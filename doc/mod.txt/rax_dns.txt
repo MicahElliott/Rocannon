@@ -1,0 +1,44 @@
+SYNOPSIS                           *rax_dns*
+
+New in version 1.5.
+
+Manage domains on Rackspace Cloud DNS
+
+EXAMPLES                           *rax_dns-examples*
+>
+    - name: Create domain
+      hosts: all
+      gather_facts: False
+      tasks:
+        - name: Domain create request
+          local_action:
+            module: rax_dns
+            credentials: ~/.raxpub
+            name: example.org
+            email: [email protected]
+          register: rax_dns
+   
+      Note
+   
+      It is recommended that plays utilizing this module be run with serial: 1 to avoid exceeding the API request limit imposed by the Rackspace CloudDNS API
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax_dns-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_dns_module.html

@@ -1,0 +1,62 @@
+SYNOPSIS                           *ec2_ami*
+
+New in version 1.3.
+
+Creates or deletes ec2 images.
+
+EXAMPLES                           *ec2_ami-examples*
+>
+    # Basic AMI Creation
+    - ec2_ami:
+        aws_access_key: xxxxxxxxxxxxxxxxxxxxxxx
+        aws_secret_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        instance_id: i-xxxxxx
+        wait: yes
+        name: newtest
+      register: instance
+   
+    # Basic AMI Creation, without waiting
+    - ec2_ami:
+        aws_access_key: xxxxxxxxxxxxxxxxxxxxxxx
+        aws_secret_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        region: xxxxxx
+        instance_id: i-xxxxxx
+        wait: no
+        name: newtest
+      register: instance
+   
+    # Deregister/Delete AMI
+    - ec2_ami:
+        aws_access_key: xxxxxxxxxxxxxxxxxxxxxxx
+        aws_secret_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        region: xxxxxx
+        image_id: "{{ instance.image_id }}"
+        delete_snapshot: True
+        state: absent
+   
+    # Deregister AMI
+    - ec2_ami:
+        aws_access_key: xxxxxxxxxxxxxxxxxxxxxxx
+        aws_secret_key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        region: xxxxxx
+        image_id: "{{ instance.image_id }}"
+        delete_snapshot: False
+        state: absent
+   
+      Note
+   
+      The following environment variables can be used AWS_ACCESS_KEY or EC2_ACCESS_KEY or AWS_ACCESS_KEY_ID, AWS_SECRET_KEY or EC2_SECRET_KEY or AWS_SECRET_ACCESS_KEY, AWS_REGION or EC2_REGION,
+      AWS_SECURITY_TOKEN
+   
+      Note
+   
+      Ansible uses the boto configuration file (typically ~/.boto) if no credentials are provided. See http://boto.readthedocs.org/en/latest/boto_config_tut.html
+   
+      Note
+   
+      AWS_REGION or EC2_REGION can be typically be used to specify the AWS region, when required, but this can also be configured in the boto config file
+   
+MORE INFO                          *ec2_ami-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_ami_module.html

@@ -1,0 +1,20 @@
+SYNOPSIS                           *hg*
+
+New in version 1.0.
+
+Manages Mercurial (hg) repositories. Supports SSH, HTTP/S and local address.
+
+EXAMPLES                           *hg-examples*
+>
+    # Ensure the current working copy is inside the stable branch and deletes untracked files if any.
+    - hg: repo=https://bitbucket.org/user/repo1 dest=/home/user/repo1 revision=stable purge=yes
+   
+      Note
+   
+      If the task seems to be hanging, first verify remote host is in known_hosts. SSH will prompt user to authorize the first contact with a remote host. To avoid this prompt, one solution is to add
+      the remote host public key in /etc/ssh/ssh_known_hosts before calling the hg module, with the following command: ssh-keyscan remote_host.com >> /etc/ssh/ssh_known_hosts.
+   
+MORE INFO                          *hg-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/hg_module.html

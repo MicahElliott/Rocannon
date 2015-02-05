@@ -1,0 +1,92 @@
+SYNOPSIS                           *bigip_pool*
+
+New in version 1.2.
+
+Manages F5 BIG-IP LTM pools via iControl SOAP API
+
+EXAMPLES                           *bigip_pool-examples*
+>
+    ## playbook task examples:
+   
+    ---
+    # file bigip-test.yml
+    # ...
+    - hosts: localhost
+      tasks:
+      - name: Create pool
+        local_action: >
+          bigip_pool
+          server=lb.mydomain.com
+          user=admin
+          password=mysecret
+          state=present
+          name=matthite-pool
+          partition=matthite
+          lb_method=least_connection_member
+          slow_ramp_time=120
+   
+      - name: Modify load balancer method
+        local_action: >
+          bigip_pool
+          server=lb.mydomain.com
+          user=admin
+          password=mysecret
+          state=present
+          name=matthite-pool
+          partition=matthite
+          lb_method=round_robin
+   
+    - hosts: bigip-test
+      tasks:
+      - name: Add pool member
+        local_action: >
+          bigip_pool
+          server=lb.mydomain.com
+          user=admin
+          password=mysecret
+          state=present
+          name=matthite-pool
+          partition=matthite
+          host="{{ ansible_default_ipv4["address"] }}"
+          port=80
+   
+      - name: Remove pool member from pool
+        local_action: >
+          bigip_pool
+          server=lb.mydomain.com
+          user=admin
+          password=mysecret
+          state=absent
+          name=matthite-pool
+          partition=matthite
+          host="{{ ansible_default_ipv4["address"] }}"
+          port=80
+   
+    - hosts: localhost
+      tasks:
+      - name: Delete pool
+        local_action: >
+          bigip_pool
+          server=lb.mydomain.com
+          user=admin
+          password=mysecret
+          state=absent
+          name=matthite-pool
+          partition=matthite
+   
+      Note
+   
+      Requires BIG-IP software version >= 11
+   
+      Note
+   
+      F5 developed module ‘bigsuds’ required (see http://devcentral.f5.com)
+   
+      Note
+   
+      Best run as a local_action in your playbook
+   
+MORE INFO                          *bigip_pool-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/bigip_pool_module.html

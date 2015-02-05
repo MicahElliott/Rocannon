@@ -1,0 +1,24 @@
+SYNOPSIS                           *pacman*
+
+New in version 1.0.
+
+Manage packages with the pacman package manager, which is used by Arch Linux and its variants.
+
+EXAMPLES                           *pacman-examples*
+>
+    # Install package foo
+    - pacman: name=foo state=present
+   
+    # Remove packages foo and bar
+    - pacman: name=foo,bar state=absent
+   
+    # Recursively remove package baz
+    - pacman: name=baz state=absent recurse=yes
+   
+    # Run the equivalent of "pacman -Syy" as a separate step
+    - pacman: update_cache=yes
+   
+MORE INFO                          *pacman-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/pacman_module.html

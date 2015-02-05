@@ -1,0 +1,37 @@
+SYNOPSIS                           *a10_service_group*
+
+New in version 1.8.
+
+Manage slb service-group objects on A10 Networks devices via aXAPI
+
+EXAMPLES                           *a10_service_group-examples*
+>
+    # Create a new service-group
+    - a10_service_group:
+        host: a10.mydomain.com
+        username: myadmin
+        password: mypassword
+        service_group: sg-80-tcp
+        servers:
+          - server: foo1.mydomain.com
+            port: 8080
+          - server: foo2.mydomain.com
+            port: 8080
+          - server: foo3.mydomain.com
+            port: 8080
+          - server: foo4.mydomain.com
+            port: 8080
+            status: disabled
+   
+      Note
+   
+      Requires A10 Networks aXAPI 2.1
+   
+      Note
+   
+      When a server doesn’t exist and is added to the service-group the server will be created
+   
+MORE INFO                          *a10_service_group-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/a10_service_group_module.html

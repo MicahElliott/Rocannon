@@ -1,0 +1,17 @@
+SYNOPSIS                           *win_updates*
+
+New in version 1.9.
+
+Installs windows updates using PSWindowsUpdate (http://gallery.technet.microsoft.com/scriptcenter/2d191bcd-3308-4edd-9de2-88dff796b0bc). PSWindowsUpdate needs to be installed first - use
+win_chocolatey.
+
+EXAMPLES                           *win_updates-examples*
+>
+    # Install updates from security category
+    win_updates:
+      category: security
+   
+MORE INFO                          *win_updates-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/win_updates_module.html

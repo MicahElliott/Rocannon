@@ -1,0 +1,28 @@
+SYNOPSIS                           *win_user*
+
+New in version 1.7.
+
+Manages local Windows user accounts
+
+EXAMPLES                           *win_user-examples*
+>
+    # Ad-hoc example
+    $ ansible -i hosts -m win_user -a "name=bob password=Password12345 groups=Users" all
+    $ ansible -i hosts -m win_user -a "name=bob state=absent" all
+   
+    # Playbook example
+    ---
+    - name: Add a user
+      hosts: all
+      gather_facts: false
+      tasks:
+        - name: Add User
+          win_user:
+            name: ansible
+            password: "@ns1bl3"
+            groups: ["Users"]
+   
+MORE INFO                          *win_user-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/win_user_module.html

@@ -1,0 +1,73 @@
+SYNOPSIS                           *gce*
+
+New in version 1.4.
+
+Creates or terminates Google Compute Engine (GCE) instances. See https://cloud.google.com/products/compute-engine for an overview. Full install/configuration instructions for the gce* modules
+can be found in the comments of ansible/test/gce_tests.py.
+
+EXAMPLES                           *gce-examples*
+>
+    # Basic provisioning example.  Create a single Debian 7 instance in the
+    # us-central1-a Zone of n1-standard-1 machine type.
+    - local_action:
+        module: gce
+        name: test-instance
+        zone: us-central1-a
+        machine_type: n1-standard-1
+        image: debian-7
+   
+    # Example using defaults and with metadata to create a single 'foo' instance
+    - local_action:
+        module: gce
+        name: foo
+        metadata: '{"db":"postgres", "group":"qa", "id":500}'
+   
+   
+    # Launch instances from a control node, runs some tasks on the new instances,
+    # and then terminate them
+    - name: Create a sandbox instance
+      hosts: localhost
+      vars:
+        names: foo,bar
+        machine_type: n1-standard-1
+        image: debian-6
+        zone: us-central1-a
+        service_account_email: [email protected]
+        pem_file: /path/to/pem_file
+        project_id: project-id
+      tasks:
+        - name: Launch instances
+          local_action: gce instance_names={{names}} machine_type={{machine_type}}
+                        image={{image}} zone={{zone}} service_account_email={{ service_account_email }}
+                        pem_file={{ pem_file }} project_id={{ project_id }}
+          register: gce
+        - name: Wait for SSH to come up
+          local_action: wait_for host={{item.public_ip}} port=22 delay=10
+                        timeout=60 state=started
+          with_items: {{gce.instance_data}}
+   
+    - name: Configure instance(s)
+      hosts: launched
+      sudo: True
+      roles:
+        - my_awesome_role
+        - my_awesome_tasks
+   
+    - name: Terminate instances
+      hosts: localhost
+      connection: local
+      tasks:
+        - name: Terminate instances that were previously launched
+          local_action:
+            module: gce
+            state: 'absent'
+            instance_names: {{gce.instance_names}}
+   
+      Note
+   
+      Either name or instance_names is required.
+   
+MORE INFO                          *gce-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/gce_module.html

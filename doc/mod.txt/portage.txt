@@ -1,0 +1,30 @@
+SYNOPSIS                           *portage*
+
+New in version 1.6.
+
+Manages Gentoo packages
+
+EXAMPLES                           *portage-examples*
+>
+    # Make sure package foo is installed
+    - portage: package=foo state=present
+   
+    # Make sure package foo is not installed
+    - portage: package=foo state=absent
+   
+    # Update package foo to the "best" version
+    - portage: package=foo update=yes
+   
+    # Sync repositories and update world
+    - portage: package=@world update=yes deep=yes sync=yes
+   
+    # Remove unneeded packages
+    - portage: depclean=yes
+   
+    # Remove package foo if it is not explicitly needed
+    - portage: package=foo state=absent depclean=yes
+   
+MORE INFO                          *portage-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/portage_module.html

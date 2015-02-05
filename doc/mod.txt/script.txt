@@ -1,0 +1,24 @@
+SYNOPSIS                           *script*
+
+The script module takes the script name followed by a list of space-delimited arguments. The local script at path will be transferred to the remote node and then executed. The given script will
+be processed through the shell environment on the remote node. This module does not require python on the remote system, much like the raw module.
+
+EXAMPLES                           *script-examples*
+>
+    # Example from Ansible Playbooks
+    - script: /some/local/script.sh --some-arguments 1234
+   
+    # Run a script that creates a file, but only if the file is not yet created
+    - script: /some/local/create_file.sh --some-arguments 1234 creates=/the/created/file.txt
+   
+    # Run a script that removes a file, but only if the file is not yet removed
+    - script: /some/local/remove_file.sh --some-arguments 1234 removes=/the/removed/file.txt
+   
+      Note
+   
+      It is usually preferable to write Ansible modules than pushing scripts. Convert your script to an Ansible module for bonus points!
+   
+MORE INFO                          *script-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/script_module.html

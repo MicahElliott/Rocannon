@@ -1,0 +1,23 @@
+SYNOPSIS                           *fetch*
+
+This module works like copy, but in reverse. It is used for fetching files from remote machines and storing them locally in a file tree, organized by hostname. Note that this module is written
+to transfer log files that might not be present, so a missing remote file won’t be an error unless fail_on_missing is set to ‘yes’.
+
+EXAMPLES                           *fetch-examples*
+>
+    # Store file into /tmp/fetched/host.example.com/tmp/somefile
+    - fetch: src=/tmp/somefile dest=/tmp/fetched
+   
+    # Specifying a path directly
+    - fetch: src=/tmp/somefile dest=/tmp/prefix-{{ ansible_hostname }} flat=yes
+   
+    # Specifying a destination path
+    - fetch: src=/tmp/uniquefile dest=/tmp/special/ flat=yes
+   
+    # Storing in a path relative to the playbook
+    - fetch: src=/tmp/uniquefile dest=special/prefix-{{ ansible_hostname }} flat=yes
+   
+MORE INFO                          *fetch-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/fetch_module.html

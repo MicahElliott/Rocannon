@@ -1,0 +1,39 @@
+SYNOPSIS                           *rhn_register*
+
+New in version 1.2.
+
+Manage registration to the Red Hat Network.
+
+EXAMPLES                           *rhn_register-examples*
+>
+    # Unregister system from RHN.
+    - rhn_register: state=absent username=joe_user password=somepass
+   
+    # Register as user (joe_user) with password (somepass) and auto-subscribe to available content.
+    - rhn_register: state=present username=joe_user password=somepass
+   
+    # Register with activationkey (1-222333444) and enable extended update support.
+    - rhn_register: state=present activationkey=1-222333444 enable_eus=true
+   
+    # Register as user (joe_user) with password (somepass) against a satellite
+    # server specified by (server_url).
+    - rhn_register: >
+        state=present
+        username=joe_user
+        password=somepass
+        server_url=https://xmlrpc.my.satellite/XMLRPC
+   
+    # Register as user (joe_user) with password (somepass) and enable
+    # channels (rhel-x86_64-server-6-foo-1) and (rhel-x86_64-server-6-bar-1).
+    - rhn_register: state=present username=joe_user
+                    password=somepass
+                    channels=rhel-x86_64-server-6-foo-1,rhel-x86_64-server-6-bar-1
+   
+      Note
+   
+      In order to register a system, rhnreg_ks requires either a username and password, or an activationkey.
+   
+MORE INFO                          *rhn_register-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rhn_register_module.html

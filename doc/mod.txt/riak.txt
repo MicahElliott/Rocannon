@@ -1,0 +1,21 @@
+SYNOPSIS                           *riak*
+
+New in version 1.2.
+
+This module can be used to join nodes to a cluster, check the status of the cluster.
+
+EXAMPLES                           *riak-examples*
+>
+    # Join's a Riak node to another node
+    - riak: command=join target_node=[email protected]
+   
+    # Wait for handoffs to finish.  Use with async and poll.
+    - riak: wait_for_handoffs=yes
+   
+    # Wait for riak_kv service to startup
+    - riak: wait_for_service=kv
+   
+MORE INFO                          *riak-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/riak_module.html

@@ -1,0 +1,21 @@
+SYNOPSIS                           *portinstall*
+
+New in version 1.3.
+
+Manage packages for FreeBSD using ‘portinstall’.
+
+EXAMPLES                           *portinstall-examples*
+>
+    # Install package foo
+    - portinstall: name=foo state=present
+   
+    # Install package security/cyrus-sasl2-saslauthd
+    - portinstall: name=security/cyrus-sasl2-saslauthd state=present
+   
+    # Remove packages foo and bar
+    - portinstall: name=foo,bar state=absent
+   
+MORE INFO                          *portinstall-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/portinstall_module.html

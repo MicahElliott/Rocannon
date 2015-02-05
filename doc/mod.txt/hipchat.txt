@@ -1,0 +1,14 @@
+SYNOPSIS                           *hipchat*
+
+New in version 1.2.
+
+Send a message to hipchat
+
+EXAMPLES                           *hipchat-examples*
+>
+    - hipchat: token=AAAAAA room=notify msg="Ansible task finished"
+   
+MORE INFO                          *hipchat-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/hipchat_module.html

@@ -1,0 +1,15 @@
+SYNOPSIS                           *homebrew_cask*
+
+New in version 1.6.
+
+Manages Homebrew casks.
+
+EXAMPLES                           *homebrew_cask-examples*
+>
+    - homebrew_cask: name=alfred state=present
+    - homebrew_cask: name=alfred state=absent
+   
+MORE INFO                          *homebrew_cask-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/homebrew_cask_module.html

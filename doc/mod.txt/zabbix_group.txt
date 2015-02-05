@@ -1,0 +1,34 @@
+SYNOPSIS                           *zabbix_group*
+
+New in version 1.8.
+
+This module uses the Zabbix API to add and remove host groups.
+
+EXAMPLES                           *zabbix_group-examples*
+>
+    ---
+    # Add a new host group to Zabbix
+    - zabbix_group: host_group='Linux servers'
+                   server_url=https://monitoring.example.com/zabbix
+                   login_user=ansible
+                   login_password=secure
+   
+    # Add a new host group, login data is provided by environment variables:
+    # ZABBIX_LOGIN_USER, ZABBIX_LOGIN_PASSWORD, ZABBIX_SERVER_URL:
+    - zabbix_group: host_group=Webservers
+   
+    # Remove a host group from Zabbix
+    - zabbix_group: host_group='Linux servers'
+                   state=absent
+                   server_url=https://monitoring.example.com/zabbix
+                   login_user=ansible
+                   login_password=secure
+   
+      Note
+   
+      The module has been tested with Zabbix Server 2.2.
+   
+MORE INFO                          *zabbix_group-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/zabbix_group_module.html

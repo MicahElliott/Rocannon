@@ -1,0 +1,47 @@
+SYNOPSIS                           *pagerduty*
+
+New in version 1.2.
+
+This module will let you create PagerDuty maintenance windows
+
+EXAMPLES                           *pagerduty-examples*
+>
+    # List ongoing maintenance windows using a user/passwd
+    - pagerduty: name=companyabc user=[email protected] passwd=password123 state=ongoing
+   
+    # List ongoing maintenance windows using a token
+    - pagerduty: name=companyabc token=xxxxxxxxxxxxxx state=ongoing
+   
+    # Create a 1 hour maintenance window for service FOO123, using a user/passwd
+    - pagerduty: name=companyabc
+                 user=[email protected]
+                 passwd=password123
+                 state=running
+                 service=FOO123
+   
+    # Create a 5 minute maintenance window for service FOO123, using a token
+    - pagerduty: name=companyabc
+                 token=xxxxxxxxxxxxxx
+                 hours=0
+                 minutes=5
+                 state=running
+                 service=FOO123
+   
+   
+    # Create a 4 hour maintenance window for service FOO123 with the description "deployment".
+    - pagerduty: name=companyabc
+                 user=[email protected]
+                 passwd=password123
+                 state=running
+                 service=FOO123
+                 hours=4
+                 desc=deployment
+   
+      Note
+   
+      This module does not yet have support to end maintenance windows.
+   
+MORE INFO                          *pagerduty-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/pagerduty_module.html

@@ -1,0 +1,23 @@
+SYNOPSIS                           *nexmo*
+
+New in version 1.6.
+
+Send a SMS message via nexmo
+
+EXAMPLES                           *nexmo-examples*
+>
+    - name: Send notification message via Nexmo
+      local_action:
+        module: nexmo
+        api_key: 640c8a53
+        api_secret: 0ce239a6
+        src: 12345678901
+        dest:
+          - 10987654321
+          - 16789012345
+        msg: "{{ inventory_hostname }} completed"
+   
+MORE INFO                          *nexmo-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/nexmo_module.html

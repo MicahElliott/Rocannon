@@ -1,0 +1,44 @@
+SYNOPSIS                           *pip*
+
+Manage Python library dependencies. To use this module, one of the following keys is required: name or requirements.
+
+EXAMPLES                           *pip-examples*
+>
+    # Install (Bottle) python package.
+    - pip: name=bottle
+   
+    # Install (Bottle) python package on version 0.11.
+    - pip: name=bottle version=0.11
+   
+    # Install (MyApp) using one of the remote protocols (bzr+,hg+,git+,svn+). You do not have to supply '-e' option in extra_args.
+    - pip: name='svn+http://myrepo/svn/MyApp#egg=MyApp'
+   
+    # Install (Bottle) into the specified (virtualenv), inheriting none of the globally installed modules
+    - pip: name=bottle virtualenv=/my_app/venv
+   
+    # Install (Bottle) into the specified (virtualenv), inheriting globally installed modules
+    - pip: name=bottle virtualenv=/my_app/venv virtualenv_site_packages=yes
+   
+    # Install (Bottle) into the specified (virtualenv), using Python 2.7
+    - pip: name=bottle virtualenv=/my_app/venv virtualenv_command=virtualenv-2.7
+   
+    # Install specified python requirements.
+    - pip: requirements=/my_app/requirements.txt
+   
+    # Install specified python requirements in indicated (virtualenv).
+    - pip: requirements=/my_app/requirements.txt virtualenv=/my_app/venv
+   
+    # Install specified python requirements and custom Index URL.
+    - pip: requirements=/my_app/requirements.txt extra_args='-i https://example.com/pypi/simple'
+   
+    # Install (Bottle) for Python 3.3 specifically,using the 'pip-3.3' executable.
+    - pip: name=bottle executable=pip-3.3
+   
+      Note
+   
+      Please note that virtualenv (http://www.virtualenv.org/) must be installed on the remote host if the virtualenv parameter is specified.
+   
+MORE INFO                          *pip-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/pip_module.html

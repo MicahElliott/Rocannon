@@ -1,0 +1,42 @@
+SYNOPSIS                           *dnsimple*
+
+New in version 1.6.
+
+Manages domains and records via the DNSimple API, see the docs: http://developer.dnsimple.com/
+
+EXAMPLES                           *dnsimple-examples*
+>
+    # authenticate using email and API token
+    - local_action: dnsimple account_email=[email protected] account_api_token=dummyapitoken
+   
+    # fetch all domains
+    - local_action dnsimple
+      register: domains
+   
+    # fetch my.com domain records
+    - local_action: dnsimple domain=my.com state=present
+      register: records
+   
+    # delete a domain
+    - local_action: dnsimple domain=my.com state=absent
+   
+    # create a test.my.com A record to point to 127.0.0.01
+    - local_action: dnsimple domain=my.com record=test type=A value=127.0.0.1
+      register: record
+   
+    # and then delete it
+    - local_action: dnsimple domain=my.com record_ids={{ record['id'] }}
+   
+    # create a my.com CNAME record to example.com
+    - local_action: dnsimple domain=my.com record= type=CNAME value=example.com state=present
+   
+    # change it's ttl
+    - local_action: dnsimple domain=my.com record= type=CNAME value=example.com ttl=600 state=present
+   
+    # and delete the record
+    - local_action: dnsimpledomain=my.com record= type=CNAME value=example.com state=absent
+   
+MORE INFO                          *dnsimple-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/dnsimple_module.html

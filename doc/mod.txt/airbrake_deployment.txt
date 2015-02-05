@@ -1,0 +1,17 @@
+SYNOPSIS                           *airbrake_deployment*
+
+New in version 1.2.
+
+Notify airbrake about app deployments (see http://help.airbrake.io/kb/api-2/deploy-tracking)
+
+EXAMPLES                           *airbrake_deployment-examples*
+>
+    - airbrake_deployment: token=AAAAAA
+                           environment='staging'
+                           user='ansible'
+                           revision=4.2
+   
+MORE INFO                          *airbrake_deployment-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/airbrake_deployment_module.html

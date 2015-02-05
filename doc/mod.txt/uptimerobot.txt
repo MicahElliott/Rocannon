@@ -1,0 +1,26 @@
+SYNOPSIS                           *uptimerobot*
+
+New in version 1.9.
+
+This module will let you start and pause Uptime Robot Monitoring
+
+EXAMPLES                           *uptimerobot-examples*
+>
+    # Pause the monitor with an ID of 12345.
+    - uptimerobot: monitorid=12345
+               apikey=12345-1234512345
+               state=paused
+   
+    # Start the monitor with an ID of 12345.
+    - uptimerobot: monitorid=12345
+               apikey=12345-1234512345
+               state=started
+   
+      Note
+   
+      Support for adding and removing monitors and alert contacts has not yet been implemented.
+   
+MORE INFO                          *uptimerobot-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/uptimerobot_module.html

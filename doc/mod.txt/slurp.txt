@@ -1,0 +1,20 @@
+SYNOPSIS                           *slurp*
+
+This module works like fetch. It is used for fetching a base64- encoded blob containing the data in a remote file.
+
+EXAMPLES                           *slurp-examples*
+>
+    ansible host -m slurp -a 'src=/tmp/xx'
+       host | success >> {
+          "content": "aGVsbG8gQW5zaWJsZSB3b3JsZAo=",
+          "encoding": "base64"
+       }
+   
+      Note
+   
+      See also: fetch
+   
+MORE INFO                          *slurp-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/slurp_module.html

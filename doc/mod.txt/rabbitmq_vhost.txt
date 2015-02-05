@@ -1,0 +1,15 @@
+SYNOPSIS                           *rabbitmq_vhost*
+
+New in version 1.1.
+
+Manage the state of a virtual host in RabbitMQ
+
+EXAMPLES                           *rabbitmq_vhost-examples*
+>
+    # Ensure that the vhost /test exists.
+    - rabbitmq_vhost: name=/test state=present
+   
+MORE INFO                          *rabbitmq_vhost-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rabbitmq_vhost_module.html

@@ -1,0 +1,33 @@
+SYNOPSIS                           *azure*
+
+New in version 1.7.
+
+Creates or terminates azure instances. When created optionally waits for it to be ‘running’. This module has a dependency on python-azure >= 0.7.1
+
+EXAMPLES                           *azure-examples*
+>
+    # Note: None of these examples set subscription_id or management_cert_path
+    # It is assumed that their matching environment variables are set.
+   
+    # Provision virtual machine example
+    - local_action:
+        module: azure
+        name: my-virtual-machine
+        role_size: Small
+        image: b39f27a8b8c64d52b05eac6a62ebad85__Ubuntu_DAILY_BUILD-precise-12_04_3-LTS-amd64-server-20131205-en-us-30GB
+        location: 'East US'
+        user: ubuntu
+        ssh_cert_path: /path/to/azure_x509_cert.pem
+        storage_account: my-storage-account
+        wait: yes
+   
+    # Terminate virtual machine example
+    - local_action:
+        module: azure
+        name: my-virtual-machine
+        state: absent
+   
+MORE INFO                          *azure-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/azure_module.html

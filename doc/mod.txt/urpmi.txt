@@ -1,0 +1,21 @@
+SYNOPSIS                           *urpmi*
+
+New in version 1.3.4.
+
+Manages packages with urpmi (such as for Mageia or Mandriva)
+
+EXAMPLES                           *urpmi-examples*
+>
+    # install package foo
+    - urpmi: pkg=foo state=present
+    # remove package foo
+    - urpmi: pkg=foo state=absent
+    # description: remove packages foo and bar
+    - urpmi: pkg=foo,bar state=absent
+    # description: update the package database (urpmi.update -a -q) and install bar (bar will be the updated if a newer version exists)
+    - urpmi: name=bar, state=present, update_cache=yes
+   
+MORE INFO                          *urpmi-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/urpmi_module.html

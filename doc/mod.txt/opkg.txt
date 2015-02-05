@@ -1,0 +1,17 @@
+SYNOPSIS                           *opkg*
+
+New in version 1.1.
+
+Manages OpenWrt packages
+
+EXAMPLES                           *opkg-examples*
+>
+    - opkg: name=foo state=present
+    - opkg: name=foo state=present update_cache=yes
+    - opkg: name=foo state=absent
+    - opkg: name=foo,bar state=absent
+   
+MORE INFO                          *opkg-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/opkg_module.html

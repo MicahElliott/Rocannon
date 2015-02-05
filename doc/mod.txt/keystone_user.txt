@@ -1,0 +1,21 @@
+SYNOPSIS                           *keystone_user*
+
+New in version 1.2.
+
+Manage users,tenants, roles from OpenStack.
+
+EXAMPLES                           *keystone_user-examples*
+>
+    # Create a tenant
+    - keystone_user: tenant=demo tenant_description="Default Tenant"
+   
+    # Create a user
+    - keystone_user: user=john tenant=demo password=secrete
+   
+    # Apply the admin role to the john user in the demo tenant
+    - keystone_user: role=admin user=john tenant=demo
+   
+MORE INFO                          *keystone_user-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/keystone_user_module.html

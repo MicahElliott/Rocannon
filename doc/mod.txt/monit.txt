@@ -1,0 +1,15 @@
+SYNOPSIS                           *monit*
+
+New in version 1.2.
+
+Manage the state of a program monitored via Monit
+
+EXAMPLES                           *monit-examples*
+>
+    # Manage the state of program "httpd" to be in "started" state.
+    - monit: name=httpd state=started
+   
+MORE INFO                          *monit-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/monit_module.html

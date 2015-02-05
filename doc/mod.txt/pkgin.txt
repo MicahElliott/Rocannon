@@ -1,0 +1,21 @@
+SYNOPSIS                           *pkgin*
+
+New in version 1.0.
+
+Manages SmartOS packages
+
+EXAMPLES                           *pkgin-examples*
+>
+    # install package foo"
+    - pkgin: name=foo state=present
+   
+    # remove package foo
+    - pkgin: name=foo state=absent
+   
+    # remove packages foo and bar
+    - pkgin: name=foo,bar state=absent
+   
+MORE INFO                          *pkgin-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/pkgin_module.html

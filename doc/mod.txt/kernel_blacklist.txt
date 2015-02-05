@@ -1,0 +1,15 @@
+SYNOPSIS                           *kernel_blacklist*
+
+New in version 1.4.
+
+Add or remove kernel modules from blacklist.
+
+EXAMPLES                           *kernel_blacklist-examples*
+>
+    # Blacklist the nouveau driver module
+    - kernel_blacklist: name=nouveau state=present
+   
+MORE INFO                          *kernel_blacklist-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/kernel_blacklist_module.html

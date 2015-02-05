@@ -1,0 +1,34 @@
+SYNOPSIS                           *ejabberd_user*
+
+New in version 1.5.
+
+This module provides user management for ejabberd servers
+
+EXAMPLES                           *ejabberd_user-examples*
+>
+    Example playbook entries using the ejabberd_user module to manage users state.
+   
+        tasks:
+   
+        - name: create a user if it does not exists
+          action: ejabberd_user username=test host=server password=password
+   
+        - name: delete a user if it exists
+          action: ejabberd_user username=test host=server state=absent
+   
+      Note
+   
+      Password parameter is required for state == present only
+   
+      Note
+   
+      Passwords must be stored in clear text for this release
+   
+      Note
+   
+      The ejabberd configuration file must include mod_admin_extra as a module.
+   
+MORE INFO                          *ejabberd_user-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ejabberd_user_module.html

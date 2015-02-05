@@ -1,0 +1,15 @@
+SYNOPSIS                           *openvswitch_port*
+
+New in version 1.4.
+
+Manage Open vSwitch ports
+
+EXAMPLES                           *openvswitch_port-examples*
+>
+    # Creates port eth2 on bridge br-ex
+    - openvswitch_port: bridge=br-ex port=eth2 state=present
+   
+MORE INFO                          *openvswitch_port-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/openvswitch_port_module.html

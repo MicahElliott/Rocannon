@@ -1,0 +1,28 @@
+SYNOPSIS                           *file*
+
+Sets attributes of files, symlinks, and directories, or removes files/symlinks/directories. Many other modules support the same options as the file module - including copy, template, and
+assemble.
+
+EXAMPLES                           *file-examples*
+>
+    - file: path=/etc/foo.conf owner=foo group=foo mode=0644
+    - file: src=/file/to/link/to dest=/path/to/symlink owner=foo group=foo state=link
+    - file: src=/tmp/{{ item.path }} dest={{ item.dest }} state=link
+      with_items:
+        - { path: 'x', dest: 'y' }
+        - { path: 'z', dest: 'k' }
+   
+    # touch a file, using symbolic modes to set the permissions (equivalent to 0644)
+    - file: path=/etc/foo.conf state=touch mode="u=rw,g=r,o=r"
+   
+    # touch the same file, but add/remove some permissions
+    - file: path=/etc/foo.conf state=touch mode="u+rw,g-wx,o-rwx"
+   
+      Note
+   
+      See also copy, template, assemble
+   
+MORE INFO                          *file-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/file_module.html

@@ -1,0 +1,21 @@
+SYNOPSIS                           *xattr*
+
+New in version 1.3.
+
+Manages filesystem user defined extended attributes, requires that they are enabled on the target filesystem and that the setfattr/getfattr utilities are present.
+
+EXAMPLES                           *xattr-examples*
+>
+    # Obtain the extended attributes  of /etc/foo.conf
+    - xattr: name=/etc/foo.conf
+   
+    # Sets the key 'foo' to value 'bar'
+    - xattr: path=/etc/foo.conf key=user.foo value=bar
+   
+    # Removes the key 'foo'
+    - xattr: name=/etc/foo.conf key=user.foo state=absent
+   
+MORE INFO                          *xattr-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/xattr_module.html

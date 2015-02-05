@@ -1,0 +1,18 @@
+# Install Rocannon
+- vars: { rodest: ~/.vim/bundle/Rocannon/ }
+  hosts: localhost
+  tasks:
+    - name: clone rocannon plugin
+      # Notice the nice colors
+      git: repo=https://github.com/MicahElliott/Rocannon dest={{rodest}}
+
+    - name: stat for existing docs
+      stat: path={{rodest}}/doc/tags
+      register: docs_r
+
+    - name: just testing the debug module
+      debug: var=docs_r
+
+    - name: generate rocannon documentation
+      command: chdir={{rodest}} vim -c ":helptags {{rodest}}|q"
+      when: not docs_r.stat.exists

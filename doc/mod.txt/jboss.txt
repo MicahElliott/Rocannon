@@ -1,0 +1,27 @@
+SYNOPSIS                           *jboss*
+
+New in version 1.4.
+
+Deploy applications to JBoss standalone using the filesystem
+
+EXAMPLES                           *jboss-examples*
+>
+    # Deploy a hello world application
+    - jboss: src=/tmp/hello-1.0-SNAPSHOT.war deployment=hello.war state=present
+    # Update the hello world application
+    - jboss: src=/tmp/hello-1.1-SNAPSHOT.war deployment=hello.war state=present
+    # Undeploy the hello world application
+    - jboss: deployment=hello.war state=absent
+   
+      Note
+   
+      The JBoss standalone deployment-scanner has to be enabled in standalone.xml
+   
+      Note
+   
+      Ensure no identically named application is deployed through the JBoss CLI
+   
+MORE INFO                          *jboss-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/jboss_module.html

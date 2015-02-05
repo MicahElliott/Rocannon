@@ -1,0 +1,57 @@
+SYNOPSIS                           *rax_clb_nodes*
+
+New in version 1.4.
+
+Adds, modifies and removes nodes from a Rackspace Cloud Load Balancer
+
+EXAMPLES                           *rax_clb_nodes-examples*
+>
+    # Add a new node to the load balancer
+    - local_action:
+        module: rax_clb_nodes
+        load_balancer_id: 71
+        address: 10.2.2.3
+        port: 80
+        condition: enabled
+        type: primary
+        wait: yes
+        credentials: /path/to/credentials
+   
+    # Drain connections from a node
+    - local_action:
+        module: rax_clb_nodes
+        load_balancer_id: 71
+        node_id: 410
+        condition: draining
+        wait: yes
+        credentials: /path/to/credentials
+   
+    # Remove a node from the load balancer
+    - local_action:
+        module: rax_clb_nodes
+        load_balancer_id: 71
+        node_id: 410
+        state: absent
+        wait: yes
+        credentials: /path/to/credentials
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax_clb_nodes-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_clb_nodes_module.html

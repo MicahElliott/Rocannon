@@ -1,0 +1,125 @@
+SYNOPSIS                           *docker*
+
+New in version 1.4.
+
+Manage the life cycle of docker containers.
+
+EXAMPLES                           *docker-examples*
+>
+    Start one docker container running tomcat in each host of the web group and bind tomcat's listening port to 8080
+    on the host:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: run tomcat servers
+        docker: image=centos command="service tomcat6 start" ports=8080
+   
+    The tomcat server's port is NAT'ed to a dynamic port on the host, but you can determine which port the server was
+    mapped to using docker_containers:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: run tomcat servers
+        docker: image=centos command="service tomcat6 start" ports=8080 count=5
+      - name: Display IP address and port mappings for containers
+        debug: msg={{inventory_hostname}}:{{item['HostConfig']['PortBindings']['8080/tcp'][0]['HostPort']}}
+        with_items: docker_containers
+   
+    Just as in the previous example, but iterates over the list of docker containers with a sequence:
+   
+    - hosts: web
+      sudo: yes
+      vars:
+        start_containers_count: 5
+      tasks:
+      - name: run tomcat servers
+        docker: image=centos command="service tomcat6 start" ports=8080 count={{start_containers_count}}
+      - name: Display IP address and port mappings for containers
+        debug: msg="{{inventory_hostname}}:{{docker_containers[{{item}}]['HostConfig']['PortBindings']['8080/tcp'][0]['HostPort']}}"
+        with_sequence: start=0 end={{start_containers_count - 1}}
+   
+    Stop, remove all of the running tomcat containers and list the exit code from the stopped containers:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: stop tomcat servers
+        docker: image=centos command="service tomcat6 start" state=absent
+      - name: Display return codes from stopped containers
+        debug: msg="Returned {{inventory_hostname}}:{{item}}"
+        with_items: docker_containers
+   
+    Create a named container:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: run tomcat server
+        docker: image=centos name=tomcat command="service tomcat6 start" ports=8080
+   
+    Create multiple named containers:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: run tomcat servers
+        docker: image=centos name={{item}} command="service tomcat6 start" ports=8080
+        with_items:
+          - crookshank
+          - snowbell
+          - heathcliff
+          - felix
+          - sylvester
+   
+    Create containers named in a sequence:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: run tomcat servers
+        docker: image=centos name={{item}} command="service tomcat6 start" ports=8080
+        with_sequence: start=1 end=5 format=tomcat_%d.example.com
+   
+    Create two linked containers:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: ensure redis container is running
+        docker: image=crosbymichael/redis name=redis
+   
+      - name: ensure redis_ambassador container is running
+        docker: image=svendowideit/ambassador ports=6379:6379 links=redis:redis name=redis_ambassador_ansible
+   
+    Create containers with options specified as key-value pairs and lists:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - docker:
+            image: namespace/image_name
+            links:
+              - postgresql:db
+              - redis:redis
+   
+   
+    Create containers with options specified as strings and lists as comma-separated strings:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      docker: image=namespace/image_name links=postgresql:db,redis:redis
+   
+    Create a container with no networking:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      docker: image=namespace/image_name net=none
+   
+MORE INFO                          *docker-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/docker_module.html

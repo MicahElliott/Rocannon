@@ -1,0 +1,21 @@
+SYNOPSIS                           *zypper*
+
+New in version 1.2.
+
+Manage packages on SUSE and openSUSE using the zypper and rpm tools.
+
+EXAMPLES                           *zypper-examples*
+>
+    # Install "nmap"
+    - zypper: name=nmap state=present
+   
+    # Install apache2 with recommended packages
+    - zypper: name=apache2 state=present disable_recommends=no
+   
+    # Remove the "nmap" package
+    - zypper: name=nmap state=absent
+   
+MORE INFO                          *zypper-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/zypper_module.html

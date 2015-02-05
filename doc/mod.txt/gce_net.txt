@@ -1,0 +1,28 @@
+SYNOPSIS                           *gce_net*
+
+New in version 1.5.
+
+This module can create and destroy Google Compue Engine networks and firewall rules https://developers.google.com/compute/docs/networking. The name parameter is reserved for referencing a
+network while the fwname parameter is used to reference firewall rules. IPv4 Address ranges must be specified using the CIDR http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing format.
+Full install/configuration instructions for the gce* modules can be found in the comments of ansible/test/gce_tests.py.
+
+EXAMPLES                           *gce_net-examples*
+>
+    # Simple example of creating a new network
+    - local_action:
+        module: gce_net
+        name: privatenet
+        ipv4_range: '10.240.16.0/24'
+   
+    # Simple example of creating a new firewall rule
+    - local_action:
+        module: gce_net
+        name: privatenet
+        fwname: all-web-webproxy
+        allowed: tcp:80,8080
+        src_tags: ["web", "proxy"]
+   
+MORE INFO                          *gce_net-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/gce_net_module.html

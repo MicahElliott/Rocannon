@@ -1,0 +1,20 @@
+SYNOPSIS                           *gce_pd*
+
+New in version 1.4.
+
+This module can create and destroy unformatted GCE persistent disks https://developers.google.com/compute/docs/disks#persistentdisks. It also supports attaching and detaching disks from running
+instances. Full install/configuration instructions for the gce* modules can be found in the comments of ansible/test/gce_tests.py.
+
+EXAMPLES                           *gce_pd-examples*
+>
+    # Simple attachment action to an existing instance
+    - local_action:
+        module: gce_pd
+        instance_name: notlocalhost
+        size_gb: 5
+        name: pd
+   
+MORE INFO                          *gce_pd-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/gce_pd_module.html

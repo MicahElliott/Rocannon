@@ -1,0 +1,27 @@
+SYNOPSIS                           *bower*
+
+New in version 1.7.
+
+Manage bower packages with bower
+
+EXAMPLES                           *bower-examples*
+>
+    description: Install "bootstrap" bower package.
+    - bower: name=bootstrap
+   
+    description: Install "bootstrap" bower package on version 3.1.1.
+    - bower: name=bootstrap version=3.1.1
+   
+    description: Remove the "bootstrap" bower package.
+    - bower: name=bootstrap state=absent
+   
+    description: Install packages based on bower.json.
+    - bower: path=/app/location
+   
+    description: Update packages based on bower.json to their latest version.
+    - bower: path=/app/location state=latest
+   
+MORE INFO                          *bower-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/bower_module.html

@@ -1,0 +1,20 @@
+SYNOPSIS                           *irc*
+
+New in version 1.2.
+
+Send a message to an IRC channel. This is a very simplistic implementation.
+
+EXAMPLES                           *irc-examples*
+>
+    - irc: server=irc.example.net channel="#t1" msg="Hello world"
+   
+    - local_action: irc port=6669
+                    channel="#t1"
+                    msg="All finished at {{ ansible_date_time.iso8601 }}"
+                    color=red
+                    nick=ansibleIRC
+   
+MORE INFO                          *irc-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/irc_module.html

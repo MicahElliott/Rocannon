@@ -1,0 +1,17 @@
+SYNOPSIS                           *modprobe*
+
+New in version 1.4.
+
+Add or remove kernel modules.
+
+EXAMPLES                           *modprobe-examples*
+>
+    # Add the 802.1q module
+    - modprobe: name=8021q state=present
+    # Add the dummy module
+    - modprobe: name=dummy state=present params="numdummies=2"
+   
+MORE INFO                          *modprobe-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/modprobe_module.html

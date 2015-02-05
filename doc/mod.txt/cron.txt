@@ -1,0 +1,31 @@
+SYNOPSIS                           *cron*
+
+Use this module to manage crontab entries. This module allows you to create named crontab entries, update, or delete them. The module includes one line with the description of the crontab entry
+"#Ansible: <name>" corresponding to the “name” passed to the module, which is used by future ansible/module calls to find/check the state. The “name” parameter should be unique, and changing the
+“name” value will result in a new cron task being created (or a different one being removed)
+
+EXAMPLES                           *cron-examples*
+>
+    # Ensure a job that runs at 2 and 5 exists.
+    # Creates an entry like "0 5,2 * * ls -alh > /dev/null"
+    - cron: name="check dirs" minute="0" hour="5,2" job="ls -alh > /dev/null"
+   
+    # Ensure an old job is no longer present. Removes any job that is prefixed
+    # by "#Ansible: an old job" from the crontab
+    - cron: name="an old job" state=absent
+   
+    # Creates an entry like "@reboot /some/job.sh"
+    - cron: name="a job for reboot" special_time=reboot job="/some/job.sh"
+   
+    # Creates a cron file under /etc/cron.d
+    - cron: name="yum autoupdate" weekday="2" minute=0 hour=12
+            user="root" job="YUMINTERACTIVE=0 /usr/sbin/yum-autoupdate"
+            cron_file=ansible_yum-autoupdate
+   
+    # Removes a cron file from under /etc/cron.d
+    - cron: cron_file=ansible_yum-autoupdate state=absent
+   
+MORE INFO                          *cron-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/cron_module.html

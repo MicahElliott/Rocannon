@@ -1,0 +1,105 @@
+SYNOPSIS                           *nova_compute*
+
+New in version 1.2.
+
+Create or Remove virtual machines from Openstack.
+
+EXAMPLES                           *nova_compute-examples*
+>
+    # Creates a new VM and attaches to a network and passes metadata to the instance
+    - nova_compute:
+           state: present
+           login_username: admin
+           login_password: admin
+           login_tenant_name: admin
+           name: vm1
+           image_id: 4f905f38-e52a-43d2-b6ec-754a13ffb529
+           key_name: ansible_key
+           wait_for: 200
+           flavor_id: 4
+           nics:
+             - net-id: 34605f38-e52a-25d2-b6ec-754a13ffb723
+           meta:
+             hostname: test1
+             group: uge_master
+   
+    # Creates a new VM in HP Cloud AE1 region availability zone az2 and automatically assigns a floating IP
+    - name: launch a nova instance
+      hosts: localhost
+      tasks:
+      - name: launch an instance
+        nova_compute:
+          state: present
+          login_username: username
+          login_password: Equality7-2521
+          login_tenant_name: username-project1
+          name: vm1
+          auth_url: https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/
+          region_name: region-b.geo-1
+          availability_zone: az2
+          image_id: 9302692b-b787-4b52-a3a6-daebb79cb498
+          key_name: test
+          wait_for: 200
+          flavor_id: 101
+          security_groups: default
+          auto_floating_ip: yes
+   
+    # Creates a new VM in HP Cloud AE1 region availability zone az2 and assigns a pre-known floating IP
+    - name: launch a nova instance
+      hosts: localhost
+      tasks:
+      - name: launch an instance
+        nova_compute:
+          state: present
+          login_username: username
+          login_password: Equality7-2521
+          login_tenant_name: username-project1
+          name: vm1
+          auth_url: https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/
+          region_name: region-b.geo-1
+          availability_zone: az2
+          image_id: 9302692b-b787-4b52-a3a6-daebb79cb498
+          key_name: test
+          wait_for: 200
+          flavor_id: 101
+          floating-ips:
+            - 12.34.56.79
+   
+    # Creates a new VM with 4G of RAM on Ubuntu Trusty, ignoring deprecated images
+    - name: launch a nova instance
+      hosts: localhost
+      tasks:
+      - name: launch an instance
+        nova_compute:
+          name: vm1
+          state: present
+          login_username: username
+          login_password: Equality7-2521
+          login_tenant_name: username-project1
+          auth_url: https://region-b.geo-1.identity.hpcloudsvc.com:35357/v2.0/
+          region_name: region-b.geo-1
+          image_name: Ubuntu Server 14.04
+          image_exclude: deprecated
+          flavor_ram: 4096
+   
+    # Creates a new VM with 4G of RAM on Ubuntu Trusty on a Rackspace Performance node in DFW
+    - name: launch a nova instance
+      hosts: localhost
+      tasks:
+      - name: launch an instance
+        nova_compute:
+          name: vm1
+          state: present
+          login_username: username
+          login_password: Equality7-2521
+          login_tenant_name: username-project1
+          auth_url: https://identity.api.rackspacecloud.com/v2.0/
+          region_name: DFW
+          image_name: Ubuntu 14.04 LTS (Trusty Tahr) (PVHVM)
+          flavor_ram: 4096
+          flavor_include: Performance
+   
+MORE INFO                          *nova_compute-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/nova_compute_module.html

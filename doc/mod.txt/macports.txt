@@ -1,0 +1,18 @@
+SYNOPSIS                           *macports*
+
+New in version 1.1.
+
+Manages MacPorts packages
+
+EXAMPLES                           *macports-examples*
+>
+    - macports: name=foo state=present
+    - macports: name=foo state=present update_cache=yes
+    - macports: name=foo state=absent
+    - macports: name=foo state=active
+    - macports: name=foo state=inactive
+   
+MORE INFO                          *macports-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/macports_module.html

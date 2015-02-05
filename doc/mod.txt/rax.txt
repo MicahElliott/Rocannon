@@ -1,0 +1,72 @@
+SYNOPSIS                           *rax*
+
+New in version 1.2.
+
+creates / deletes a Rackspace Public Cloud instance and optionally waits for it to be ‘running’.
+
+EXAMPLES                           *rax-examples*
+>
+    - name: Build a Cloud Server
+      gather_facts: False
+      tasks:
+        - name: Server build request
+          local_action:
+            module: rax
+            credentials: ~/.raxpub
+            name: rax-test1
+            flavor: 5
+            image: b11d9567-e412-4255-96b9-bd63ab23bcfe
+            key_name: my_rackspace_key
+            files:
+              /root/test.txt: /home/localuser/test.txt
+            wait: yes
+            state: present
+            networks:
+              - private
+              - public
+          register: rax
+   
+    - name: Build an exact count of cloud servers with incremented names
+      hosts: local
+      gather_facts: False
+      tasks:
+        - name: Server build requests
+          local_action:
+            module: rax
+            credentials: ~/.raxpub
+            name: test%03d.example.org
+            flavor: performance1-1
+            image: ubuntu-1204-lts-precise-pangolin
+            state: present
+            count: 10
+            count_offset: 10
+            exact_count: yes
+            group: test
+            wait: yes
+          register: rax
+   
+      Note
+   
+      exact_count can be “destructive” if the number of running servers in the group is larger than that specified in count. In such a case, the state is effectively set to absent and the extra
+      servers are deleted. In the case of deletion, the returned data structure will have action set to delete, and the oldest servers in the group will be deleted.
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_module.html

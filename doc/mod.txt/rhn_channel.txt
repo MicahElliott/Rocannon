@@ -1,0 +1,18 @@
+SYNOPSIS                           *rhn_channel*
+
+New in version 1.1.
+
+Adds or removes Red Hat software channels
+
+EXAMPLES                           *rhn_channel-examples*
+>
+    - rhn_channel: name=rhel-x86_64-server-v2vwin-6 sysname=server01 url=https://rhn.redhat.com/rpc/api user=rhnuser password=guessme
+   
+      Note
+   
+      this module fetches the system id from RHN.
+   
+MORE INFO                          *rhn_channel-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rhn_channel_module.html

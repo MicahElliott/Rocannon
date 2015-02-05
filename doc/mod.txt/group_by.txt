@@ -1,0 +1,19 @@
+SYNOPSIS                           *group_by*
+
+Use facts to create ad-hoc groups that can be used later in a playbook.
+
+EXAMPLES                           *group_by-examples*
+>
+    # Create groups based on the machine architecture
+    -  group_by: key=machine_{{ ansible_machine }}
+    # Create groups like 'kvm-host'
+    -  group_by: key=virt_{{ ansible_virtualization_type }}_{{ ansible_virtualization_role }}
+   
+      Note
+   
+      Spaces in group names are converted to dashes ‘-‘.
+   
+MORE INFO                          *group_by-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/group_by_module.html

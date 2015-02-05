@@ -1,0 +1,19 @@
+SYNOPSIS                           *alternatives*
+
+New in version 1.6.
+
+Manages symbolic links using the ‘update-alternatives’ tool provided on debian-like systems. Useful when multiple programs are installed but provide similar functionality (e.g. different
+editors).
+
+EXAMPLES                           *alternatives-examples*
+>
+    - name: correct java version selected
+      alternatives: name=java path=/usr/lib/jvm/java-7-openjdk-amd64/jre/bin/java
+   
+    - name: alternatives link created
+      alternatives: name=hadoop-conf link=/etc/hadoop/conf path=/etc/hadoop/conf.ansible
+   
+MORE INFO                          *alternatives-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/alternatives_module.html

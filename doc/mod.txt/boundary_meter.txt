@@ -1,0 +1,22 @@
+SYNOPSIS                           *boundary_meter*
+
+New in version 1.3.
+
+This module manages boundary meters
+
+EXAMPLES                           *boundary_meter-examples*
+>
+    - name: Create meter
+      boundary_meter: apiid=AAAAAA api_key=BBBBBB state=present name={{ inventory_hostname }}"
+   
+    - name: Delete meter
+      boundary_meter: apiid=AAAAAA api_key=BBBBBB state=absent name={{ inventory_hostname }}"
+   
+      Note
+   
+      This module does not yet support boundary tags.
+   
+MORE INFO                          *boundary_meter-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/boundary_meter_module.html

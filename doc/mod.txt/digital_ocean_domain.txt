@@ -1,0 +1,38 @@
+SYNOPSIS                           *digital_ocean_domain*
+
+New in version 1.6.
+
+Create/delete a DNS record in DigitalOcean.
+
+EXAMPLES                           *digital_ocean_domain-examples*
+>
+    # Create a domain record
+   
+    - digital_ocean_domain: >
+          state=present
+          name=my.digitalocean.domain
+          ip=127.0.0.1
+   
+    # Create a droplet and a corresponding domain record
+   
+    - digital_ocean: >
+          state=present
+          name=test_droplet
+          size_id=1
+          region_id=2
+          image_id=3
+      register: test_droplet
+   
+    - digital_ocean_domain: >
+          state=present
+          name={{ test_droplet.droplet.name }}.my.domain
+          ip={{ test_droplet.droplet.ip_address }}
+   
+      Note
+   
+      Two environment variables can be used, DO_CLIENT_ID and DO_API_KEY.
+   
+MORE INFO                          *digital_ocean_domain-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/digital_ocean_domain_module.html

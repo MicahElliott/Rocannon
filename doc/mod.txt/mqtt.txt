@@ -1,0 +1,23 @@
+SYNOPSIS                           *mqtt*
+
+New in version 1.2.
+
+Publish a message on an MQTT topic.
+
+EXAMPLES                           *mqtt-examples*
+>
+    - local_action: mqtt
+                  topic=service/ansible/{{ ansible_hostname }}
+                  payload="Hello at {{ ansible_date_time.iso8601 }}"
+                  qos=0
+                  retain=false
+                  client_id=ans001
+   
+      Note
+   
+      This module requires a connection to an MQTT broker such as Mosquitto http://mosquitto.org and the Paho mqtt Python client (https://pypi.python.org/pypi/paho-mqtt).
+   
+MORE INFO                          *mqtt-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/mqtt_module.html

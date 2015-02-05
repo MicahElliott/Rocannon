@@ -1,0 +1,22 @@
+SYNOPSIS                           *filesystem*
+
+New in version 1.2.
+
+This module creates file system.
+
+EXAMPLES                           *filesystem-examples*
+>
+    # Create a ext2 filesystem on /dev/sdb1.
+    - filesystem: fstype=ext2 dev=/dev/sdb1
+   
+    # Create a ext4 filesystem on /dev/sdb1 and check disk blocks.
+    - filesystem: fstype=ext4 dev=/dev/sdb1 opts="-cc"
+   
+      Note
+   
+      uses mkfs command
+   
+MORE INFO                          *filesystem-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/filesystem_module.html

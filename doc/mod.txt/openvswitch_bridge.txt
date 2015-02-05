@@ -1,0 +1,15 @@
+SYNOPSIS                           *openvswitch_bridge*
+
+New in version 1.4.
+
+Manage Open vSwitch bridges
+
+EXAMPLES                           *openvswitch_bridge-examples*
+>
+    # Create a bridge named br-int
+    - openvswitch_bridge: bridge=br-int state=present
+   
+MORE INFO                          *openvswitch_bridge-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/openvswitch_bridge_module.html

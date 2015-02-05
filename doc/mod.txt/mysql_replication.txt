@@ -1,0 +1,21 @@
+SYNOPSIS                           *mysql_replication*
+
+New in version 1.3.
+
+Manages MySQL server replication, slave, master status get and change master host.
+
+EXAMPLES                           *mysql_replication-examples*
+>
+    # Stop mysql slave thread
+    - mysql_replication: mode=stopslave
+   
+    # Get master binlog file name and binlog position
+    - mysql_replication: mode=getmaster
+   
+    # Change master to master server 192.168.1.1 and use binary log 'mysql-bin.000009' with position 4578
+    - mysql_replication: mode=changemaster master_host=192.168.1.1 master_log_file=mysql-bin.000009 master_log_pos=4578
+   
+MORE INFO                          *mysql_replication-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/mysql_replication_module.html

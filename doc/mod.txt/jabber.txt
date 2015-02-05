@@ -1,0 +1,32 @@
+SYNOPSIS                           *jabber*
+
+New in version 1.2.
+
+Send a message to jabber
+
+EXAMPLES                           *jabber-examples*
+>
+    # send a message to a user
+    - jabber: user=[email protected]
+              password=secret
+              to=[email protected]
+              msg="Ansible task finished"
+   
+    # send a message to a room
+    - jabber: user=[email protected]
+              password=secret
+              to=[email protected]/ansiblebot
+              msg="Ansible task finished"
+   
+    # send a message, specifying the host and port
+    - jabber user=[email protected]
+             host=talk.example.net
+             port=5223
+             password=secret
+             to=[email protected]
+             msg="Ansible task finished"
+   
+MORE INFO                          *jabber-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/jabber_module.html

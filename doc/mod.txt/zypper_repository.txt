@@ -1,0 +1,21 @@
+SYNOPSIS                           *zypper_repository*
+
+New in version 1.4.
+
+Add or remove Zypper repositories on SUSE and openSUSE
+
+EXAMPLES                           *zypper_repository-examples*
+>
+    # Add NVIDIA repository for graphics drivers
+    - zypper_repository: name=nvidia-repo repo='ftp://download.nvidia.com/opensuse/12.2' state=present
+   
+    # Remove NVIDIA repository
+    - zypper_repository: name=nvidia-repo repo='ftp://download.nvidia.com/opensuse/12.2' state=absent
+   
+    # Add python development repository
+    - zypper_repository: repo=http://download.opensuse.org/repositories/devel:/languages:/python/SLE_11_SP3/devel:languages:python.repo
+   
+MORE INFO                          *zypper_repository-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/zypper_repository_module.html

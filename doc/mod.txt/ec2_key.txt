@@ -1,0 +1,56 @@
+SYNOPSIS                           *ec2_key*
+
+New in version 1.5.
+
+maintains ec2 key pairs. This module has a dependency on python-boto >= 2.5
+
+EXAMPLES                           *ec2_key-examples*
+>
+    # Note: None of these examples set aws_access_key, aws_secret_key, or region.
+    # It is assumed that their matching environment variables are set.
+   
+    # Creates a new ec2 key pair named `example` if not present, returns generated
+    # private key
+    - name: example ec2 key
+      ec2_key:
+        name: example
+   
+    # Creates a new ec2 key pair named `example` if not present using provided key
+    # material.  This could use the 'file' lookup plugin to pull this off disk.
+    - name: example2 ec2 key
+      ec2_key:
+        name: example2
+        key_material: 'ssh-rsa AAAAxyz...== [email protected]'
+        state: present
+   
+    # Creates a new ec2 key pair named `example` if not present using provided key
+    # material
+    - name: example3 ec2 key
+      ec2_key:
+        name: example3
+        key_material: "{{ item }}"
+      with_file: /path/to/public_key.id_rsa.pub
+   
+    # Removes ec2 key pair by name
+    - name: remove example key
+      ec2_key:
+        name: example
+        state: absent
+   
+      Note
+   
+      The following environment variables can be used AWS_ACCESS_KEY or EC2_ACCESS_KEY or AWS_ACCESS_KEY_ID, AWS_SECRET_KEY or EC2_SECRET_KEY or AWS_SECRET_ACCESS_KEY, AWS_REGION or EC2_REGION,
+      AWS_SECURITY_TOKEN
+   
+      Note
+   
+      Ansible uses the boto configuration file (typically ~/.boto) if no credentials are provided. See http://boto.readthedocs.org/en/latest/boto_config_tut.html
+   
+      Note
+   
+      AWS_REGION or EC2_REGION can be typically be used to specify the AWS region, when required, but this can also be configured in the boto config file
+   
+MORE INFO                          *ec2_key-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_key_module.html

@@ -1,0 +1,25 @@
+SYNOPSIS                           *flowdock*
+
+New in version 1.2.
+
+Send a message to a flowdock team inbox or chat using the push API (see https://www.flowdock.com/api/team-inbox and https://www.flowdock.com/api/chat)
+
+EXAMPLES                           *flowdock-examples*
+>
+    - flowdock: type=inbox
+                token=AAAAAA
+                from_address=[email protected]
+                source='my cool app'
+                msg='test from ansible'
+                subject='test subject'
+   
+    - flowdock: type=chat
+                token=AAAAAA
+                external_user_name=testuser
+                msg='test from ansible'
+                tags=tag1,tag2,tag3
+   
+MORE INFO                          *flowdock-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/flowdock_module.html

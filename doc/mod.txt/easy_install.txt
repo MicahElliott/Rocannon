@@ -1,0 +1,25 @@
+SYNOPSIS                           *easy_install*
+
+Installs Python libraries, optionally in a virtualenv
+
+EXAMPLES                           *easy_install-examples*
+>
+    # Examples from Ansible Playbooks
+    - easy_install: name=pip
+   
+    # Install Bottle into the specified virtualenv.
+    - easy_install: name=bottle virtualenv=/webapps/myapp/venv
+   
+      Note
+   
+      Please note that the easy_install module can only install Python libraries. Thus this module is not able to remove libraries. It is generally recommended to use the pip module which you can
+      first install using easy_install.
+   
+      Note
+   
+      Also note that virtualenv must be installed on the remote host if the virtualenv parameter is specified.
+   
+MORE INFO                          *easy_install-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/easy_install_module.html

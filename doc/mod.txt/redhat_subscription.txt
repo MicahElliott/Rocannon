@@ -1,0 +1,25 @@
+SYNOPSIS                           *redhat_subscription*
+
+New in version 1.2.
+
+Manage registration and subscription to the Red Hat Network entitlement platform.
+
+EXAMPLES                           *redhat_subscription-examples*
+>
+    # Register as user (joe_user) with password (somepass) and auto-subscribe to available content.
+    - redhat_subscription: state=present username=joe_user password=somepass autosubscribe=true
+   
+    # Register with activationkey (1-222333444) and consume subscriptions matching
+    # the names (Red hat Enterprise Server) and (Red Hat Virtualization)
+    - redhat_subscription: state=present
+                           activationkey=1-222333444
+                           pool='^(Red Hat Enterprise Server|Red Hat Virtualization)$'
+   
+      Note
+   
+      In order to register a system, subscription-manager requires either a username and password, or an activationkey.
+   
+MORE INFO                          *redhat_subscription-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/redhat_subscription_module.html

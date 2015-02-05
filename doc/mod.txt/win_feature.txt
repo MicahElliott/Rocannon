@@ -1,0 +1,33 @@
+SYNOPSIS                           *win_feature*
+
+New in version 1.7.
+
+Installs or uninstalls Windows Roles or Features
+
+EXAMPLES                           *win_feature-examples*
+>
+    # This installs IIS.
+    # The names of features available for install can be run by running the following Powershell Command:
+    # PS C:\Users\Administrator> Import-Module ServerManager; Get-WindowsFeature
+    $ ansible -i hosts -m win_feature -a "name=Web-Server" all
+    $ ansible -i hosts -m win_feature -a "name=Web-Server,Web-Common-Http" all
+   
+   
+    # Playbook example
+    ---
+    - name: Install IIS
+      hosts: all
+      gather_facts: false
+      tasks:
+        - name: Install IIS
+          win_feature:
+            name: "Web-Server"
+            state: absent
+            restart: yes
+            include_sub_features: yes
+            include_management_tools: yes
+   
+MORE INFO                          *win_feature-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/win_feature_module.html

@@ -1,0 +1,24 @@
+SYNOPSIS                           *zfs*
+
+New in version 1.1.
+
+Manages ZFS file systems on Solaris and FreeBSD. Can manage file systems, volumes and snapshots. See zfs(1M) for more information about the properties.
+
+EXAMPLES                           *zfs-examples*
+>
+    # Create a new file system called myfs in pool rpool
+    - zfs: name=rpool/myfs state=present
+   
+    # Create a new volume called myvol in pool rpool.
+    - zfs: name=rpool/myvol state=present volsize=10M
+   
+    # Create a snapshot of rpool/myfs file system.
+    - zfs: name=rpool/myfs@mysnapshot state=present
+   
+    # Create a new file system called myfs2 with snapdir enabled
+    - zfs: name=rpool/myfs2 state=present snapdir=enabled
+   
+MORE INFO                          *zfs-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/zfs_module.html

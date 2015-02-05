@@ -1,0 +1,40 @@
+SYNOPSIS                           *cpanm*
+
+New in version 1.6.
+
+Manage Perl library dependencies.
+
+EXAMPLES                           *cpanm-examples*
+>
+      Install Dancer perl package.
+   
+    cpanm: name=Dancer
+   
+      Install version 0.99_05 of the Plack perl package.
+   
+    cpanm: name=MIYAGAWA/Plack-0.99_05.tar.gz
+   
+      Install Dancer (http://perldancer.org/) into the specified locallib
+   
+    cpanm: name=Dancer locallib=/srv/webapps/my_app/extlib
+   
+      Install perl dependencies from local directory.
+   
+    cpanm: from_path=/srv/webapps/my_app/src/
+   
+      Install Dancer perl package without running the unit tests in indicated locallib.
+   
+    cpanm: name=Dancer notest=True locallib=/srv/webapps/my_app/extlib
+   
+      Install Dancer perl package from a specific mirror
+   
+    cpanm: name=Dancer mirror=http://cpan.cpantesters.org/
+   
+      Note
+   
+      Please note that http://search.cpan.org/dist/App-cpanminus/bin/cpanm, cpanm must be installed on the remote host.
+   
+MORE INFO                          *cpanm-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/cpanm_module.html

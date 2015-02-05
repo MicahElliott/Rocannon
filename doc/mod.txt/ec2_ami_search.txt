@@ -1,0 +1,23 @@
+SYNOPSIS                           *ec2_ami_search*
+
+New in version 1.6.
+
+Look up the most recent AMI on AWS for a given operating system. Returns ami, aki, ari, serial, tag If there is no AKI or ARI associated with an image, these will be null. Only supports images
+from cloud-images.ubuntu.com Example output: {"ami": "ami-69f5a900", "changed": false, "aki": "aki-88aa75e1", "tag": "release", "ari": null, "serial": "20131024"}
+
+EXAMPLES                           *ec2_ami_search-examples*
+>
+    - name: Launch an Ubuntu 12.04 (Precise Pangolin) EC2 instance
+      hosts: 127.0.0.1
+      connection: local
+      tasks:
+      - name: Get the Ubuntu precise AMI
+        ec2_ami_search: distro=ubuntu release=precise region=us-west-1 store=instance-store
+        register: ubuntu_image
+      - name: Start the EC2 instance
+        ec2: image={{ ubuntu_image.ami }} instance_type=m1.small key_name=mykey
+   
+MORE INFO                          *ec2_ami_search-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_ami_search_module.html

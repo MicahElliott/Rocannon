@@ -1,0 +1,21 @@
+SYNOPSIS                           *at*
+
+New in version 1.5.
+
+Use this module to schedule a command or script file to run once in the future. All jobs are executed in the ‘a’ queue.
+
+EXAMPLES                           *at-examples*
+>
+    # Schedule a command to execute in 20 minutes as root.
+    - at: command="ls -d / > /dev/null" count=20 units="minutes"
+   
+    # Match a command to an existing job and delete the job.
+    - at: command="ls -d / > /dev/null" state="absent"
+   
+    # Schedule a command to execute in 20 minutes making sure it is unique in the queue.
+    - at: command="ls -d / > /dev/null" unique=true count=20 units="minutes"
+   
+MORE INFO                          *at-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/at_module.html

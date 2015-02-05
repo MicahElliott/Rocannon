@@ -1,0 +1,47 @@
+SYNOPSIS                           *haproxy*
+
+New in version 1.9.
+
+The Enable Haproxy Backend Server, with supports get current weight for server (default) and set weight for haproxy backend server when provides. The Disable Haproxy Backend Server, with
+supports get current weight for server (default) and shutdown sessions while disabling backend host server.
+
+EXAMPLES                           *haproxy-examples*
+>
+    examples:
+   
+    # disable server in 'www' backend pool
+    - haproxy: state=disabled host={{ inventory_hostname }} backend=www
+   
+    # disable server without backend pool name (apply to all available backend pool)
+    - haproxy: state=disabled host={{ inventory_hostname }}
+   
+    # disable server, provide socket file
+    - haproxy: state=disabled host={{ inventory_hostname }} socket=/var/run/haproxy.sock backend=www
+   
+    # disable backend server in 'www' backend pool and drop open sessions to it
+    - haproxy: state=disabled host={{ inventory_hostname }} backend=www socket=/var/run/haproxy.sock shutdown_sessions=true
+   
+    # enable server in 'www' backend pool
+    - haproxy: state=enabled host={{ inventory_hostname }} backend=www
+   
+    # enable server in 'www' backend pool with change server(s) weight
+    - haproxy: state=enabled host={{ inventory_hostname }} socket=/var/run/haproxy.sock weight=10 backend=www
+   
+    author: Ravi Bhure <[email protected]>
+   
+      Note
+   
+      enable or disable commands are restricted and can only be issued on sockets configured for level ‘admin’,
+   
+      Note
+   
+      Check - http://haproxy.1wt.eu/download/1.5/doc/configuration.txt,
+   
+      Note
+   
+      Example: ‘stats socket /var/run/haproxy.sock level admin’
+   
+MORE INFO                          *haproxy-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/haproxy_module.html

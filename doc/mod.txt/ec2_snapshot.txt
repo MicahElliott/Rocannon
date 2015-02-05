@@ -1,0 +1,50 @@
+SYNOPSIS                           *ec2_snapshot*
+
+New in version 1.5.
+
+creates an EC2 snapshot from an existing EBS volume
+
+EXAMPLES                           *ec2_snapshot-examples*
+>
+    # Simple snapshot of volume using volume_id
+    - ec2_snapshot:
+        volume_id: vol-abcdef12
+        description: snapshot of /data from DB123 taken 2013/11/28 12:18:32
+   
+    # Snapshot of volume mounted on device_name attached to instance_id
+    - ec2_snapshot:
+        instance_id: i-12345678
+        device_name: /dev/sdb1
+        description: snapshot of /data from DB123 taken 2013/11/28 12:18:32
+   
+    # Snapshot of volume with tagging
+    - ec2_snapshot:
+        instance_id: i-12345678
+        device_name: /dev/sdb1
+        snapshot_tags:
+            frequency: hourly
+            source: /data
+   
+    # Remove a snapshot
+    - local_action:
+        module: ec2_snapshot
+        snapshot_id: snap-abcd1234
+        state: absent
+   
+      Note
+   
+      The following environment variables can be used AWS_ACCESS_KEY or EC2_ACCESS_KEY or AWS_ACCESS_KEY_ID, AWS_SECRET_KEY or EC2_SECRET_KEY or AWS_SECRET_ACCESS_KEY, AWS_REGION or EC2_REGION,
+      AWS_SECURITY_TOKEN
+   
+      Note
+   
+      Ansible uses the boto configuration file (typically ~/.boto) if no credentials are provided. See http://boto.readthedocs.org/en/latest/boto_config_tut.html
+   
+      Note
+   
+      AWS_REGION or EC2_REGION can be typically be used to specify the AWS region, when required, but this can also be configured in the boto config file
+   
+MORE INFO                          *ec2_snapshot-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_snapshot_module.html

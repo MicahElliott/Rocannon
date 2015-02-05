@@ -1,0 +1,27 @@
+SYNOPSIS                           *template*
+
+Templates are processed by the Jinja2 templating language (http://jinja.pocoo.org/docs/) - documentation on the template formatting can be found in the Template Designer Documentation
+(http://jinja.pocoo.org/docs/templates/). Six additional variables can be used in templates: ansible_managed (configurable via the defaults section of ansible.cfg) contains a string which can be
+used to describe the template name, host, modification time of the template file and the owner uid, template_host contains the node name of the template’s machine, template_uid the owner,
+template_path the absolute path of the template, template_fullpath is the absolute path of the template, and template_run_date is the date that the template was rendered. Note that including a
+string that uses a date in the template will result in the template being marked ‘changed’ each time.
+
+EXAMPLES                           *template-examples*
+>
+    # Example from Ansible Playbooks
+    - template: src=/mytemplates/foo.j2 dest=/etc/file.conf owner=bin group=wheel mode=0644
+   
+    # The same example, but using symbolic modes equivalent to 0644
+    - template: src=/mytemplates/foo.j2 dest=/etc/file.conf owner=bin group=wheel mode="u=rw,g=r,o=r"
+   
+    # Copy a new "sudoers" file into place, after passing validation with visudo
+    - template: src=/mine/sudoers dest=/etc/sudoers validate='visudo -cf %s'
+   
+      Note
+   
+      Since Ansible version 0.9, templates are loaded with trim_blocks=True.
+   
+MORE INFO                          *template-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/template_module.html

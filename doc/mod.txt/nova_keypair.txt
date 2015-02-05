@@ -1,0 +1,21 @@
+SYNOPSIS                           *nova_keypair*
+
+New in version 1.2.
+
+Add or Remove key pair from nova .
+
+EXAMPLES                           *nova_keypair-examples*
+>
+    # Creates a key pair with the running users public key
+    - nova_keypair: state=present login_username=admin
+                    login_password=admin login_tenant_name=admin name=ansible_key
+                    public_key={{ lookup('file','~/.ssh/id_rsa.pub') }}
+   
+    # Creates a new key pair and the private key returned after the run.
+    - nova_keypair: state=present login_username=admin login_password=admin
+                    login_tenant_name=admin name=ansible_key
+   
+MORE INFO                          *nova_keypair-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/nova_keypair_module.html

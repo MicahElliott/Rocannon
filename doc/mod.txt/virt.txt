@@ -1,0 +1,28 @@
+SYNOPSIS                           *virt*
+
+Manages virtual machines supported by libvirt.
+
+EXAMPLES                           *virt-examples*
+>
+    # a playbook task line:
+    - virt: name=alpha state=running
+   
+    # /usr/bin/ansible invocations
+    ansible host -m virt -a "name=alpha command=status"
+    ansible host -m virt -a "name=alpha command=get_xml"
+    ansible host -m virt -a "name=alpha command=create uri=lxc:///"
+   
+    # a playbook example of defining and launching an LXC guest
+    tasks:
+      - name: define vm
+        virt: name=foo
+              command=define
+              xml="{{ lookup('template', 'container-template.xml.j2') }}"
+              uri=lxc:///
+      - name: start vm
+        virt: name=foo state=running uri=lxc:///
+   
+MORE INFO                          *virt-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/virt_module.html

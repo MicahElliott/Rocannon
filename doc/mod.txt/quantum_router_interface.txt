@@ -1,0 +1,20 @@
+SYNOPSIS                           *quantum_router_interface*
+
+New in version 1.2.
+
+Attach/Dettach a subnet interface to a router, to provide a gateway for the subnet.
+
+EXAMPLES                           *quantum_router_interface-examples*
+>
+    # Attach tenant1's subnet to the external router
+    - quantum_router_interface: state=present login_username=admin
+                                login_password=admin
+                                login_tenant_name=admin
+                                tenant_name=tenant1
+                                router_name=external_route
+                                subnet_name=t1subnet
+   
+MORE INFO                          *quantum_router_interface-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/quantum_router_interface_module.html

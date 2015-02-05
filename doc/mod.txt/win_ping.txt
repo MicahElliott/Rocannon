@@ -1,0 +1,18 @@
+SYNOPSIS                           *win_ping*
+
+New in version 1.7.
+
+Checks management connectivity of a windows host
+
+EXAMPLES                           *win_ping-examples*
+>
+    # Test connectivity to a windows host
+    ansible winserver -m win_ping
+   
+    # Example from an Ansible Playbook
+    - action: win_ping
+   
+MORE INFO                          *win_ping-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/win_ping_module.html

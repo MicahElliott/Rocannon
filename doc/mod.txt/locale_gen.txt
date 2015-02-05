@@ -1,0 +1,15 @@
+SYNOPSIS                           *locale_gen*
+
+New in version 1.6.
+
+Manages locales by editing /etc/locale.gen and invoking locale-gen.
+
+EXAMPLES                           *locale_gen-examples*
+>
+    # Ensure a locale exists.
+    - locale_gen: name=de_CH.UTF-8 state=present
+   
+MORE INFO                          *locale_gen-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/locale_gen_module.html

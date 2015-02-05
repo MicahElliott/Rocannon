@@ -1,0 +1,34 @@
+SYNOPSIS                           *command*
+
+The command module takes the command name followed by a list of space-delimited arguments. The given command will be executed on all selected nodes. It will not be processed through the shell,
+so variables like $HOME and operations like "<", ">", "|", and "&" will not work (use the shell module if you need these features).
+
+EXAMPLES                           *command-examples*
+>
+    # Example from Ansible Playbooks.
+    - command: /sbin/shutdown -t now
+   
+    # Run the command if the specified file does not exist.
+    - command: /usr/bin/make_database.sh arg1 arg2 creates=/path/to/database
+   
+    # You can also use the 'args' form to provide the options. This command
+    # will change the working directory to somedir/ and will only run when
+    # /path/to/database doesn't exist.
+    - command: /usr/bin/make_database.sh arg1 arg2
+      args:
+        chdir: somedir/
+        creates: /path/to/database
+   
+      Note
+   
+      If you want to run a command through the shell (say you are using <, >, |, etc), you actually want the shell module instead. The command module is much more secure as it’s not affected by the
+      user’s environment.
+   
+      Note
+   
+      creates, removes, and chdir can be specified after the command. For instance, if you only want to run a command if a certain file does not exist, use this.
+   
+MORE INFO                          *command-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/command_module.html

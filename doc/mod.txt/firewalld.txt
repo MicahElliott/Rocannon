@@ -1,0 +1,21 @@
+SYNOPSIS                           *firewalld*
+
+New in version 1.4.
+
+This module allows for addition or deletion of services and ports either tcp or udp in either running or permanent firewalld rules
+
+EXAMPLES                           *firewalld-examples*
+>
+    - firewalld: service=https permanent=true state=enabled
+    - firewalld: port=8081/tcp permanent=true state=disabled
+    - firewalld: zone=dmz service=http permanent=true state=enabled
+    - firewalld: rich_rule='rule service name="ftp" audit limit value="1/m" accept' permanent=true state=enabled
+   
+      Note
+   
+      Not tested on any debian based system
+   
+MORE INFO                          *firewalld-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/firewalld_module.html

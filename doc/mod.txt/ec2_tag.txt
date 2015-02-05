@@ -1,0 +1,49 @@
+SYNOPSIS                           *ec2_tag*
+
+New in version 1.3.
+
+Creates, removes and lists tags from any EC2 resource. The resource is referenced by its resource id (e.g. an instance being i-XXXXXXX). It is designed to be used with complex args (tags), see
+the examples. This module has a dependency on python-boto.
+
+EXAMPLES                           *ec2_tag-examples*
+>
+    # Basic example of adding tag(s)
+    tasks:
+    - name: tag a resource
+      ec2_tag: resource=vol-XXXXXX region=eu-west-1 state=present
+      args:
+        tags:
+          Name: ubervol
+          env: prod
+   
+    # Playbook example of adding tag(s) to spawned instances
+    tasks:
+    - name: launch some instances
+      ec2: keypair={{ keypair }} group={{ security_group }} instance_type={{ instance_type }} image={{ image_id }} wait=true region=eu-west-1
+      register: ec2
+   
+    - name: tag my launched instances
+      ec2_tag: resource={{ item.id }} region=eu-west-1 state=present
+      with_items: ec2.instances
+      args:
+        tags:
+          Name: webserver
+          env: prod
+   
+      Note
+   
+      The following environment variables can be used AWS_ACCESS_KEY or EC2_ACCESS_KEY or AWS_ACCESS_KEY_ID, AWS_SECRET_KEY or EC2_SECRET_KEY or AWS_SECRET_ACCESS_KEY, AWS_REGION or EC2_REGION,
+      AWS_SECURITY_TOKEN
+   
+      Note
+   
+      Ansible uses the boto configuration file (typically ~/.boto) if no credentials are provided. See http://boto.readthedocs.org/en/latest/boto_config_tut.html
+   
+      Note
+   
+      AWS_REGION or EC2_REGION can be typically be used to specify the AWS region, when required, but this can also be configured in the boto config file
+   
+MORE INFO                          *ec2_tag-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_tag_module.html

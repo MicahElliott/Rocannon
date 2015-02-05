@@ -1,0 +1,61 @@
+SYNOPSIS                           *ec2_vpc*
+
+New in version 1.4.
+
+Create or terminates AWS virtual private clouds. This module has a dependency on python-boto.
+
+EXAMPLES                           *ec2_vpc-examples*
+>
+    # Note: None of these examples set aws_access_key, aws_secret_key, or region.
+    # It is assumed that their matching environment variables are set.
+   
+    # Basic creation example:
+          ec2_vpc:
+            state: present
+            cidr_block: 172.23.0.0/16
+            resource_tags: { "Environment":"Development" }
+            region: us-west-2
+    # Full creation example with subnets and optional availability zones.
+    # The absence or presence of subnets deletes or creates them respectively.
+          ec2_vpc:
+            state: present
+            cidr_block: 172.22.0.0/16
+            resource_tags: { "Environment":"Development" }
+            subnets:
+              - cidr: 172.22.1.0/24
+                az: us-west-2c
+                resource_tags: { "Environment":"Dev", "Tier" : "Web" }
+              - cidr: 172.22.2.0/24
+                az: us-west-2b
+                resource_tags: { "Environment":"Dev", "Tier" : "App" }
+              - cidr: 172.22.3.0/24
+                az: us-west-2a
+                resource_tags: { "Environment":"Dev", "Tier" : "DB" }
+            internet_gateway: True
+            route_tables:
+              - subnets:
+                  - 172.22.2.0/24
+                  - 172.22.3.0/24
+                routes:
+                  - dest: 0.0.0.0/0
+                    gw: igw
+              - subnets:
+                  - 172.22.1.0/24
+                routes:
+                  - dest: 0.0.0.0/0
+                    gw: igw
+            region: us-west-2
+          register: vpc
+   
+    # Removal of a VPC by id
+          ec2_vpc:
+            state: absent
+            vpc_id: vpc-aaaaaaa
+            region: us-west-2
+    If you have added elements not managed by this module, e.g. instances, NATs, etc then
+    the delete will fail until those dependencies are removed.
+   
+MORE INFO                          *ec2_vpc-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_vpc_module.html

@@ -1,0 +1,21 @@
+SYNOPSIS                           *rabbitmq_policy*
+
+New in version 1.5.
+
+Manage the state of a virtual host in RabbitMQ.
+
+EXAMPLES                           *rabbitmq_policy-examples*
+>
+    - name: ensure the default vhost contains the HA policy via a dict
+      rabbitmq_policy: name=HA pattern='.*'
+      args:
+        tags:
+          "ha-mode": all
+   
+    - name: ensure the default vhost contains the HA policy
+      rabbitmq_policy: name=HA pattern='.*' tags="ha-mode=all"
+   
+MORE INFO                          *rabbitmq_policy-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rabbitmq_policy_module.html

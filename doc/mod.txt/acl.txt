@@ -1,0 +1,32 @@
+SYNOPSIS                           *acl*
+
+New in version 1.4.
+
+Sets and retrieves file ACL information.
+
+EXAMPLES                           *acl-examples*
+>
+    # Grant user Joe read access to a file
+    - acl: name=/etc/foo.conf entity=joe etype=user permissions="r" state=present
+   
+    # Removes the acl for Joe on a specific file
+    - acl: name=/etc/foo.conf entity=joe etype=user state=absent
+   
+    # Sets default acl for joe on foo.d
+    - acl: name=/etc/foo.d entity=joe etype=user permissions=rw default=yes state=present
+   
+    # Same as previous but using entry shorthand
+    - acl: name=/etc/foo.d entry="default:user:joe:rw-" state=present
+   
+    # Obtain the acl for a specific file
+    - acl: name=/etc/foo.conf
+      register: acl_info
+   
+      Note
+   
+      The “acl” module requires that acls are enabled on the target filesystem and that the setfacl and getfacl binaries are installed.
+   
+MORE INFO                          *acl-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/acl_module.html

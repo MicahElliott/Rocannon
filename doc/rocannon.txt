@@ -1,0 +1,92 @@
+*rocannon.txt* Ansible completion, abbrs, syntax, colorscheme, folding, docs
+
+Author:  Micah Elliott
+Repo:    https://github.com/MicahElliott/rocannon
+License: Same terms as Vim itself (see |license|)
+
+INTRODUCTION                                     *rocannon*
+
+Rocannon is the operator of the Ansible.
+
+Ansible is basically just a bunch of commands (actions like stat, yum, git),
+expressed in YAML. In fact, it looks like plain old YAML data that benefits
+very little from default highlighting. It’s not terribly obvious that a
+multiline play always has just a single action, and several supporting
+constructs that look a lot like actions (while, register, when). Rocannon makes
+these things obvious. It also really speeds up specifying a playbook by
+completing most of what you’d type.
+
+HELP                                            *rocannon-help*
+
+All of the online Ansible module site docs have been parsed into vim
+|online-help| files. This makes it really quick to look up any module's docs
+with |K|. Remember |K| as a "K"iller feature.
+
+This works because Rocannon sets |keywordprg|.
+
+COMPLETION                                      *rocannon-completion*
+
+Actions are omni-completed. Typing <C-x><C-o> to start an indented line will
+show all available Ansible actions.
+
+Completion of required args is simply done through abbreviations (snippets felt
+like overkill since few commands have multiple required args). To perform an
+insert-mode abbr expansion, you can simply use <Space>, but <C-]> is better.
+
+    Before            After ~
+    yum:<C-]>         yum: name=_
+
+There is a workaround for <Space>-expansion of abbreviations that avoids
+adding the <Space>. It (Eatchar) is included.
+
+Further optional args can be expanded through omni-completion: <C-x><C-o> (but
+<C-Space> is easier; see below).
+
+You can even complete `state=` args. These are by far the most common among
+modules, and vary quite a bit, so they've been generated as another
+omni-completion. This one is presently a kluge, so press <C-]> to end the
+prior completion.
+
+    Example Sequence ~
+    yum: name=zsh <C-Space>        " choose state
+    yum: name=zsh state=<C-]>      " finish, staying in insert mode
+    yum: name=zsh state=<C-Space>  " choose present
+    yum: name=zsh state=present
+
+You can set up <C-Space> for omni-completion with the following in `$VIM`:
+>
+    inoremap <Nul> <C-x><C-o>
+
+(This may be OS/term-dependent; works well in urxvt.)
+
+COLORS                                          *rocannon-colors*
+
+Colors can be disabled, but it’s not recommended.
+>
+    let g:rocannon_bypass_colorscheme = 1
+
+FOLDING                                         *rocannon-folding*
+
+Folding is done via syntax. To enable it:
+>
+    set foldmethod=syntax
+    set foldmethod=expr
+    set foldlevel=0
+
+This will collapse all plays into a single "name" line.
+
+SYNTAX                                          *rocannon-syntax*
+
+Ansible is much like a little programming language, though its semantics are
+simply conventional. They represent conditionals (when), loops (item,
+with_items), statements (actions), functions (notify blocks). These should be
+highlighted as such.
+
+There are several elements defined according to Ansibles semantics. Each is
+prefixed with `ans`.
+
+CONTRIBUTING                                    *rocannon-contributing*
+
+See |CONTRIBUTING.md| for development details.
+
+Copyright © Micah Elliott. vim:ft=help:

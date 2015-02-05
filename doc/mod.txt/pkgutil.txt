@@ -1,0 +1,19 @@
+SYNOPSIS                           *pkgutil*
+
+New in version 1.3.
+
+Manages CSW packages (SVR4 format) on Solaris 10 and 11. These were the native packages on Solaris <= 10 and are available as a legacy feature in Solaris 11. Pkgutil is an advanced packaging
+system, which resolves dependency on installation. It is designed for CSW packages.
+
+EXAMPLES                           *pkgutil-examples*
+>
+    # Install a package
+    pkgutil: name=CSWcommon state=present
+   
+    # Install a package from a specific repository
+    pkgutil: name=CSWnrpe site='ftp://myinternal.repo/opencsw/kiel state=latest'
+   
+MORE INFO                          *pkgutil-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/pkgutil_module.html

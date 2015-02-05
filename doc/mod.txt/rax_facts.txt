@@ -1,0 +1,42 @@
+SYNOPSIS                           *rax_facts*
+
+New in version 1.4.
+
+Gather facts for Rackspace Cloud Servers.
+
+EXAMPLES                           *rax_facts-examples*
+>
+    - name: Gather info about servers
+      hosts: all
+      gather_facts: False
+      tasks:
+        - name: Get facts about servers
+          local_action:
+            module: rax_facts
+            credentials: ~/.raxpub
+            name: "{{ inventory_hostname }}"
+            region: DFW
+        - name: Map some facts
+          set_fact:
+            ansible_ssh_host: "{{ rax_accessipv4 }}"
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax_facts-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_facts_module.html

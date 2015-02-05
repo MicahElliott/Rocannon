@@ -1,0 +1,14 @@
+SYNOPSIS                           *typetalk*
+
+New in version 1.6.
+
+Send a message to typetalk using typetalk API ( http://developers.typetalk.in/ )
+
+EXAMPLES                           *typetalk-examples*
+>
+    - typetalk: client_id=12345 client_secret=12345 topic=1 msg="install completed"
+   
+MORE INFO                          *typetalk-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/typetalk_module.html

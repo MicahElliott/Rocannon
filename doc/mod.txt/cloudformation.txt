@@ -1,0 +1,29 @@
+SYNOPSIS                           *cloudformation*
+
+New in version 1.1.
+
+Launches an AWS CloudFormation stack and waits for it complete.
+
+EXAMPLES                           *cloudformation-examples*
+>
+    # Basic task example
+    tasks:
+    - name: launch ansible cloudformation example
+      cloudformation:
+        stack_name: "ansible-cloudformation"
+        state: "present"
+        region: "us-east-1"
+        disable_rollback: true
+        template: "files/cloudformation-example.json"
+        template_parameters:
+          KeyName: "jmartin"
+          DiskType: "ephemeral"
+          InstanceType: "m1.small"
+          ClusterSize: 3
+        tags:
+          Stack: "ansible-cloudformation"
+   
+MORE INFO                          *cloudformation-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/cloudformation_module.html

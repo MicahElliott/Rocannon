@@ -1,0 +1,18 @@
+SYNOPSIS                           *osx_say*
+
+New in version 1.2.
+
+makes an OS computer speak! Amuse your friends, annoy your coworkers!
+
+EXAMPLES                           *osx_say-examples*
+>
+    - local_action: osx_say msg="{{inventory_hostname}} is all done" voice=Zarvox
+   
+      Note
+   
+      If you like this module, you may also be interested in the osx_say callback in the plugins/ directory of the source checkout.
+   
+MORE INFO                          *osx_say-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/osx_say_module.html

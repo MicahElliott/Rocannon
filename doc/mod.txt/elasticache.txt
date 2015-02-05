@@ -1,0 +1,39 @@
+SYNOPSIS                           *elasticache*
+
+New in version 1.4.
+
+Manage cache clusters in Amazon Elasticache. Returns information about the specified cache cluster.
+
+EXAMPLES                           *elasticache-examples*
+>
+    # Note: None of these examples set aws_access_key, aws_secret_key, or region.
+    # It is assumed that their matching environment variables are set.
+   
+    # Basic example
+    - elasticache:
+        name: "test-please-delete"
+        state: present
+        engine: memcached
+        cache_engine_version: 1.4.14
+        node_type: cache.m1.small
+        num_nodes: 1
+        cache_port: 11211
+        cache_security_groups:
+          - default
+        zone: us-east-1d
+   
+   
+    # Ensure cache cluster is gone
+    - elasticache:
+        name: "test-please-delete"
+        state: absent
+   
+    # Reboot cache cluster
+    - elasticache:
+        name: "test-please-delete"
+        state: rebooted
+   
+MORE INFO                          *elasticache-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/elasticache_module.html

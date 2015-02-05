@@ -1,0 +1,26 @@
+SYNOPSIS                           *accelerate*
+
+New in version 1.3.
+
+This modules launches an ephemeral accelerate daemon on the remote node which Ansible can use to communicate with nodes at high speed. The daemon listens on a configurable port for a
+configurable amount of time. Fireball mode is AES encrypted
+
+EXAMPLES                           *accelerate-examples*
+>
+    # To use accelerate mode, simply add "accelerate: true" to your play. The initial
+    # key exchange and starting up of the daemon will occur over SSH, but all commands and
+    # subsequent actions will be conducted over the raw socket connection using AES encryption
+   
+    - hosts: devservers
+      accelerate: true
+      tasks:
+          - command: /usr/bin/anything
+   
+      Note
+   
+      See the advanced playbooks chapter for more about using accelerated mode.
+   
+MORE INFO                          *accelerate-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/accelerate_module.html

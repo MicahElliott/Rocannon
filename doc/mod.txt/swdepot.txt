@@ -1,0 +1,16 @@
+SYNOPSIS                           *swdepot*
+
+New in version 1.4.
+
+Will install, upgrade and remove packages with swdepot package manager (HP-UX)
+
+EXAMPLES                           *swdepot-examples*
+>
+    - swdepot: name=unzip-6.0 state=installed depot=repository:/path
+    - swdepot: name=unzip state=latest depot=repository:/path
+    - swdepot: name=unzip state=absent
+   
+MORE INFO                          *swdepot-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/swdepot_module.html

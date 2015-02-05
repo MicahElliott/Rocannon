@@ -1,0 +1,30 @@
+SYNOPSIS                           *bigpanda*
+
+New in version 1.8.
+
+Notify BigPanda when deployments start and end (successfully or not). Returns a deployment object containing all the parameters for future module calls.
+
+EXAMPLES                           *bigpanda-examples*
+>
+    - bigpanda: component=myapp version=1.3 token={{ bigpanda_token }} state=started
+    ...
+    - bigpanda: component=myapp version=1.3 token={{ bigpanda_token }} state=finished
+   
+    or using a deployment object:
+    - bigpanda: component=myapp version=1.3 token={{ bigpanda_token }} state=started
+      register: deployment
+   
+    - bigpanda: state=finished
+      args: deployment
+   
+    If outside servers aren't reachable from your machine, use local_action and pass the hostname:
+    - local_action: bigpanda component=myapp version=1.3 hosts={{ansible_hostname}} token={{ bigpanda_token }} state=started
+      register: deployment
+    ...
+    - local_action: bigpanda state=finished
+      args: deployment
+   
+MORE INFO                          *bigpanda-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/bigpanda_module.html

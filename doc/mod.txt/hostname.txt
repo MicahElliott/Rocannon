@@ -1,0 +1,14 @@
+SYNOPSIS                           *hostname*
+
+New in version 1.4.
+
+Set system’s hostname Currently implemented on Debian, Ubuntu, Fedora, RedHat, openSUSE, Linaro, ScientificLinux, Arch, CentOS, AMI.
+
+EXAMPLES                           *hostname-examples*
+>
+    - hostname: name=web01
+   
+MORE INFO                          *hostname-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/hostname_module.html

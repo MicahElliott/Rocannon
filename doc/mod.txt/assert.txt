@@ -1,0 +1,19 @@
+SYNOPSIS                           *assert*
+
+New in version 1.5.
+
+This module asserts that a given expression is true and can be a simpler alternative to the ‘fail’ module in some cases.
+
+EXAMPLES                           *assert-examples*
+>
+    - assert: { that: "ansible_os_family != 'RedHat'" }
+   
+    - assert:
+        that:
+          - "'foo' in some_command_result.stdout"
+          - "number_of_the_counting == 3"
+   
+MORE INFO                          *assert-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/assert_module.html

@@ -1,0 +1,17 @@
+SYNOPSIS                           *grove*
+
+New in version 1.4.
+
+The grove module sends a message for a service to a Grove.io channel.
+
+EXAMPLES                           *grove-examples*
+>
+    - grove: >
+        channel_token=6Ph62VBBJOccmtTPZbubiPzdrhipZXtg
+        service=my-app
+        message=deployed {{ target }}
+   
+MORE INFO                          *grove-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/grove_module.html

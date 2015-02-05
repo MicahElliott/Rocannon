@@ -1,0 +1,27 @@
+SYNOPSIS                           *set_fact*
+
+New in version 1.2.
+
+This module allows setting new variables. Variables are set on a host-by-host basis just like facts discovered by the setup module. These variables will survive between plays.
+
+EXAMPLES                           *set_fact-examples*
+>
+    # Example setting host facts using key=value pairs
+    - set_fact: one_fact="something" other_fact="{{ local_var * 2 }}"
+   
+    # Example setting host facts using complex arguments
+    - set_fact:
+         one_fact: something
+         other_fact: "{{ local_var * 2 }}"
+   
+    # As of 1.8, Ansible will convert boolean strings ('true', 'false', 'yes', 'no')
+    # to proper boolean values when using the key=value syntax, however it is still
+    # recommended that booleans be set using the complex argument style:
+    - set_fact:
+        one_fact: true
+        other_fact: false
+   
+MORE INFO                          *set_fact-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/set_fact_module.html

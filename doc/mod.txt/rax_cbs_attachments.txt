@@ -1,0 +1,45 @@
+SYNOPSIS                           *rax_cbs_attachments*
+
+New in version 1.6.
+
+Manipulate Rackspace Cloud Block Storage Volume Attachments
+
+EXAMPLES                           *rax_cbs_attachments-examples*
+>
+    - name: Attach a Block Storage Volume
+      gather_facts: False
+      hosts: local
+      connection: local
+      tasks:
+        - name: Storage volume attach request
+          local_action:
+            module: rax_cbs_attachments
+            credentials: ~/.raxpub
+            volume: my-volume
+            server: my-server
+            device: /dev/xvdd
+            region: DFW
+            wait: yes
+            state: present
+          register: my_volume
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax_cbs_attachments-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_cbs_attachments_module.html

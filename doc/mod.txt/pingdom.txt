@@ -1,0 +1,30 @@
+SYNOPSIS                           *pingdom*
+
+New in version 1.2.
+
+This module will let you pause/unpause Pingdom alerts
+
+EXAMPLES                           *pingdom-examples*
+>
+    # Pause the check with the ID of 12345.
+    - pingdom: uid=[email protected]
+               passwd=password123
+               key=apipassword123
+               checkid=12345
+               state=paused
+   
+    # Unpause the check with the ID of 12345.
+    - pingdom: uid=[email protected]
+               passwd=password123
+               key=apipassword123
+               checkid=12345
+               state=running
+   
+      Note
+   
+      This module does not yet have support to add/remove checks.
+   
+MORE INFO                          *pingdom-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/pingdom_module.html

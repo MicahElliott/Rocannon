@@ -1,0 +1,40 @@
+SYNOPSIS                           *librato_annotation*
+
+New in version 1.6.
+
+Create an annotation event on the given annotation stream :name. If the annotation stream does not exist, it will be created automatically
+
+EXAMPLES                           *librato_annotation-examples*
+>
+    # Create a simple annotation event with a source
+    - librato_annotation:
+        user: [email protected]
+        api_key: XXXXXXXXXXXXXXXXX
+        title: 'App Config Change'
+        source: 'foo.bar'
+        description: 'This is a detailed description of the config change'
+   
+    # Create an annotation that includes a link
+    - librato_annotation:
+        user: [email protected]
+        api_key: XXXXXXXXXXXXXXXXXX
+        name: 'code.deploy'
+        title: 'app code deploy'
+        description: 'this is a detailed description of a deployment'
+        links:
+          - { rel: 'example', href: 'http://www.example.com/deploy' }
+   
+    # Create an annotation with a start_time and end_time
+    - librato_annotation:
+        user: [email protected]
+        api_key: XXXXXXXXXXXXXXXXXX
+        name: 'maintenance'
+        title: 'Maintenance window'
+        description: 'This is a detailed description of maintenance'
+        start_time: 1395940006
+        end_time: 1395954406
+   
+MORE INFO                          *librato_annotation-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/librato_annotation_module.html

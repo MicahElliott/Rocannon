@@ -1,0 +1,25 @@
+SYNOPSIS                           *ec2_facts*
+
+New in version 1.0.
+
+This module fetches data from the metadata servers in ec2 (aws) as per http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html. The module must be called from within the
+EC2 instance itself.
+
+EXAMPLES                           *ec2_facts-examples*
+>
+    # Conditional example
+    - name: Gather facts
+      action: ec2_facts
+   
+    - name: Conditional
+      action: debug msg="This instance is a t1.micro"
+      when: ansible_ec2_instance_type == "t1.micro"
+   
+      Note
+   
+      Parameters to filter on ec2_facts may be added later.
+   
+MORE INFO                          *ec2_facts-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_facts_module.html

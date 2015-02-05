@@ -1,0 +1,17 @@
+SYNOPSIS                           *newrelic_deployment*
+
+New in version 1.2.
+
+Notify newrelic about app deployments (see http://newrelic.github.io/newrelic_api/NewRelicApi/Deployment.html)
+
+EXAMPLES                           *newrelic_deployment-examples*
+>
+    - newrelic_deployment: token=AAAAAA
+                           app_name=myapp
+                           user='ansible deployment'
+                           revision=1.0
+   
+MORE INFO                          *newrelic_deployment-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/newrelic_deployment_module.html

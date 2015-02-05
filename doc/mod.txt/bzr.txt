@@ -1,0 +1,15 @@
+SYNOPSIS                           *bzr*
+
+New in version 1.1.
+
+Manage bzr branches to deploy files or software.
+
+EXAMPLES                           *bzr-examples*
+>
+    # Example bzr checkout from Ansible Playbooks
+    - bzr: name=bzr+ssh://foosball.example.org/path/to/branch dest=/srv/checkout version=22
+   
+MORE INFO                          *bzr-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/bzr_module.html

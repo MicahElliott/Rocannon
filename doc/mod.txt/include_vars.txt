@@ -1,0 +1,23 @@
+SYNOPSIS                           *include_vars*
+
+New in version 1.4.
+
+Loads variables from a YAML file dynamically during task runtime. It can work with conditionals, or use host specific variables to determine the path name to load from.
+
+EXAMPLES                           *include_vars-examples*
+>
+    # Conditionally decide to load in variables when x is 0, otherwise do not.
+    - include_vars: contingency_plan.yml
+      when: x == 0
+   
+    # Load a variable file based on the OS type, or a default if not found.
+    - include_vars: "{{ item }}"
+      with_first_found:
+       - "{{ ansible_distribution }}.yml"
+       - "{{ ansible_os_family }}.yml"
+       - "default.yml"
+   
+MORE INFO                          *include_vars-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/include_vars_module.html

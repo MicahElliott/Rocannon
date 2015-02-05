@@ -1,0 +1,17 @@
+SYNOPSIS                           *campfire*
+
+New in version 1.2.
+
+Send a message to Campfire. Messages with newlines will result in a “Paste” message being sent.
+
+EXAMPLES                           *campfire-examples*
+>
+    - campfire: subscription=foo token=12345 room=123 msg="Task completed."
+   
+    - campfire: subscription=foo token=12345 room=123 notify=loggins
+            msg="Task completed ... with feeling."
+   
+MORE INFO                          *campfire-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/campfire_module.html

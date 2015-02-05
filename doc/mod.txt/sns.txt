@@ -1,0 +1,27 @@
+SYNOPSIS                           *sns*
+
+New in version 1.6.
+
+The sns module sends notifications to a topic on your Amazon SNS account
+
+EXAMPLES                           *sns-examples*
+>
+    - name: Send default notification message via SNS
+      local_action:
+        module: sns
+        msg: "{{ inventory_hostname }} has completed the play."
+        subject: "Deploy complete!"
+        topic: "deploy"
+   
+    - name: Send notification messages via SNS with short message for SMS
+      local_action:
+        module: sns
+        msg: "{{ inventory_hostname }} has completed the play."
+        sms: "deployed!"
+        subject: "Deploy complete!"
+        topic: "deploy"
+   
+MORE INFO                          *sns-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/sns_module.html

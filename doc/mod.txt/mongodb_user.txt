@@ -1,0 +1,33 @@
+SYNOPSIS                           *mongodb_user*
+
+New in version 1.1.
+
+Adds or removes a user from a MongoDB database.
+
+EXAMPLES                           *mongodb_user-examples*
+>
+    # Create 'burgers' database user with name 'bob' and password '12345'.
+    - mongodb_user: database=burgers name=bob password=12345 state=present
+   
+    # Create a database user via SSL (MongoDB must be compiled with the SSL option and configured properly)
+    - mongodb_user: database=burgers name=bob password=12345 state=present ssl=True
+   
+    # Delete 'burgers' database user with name 'bob'.
+    - mongodb_user: database=burgers name=bob state=absent
+   
+    # Define more users with various specific roles (if not defined, no roles is assigned, and the user will be added via pre mongo 2.2 style)
+    - mongodb_user: database=burgers name=ben password=12345 roles='read' state=present
+    - mongodb_user: database=burgers name=jim password=12345 roles='readWrite,dbAdmin,userAdmin' state=present
+    - mongodb_user: database=burgers name=joe password=12345 roles='readWriteAnyDatabase' state=present
+   
+    # add a user to database in a replica set, the primary server is automatically discovered and written to
+    - mongodb_user: database=burgers name=bob replica_set=blecher password=12345 roles='readWriteAnyDatabase' state=present
+   
+      Note
+   
+      Requires the pymongo Python package on the remote host, version 2.4.2+. This can be installed using pip or the OS package manager. @see http://api.mongodb.org/python/current/installation.html
+   
+MORE INFO                          *mongodb_user-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/mongodb_user_module.html

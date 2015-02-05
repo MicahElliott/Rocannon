@@ -1,0 +1,31 @@
+SYNOPSIS                           *slack*
+
+New in version 1.6.
+
+The slack module sends notifications to http://slack.com via the Incoming WebHook integration
+
+EXAMPLES                           *slack-examples*
+>
+    - name: Send notification message via Slack
+      local_action:
+        module: slack
+        domain: future500.slack.com
+        token: thetokengeneratedbyslack
+        msg: "{{ inventory_hostname }} completed"
+   
+    - name: Send notification message via Slack all options
+      local_action:
+        module: slack
+        domain: future500.slack.com
+        token: thetokengeneratedbyslack
+        msg: "{{ inventory_hostname }} completed"
+        channel: "#ansible"
+        username: "Ansible on {{ inventory_hostname }}"
+        icon_url: "http://www.example.com/some-image-file.png"
+        link_names: 0
+        parse: 'none'
+   
+MORE INFO                          *slack-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/slack_module.html

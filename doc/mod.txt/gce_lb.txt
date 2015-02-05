@@ -1,0 +1,24 @@
+SYNOPSIS                           *gce_lb*
+
+New in version 1.5.
+
+This module can create and destroy Google Compute Engine loadbalancer and httphealthcheck resources. The primary LB resource is the load_balancer resource and the health check parameters are all
+prefixed with httphealthcheck. The full documentation for Google Compute Engine load balancing is at https://developers.google.com/compute/docs/load-balancing/. However, the ansible module
+simplifies the configuration by following the libcloud model. Full install/configuration instructions for the gce* modules can be found in the comments of ansible/test/gce_tests.py.
+
+EXAMPLES                           *gce_lb-examples*
+>
+    # Simple example of creating a new LB, adding members, and a health check
+    - local_action:
+        module: gce_lb
+        name: testlb
+        region: us-central1
+        members: ["us-central1-a/www-a", "us-central1-b/www-b"]
+        httphealthcheck_name: hc
+        httphealthcheck_port: 80
+        httphealthcheck_path: "/up"
+   
+MORE INFO                          *gce_lb-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/gce_lb_module.html

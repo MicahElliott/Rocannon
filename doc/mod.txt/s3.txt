@@ -1,0 +1,31 @@
+SYNOPSIS                           *s3*
+
+New in version 1.1.
+
+This module allows the user to dictate the presence of a given file in an S3 bucket. If or once the key (file) exists in the bucket, it returns a time-expired download URL. This module has a
+dependency on python-boto.
+
+EXAMPLES                           *s3-examples*
+>
+    # Simple PUT operation
+    - s3: bucket=mybucket object=/my/desired/key.txt src=/usr/local/myfile.txt mode=put
+   
+    # Simple GET operation
+    - s3: bucket=mybucket object=/my/desired/key.txt dest=/usr/local/myfile.txt mode=get
+   
+    # PUT/upload with metadata
+    - s3: bucket=mybucket object=/my/desired/key.txt src=/usr/local/myfile.txt mode=put metadata='Content-Encoding=gzip,Cache-Control=no-cache'
+   
+    # Create an empty bucket
+    - s3: bucket=mybucket mode=create
+   
+    # Create a bucket with key as directory, in the EU region
+    - s3: bucket=mybucket object=/my/directory/path mode=create region=eu-west-1
+   
+    # Delete a bucket and all contents
+    - s3: bucket=mybucket mode=delete
+   
+MORE INFO                          *s3-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/s3_module.html

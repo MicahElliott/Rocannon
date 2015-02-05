@@ -1,0 +1,22 @@
+SYNOPSIS                           *homebrew*
+
+New in version 1.1.
+
+Manages Homebrew packages
+
+EXAMPLES                           *homebrew-examples*
+>
+    - homebrew: name=foo state=present
+    - homebrew: name=foo state=present update_homebrew=yes
+    - homebrew: name=foo state=latest update_homebrew=yes
+    - homebrew: update_homebrew=yes upgrade_all=yes
+    - homebrew: name=foo state=head
+    - homebrew: name=foo state=linked
+    - homebrew: name=foo state=absent
+    - homebrew: name=foo,bar state=absent
+    - homebrew: name=foo state=present install_options=with-baz,enable-debug
+   
+MORE INFO                          *homebrew-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/homebrew_module.html

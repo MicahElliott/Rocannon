@@ -1,0 +1,18 @@
+SYNOPSIS                           *selinux*
+
+Configures the SELinux mode and policy. A reboot may be required after usage. Ansible will not issue this reboot but will let you know when it is required.
+
+EXAMPLES                           *selinux-examples*
+>
+    - selinux: policy=targeted state=enforcing
+    - selinux: policy=targeted state=permissive
+    - selinux: state=disabled
+   
+      Note
+   
+      Not tested on any debian based system
+   
+MORE INFO                          *selinux-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/selinux_module.html

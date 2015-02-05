@@ -1,0 +1,21 @@
+SYNOPSIS                           *rabbitmq_user*
+
+New in version 1.1.
+
+Add or remove users to RabbitMQ and assign permissions
+
+EXAMPLES                           *rabbitmq_user-examples*
+>
+    # Add user to server and assign full access control
+    - rabbitmq_user: user=joe
+                     password=changeme
+                     vhost=/
+                     configure_priv=.*
+                     read_priv=.*
+                     write_priv=.*
+                     state=present
+   
+MORE INFO                          *rabbitmq_user-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rabbitmq_user_module.html

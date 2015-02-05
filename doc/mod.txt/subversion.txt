@@ -1,0 +1,20 @@
+SYNOPSIS                           *subversion*
+
+Deploy given repository URL / revision to dest. If dest exists, update to the specified revision, otherwise perform a checkout.
+
+EXAMPLES                           *subversion-examples*
+>
+    # Checkout subversion repository to specified folder.
+    - subversion: repo=svn+ssh://an.example.org/path/to/repo dest=/src/checkout
+   
+    # Export subversion directory to folder
+    - subversion: repo=svn+ssh://an.example.org/path/to/repo dest=/src/export export=True
+   
+      Note
+   
+      Requires svn to be installed on the client.
+   
+MORE INFO                          *subversion-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/subversion_module.html

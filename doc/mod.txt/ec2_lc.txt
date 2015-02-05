@@ -1,0 +1,37 @@
+SYNOPSIS                           *ec2_lc*
+
+New in version 1.6.
+
+Can create or delete AwS Autoscaling Configurations Works with the ec2_asg module to manage Autoscaling Groups
+
+EXAMPLES                           *ec2_lc-examples*
+>
+    - ec2_lc:
+        name: special
+        image_id: ami-XXX
+        key_name: default
+        security_groups: ['group', 'group2' ]
+        instance_type: t1.micro
+   
+      Note
+   
+      Amazon ASG Autoscaling Launch Configurations are immutable once created, so modifying the configuration after it is changed will not modify the launch configuration on AWS. You must create a new
+      config and assign it to the ASG instead.
+   
+      Note
+   
+      The following environment variables can be used AWS_ACCESS_KEY or EC2_ACCESS_KEY or AWS_ACCESS_KEY_ID, AWS_SECRET_KEY or EC2_SECRET_KEY or AWS_SECRET_ACCESS_KEY, AWS_REGION or EC2_REGION,
+      AWS_SECURITY_TOKEN
+   
+      Note
+   
+      Ansible uses the boto configuration file (typically ~/.boto) if no credentials are provided. See http://boto.readthedocs.org/en/latest/boto_config_tut.html
+   
+      Note
+   
+      AWS_REGION or EC2_REGION can be typically be used to specify the AWS region, when required, but this can also be configured in the boto config file
+   
+MORE INFO                          *ec2_lc-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_lc_module.html

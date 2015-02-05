@@ -1,0 +1,18 @@
+SYNOPSIS                           *apache2_module*
+
+New in version 1.6.
+
+Enables or disables a specified module of the Apache2 webserver.
+
+EXAMPLES                           *apache2_module-examples*
+>
+    # enables the Apache2 module "wsgi"
+    - apache2_module: state=present name=wsgi
+   
+    # disables the Apache2 module "wsgi"
+    - apache2_module: state=absent name=wsgi
+   
+MORE INFO                          *apache2_module-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/apache2_module_module.html

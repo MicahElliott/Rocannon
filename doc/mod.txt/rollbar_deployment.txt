@@ -1,0 +1,19 @@
+SYNOPSIS                           *rollbar_deployment*
+
+New in version 1.6.
+
+Notify Rollbar about app deployments (see https://rollbar.com/docs/deploys_other/)
+
+EXAMPLES                           *rollbar_deployment-examples*
+>
+    - rollbar_deployment: token=AAAAAA
+                          environment='staging'
+                          user='ansible'
+                          revision=4.2,
+                          rollbar_user='admin',
+                          comment='Test Deploy'
+   
+MORE INFO                          *rollbar_deployment-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rollbar_deployment_module.html

@@ -1,0 +1,52 @@
+SYNOPSIS                           *rax_meta*
+
+New in version 1.7.
+
+Manipulate metadata for Rackspace Cloud Servers
+
+EXAMPLES                           *rax_meta-examples*
+>
+    - name: Set metadata for a server
+      hosts: all
+      gather_facts: False
+      tasks:
+        - name: Set metadata
+          local_action:
+            module: rax_meta
+            credentials: ~/.raxpub
+            name: "{{ inventory_hostname }}"
+            region: DFW
+            meta:
+              group: primary_group
+              groups:
+                - group_two
+                - group_three
+              app: my_app
+   
+        - name: Clear metadata
+          local_action:
+            module: rax_meta
+            credentials: ~/.raxpub
+            name: "{{ inventory_hostname }}"
+            region: DFW
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax_meta-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_meta_module.html

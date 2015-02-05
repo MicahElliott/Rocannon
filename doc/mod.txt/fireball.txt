@@ -1,0 +1,30 @@
+SYNOPSIS                           *fireball*
+
+This modules launches an ephemeral fireball ZeroMQ message bus daemon on the remote node which Ansible can use to communicate with nodes at high speed. The daemon listens on a configurable port
+for a configurable amount of time. Starting a new fireball as a given user terminates any existing user fireballs. Fireball mode is AES encrypted
+
+EXAMPLES                           *fireball-examples*
+>
+    # This example playbook has two plays: the first launches 'fireball' mode on all hosts via SSH, and
+    # the second actually starts using it for subsequent management over the fireball connection
+   
+    - hosts: devservers
+      gather_facts: false
+      connection: ssh
+      sudo: yes
+      tasks:
+          - action: fireball
+   
+    - hosts: devservers
+      connection: fireball
+      tasks:
+          - command: /usr/bin/anything
+   
+      Note
+   
+      See the advanced playbooks chapter for more about using fireball mode.
+   
+MORE INFO                          *fireball-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/fireball_module.html

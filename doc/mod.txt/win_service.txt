@@ -1,0 +1,23 @@
+SYNOPSIS                           *win_service*
+
+New in version 1.7.
+
+Manages Windows services
+
+EXAMPLES                           *win_service-examples*
+>
+    # Restart a service
+    win_service:
+      name: spooler
+      state: restarted
+   
+    # Set service startup mode to auto and ensure it is started
+    win_service:
+      name: spooler
+      start_mode: auto
+      state: started
+   
+MORE INFO                          *win_service-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/win_service_module.html

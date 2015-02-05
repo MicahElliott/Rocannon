@@ -1,0 +1,32 @@
+SYNOPSIS                           *authorized_key*
+
+Adds or removes authorized keys for particular user accounts
+
+EXAMPLES                           *authorized_key-examples*
+>
+    # Example using key data from a local file on the management machine
+    - authorized_key: user=charlie key="{{ lookup('file', '/home/charlie/.ssh/id_rsa.pub') }}"
+   
+    # Using alternate directory locations:
+    - authorized_key: user=charlie
+                      key="{{ lookup('file', '/home/charlie/.ssh/id_rsa.pub') }}"
+                      path='/etc/ssh/authorized_keys/charlie'
+                      manage_dir=no
+   
+    # Using with_file
+    - name: Set up authorized_keys for the deploy user
+      authorized_key: user=deploy
+                      key="{{ item }}"
+      with_file:
+        - public_keys/doe-jane
+        - public_keys/doe-john
+   
+    # Using key_options:
+    - authorized_key: user=charlie
+                      key="{{ lookup('file', '/home/charlie/.ssh/id_rsa.pub') }}"
+                      key_options='no-port-forwarding,host="10.0.1.1"'
+   
+MORE INFO                          *authorized_key-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/authorized_key_module.html

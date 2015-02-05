@@ -1,0 +1,19 @@
+SYNOPSIS                           *logentries*
+
+New in version 1.6.
+
+Sends logs to LogEntries in realtime
+
+EXAMPLES                           *logentries-examples*
+>
+    - logentries: path=/var/log/nginx/access.log state=present
+    - logentries: path=/var/log/nginx/error.log state=absent
+   
+      Note
+   
+      Requires the LogEntries agent which can be installed following the instructions at logentries.com
+   
+MORE INFO                          *logentries-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/logentries_module.html

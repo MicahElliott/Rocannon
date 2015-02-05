@@ -1,0 +1,17 @@
+SYNOPSIS                           *quantum_router_gateway*
+
+New in version 1.2.
+
+Creates/Removes a gateway interface from the router, used to associate a external network with a router to route external traffic.
+
+EXAMPLES                           *quantum_router_gateway-examples*
+>
+    # Attach an external network with a router to allow flow of external traffic
+    - quantum_router_gateway: state=present login_username=admin login_password=admin
+                              login_tenant_name=admin router_name=external_router
+                              network_name=external_network
+   
+MORE INFO                          *quantum_router_gateway-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/quantum_router_gateway_module.html

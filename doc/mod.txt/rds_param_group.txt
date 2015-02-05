@@ -1,0 +1,26 @@
+SYNOPSIS                           *rds_param_group*
+
+New in version 1.5.
+
+Creates, modifies, and deletes RDS parameter groups. This module has a dependency on python-boto >= 2.5.
+
+EXAMPLES                           *rds_param_group-examples*
+>
+    # Add or change a parameter group, in this case setting auto_increment_increment to 42 * 1024
+    - rds_param_group:
+          state: present
+          name: norwegian_blue
+          description: 'My Fancy Ex Parrot Group'
+          engine: 'mysql5.6'
+          params:
+              auto_increment_increment: "42K"
+   
+    # Remove a parameter group
+    - rds_param_group:
+          state: absent
+          name: norwegian_blue
+   
+MORE INFO                          *rds_param_group-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rds_param_group_module.html

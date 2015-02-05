@@ -1,0 +1,17 @@
+SYNOPSIS                           *seboolean*
+
+Toggles SELinux booleans.
+
+EXAMPLES                           *seboolean-examples*
+>
+    # Set (httpd_can_network_connect) flag on and keep it persistent across reboots
+    - seboolean: name=httpd_can_network_connect state=yes persistent=yes
+   
+      Note
+   
+      Not tested on any debian based system
+   
+MORE INFO                          *seboolean-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/seboolean_module.html

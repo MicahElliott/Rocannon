@@ -1,0 +1,46 @@
+SYNOPSIS                           *unarchive*
+
+New in version 1.4.
+
+The unarchive module copies an archive file from the local machine to a remote and unpacks it.
+
+EXAMPLES                           *unarchive-examples*
+>
+    # Example from Ansible Playbooks
+    - unarchive: src=foo.tgz dest=/var/lib/foo
+   
+    # Unarchive a file that is already on the remote machine
+    - unarchive: src=/tmp/foo.zip dest=/usr/local/bin copy=no
+   
+      Note
+   
+      requires tar/unzip command on target host
+   
+      Note
+   
+      can handle gzip, bzip2 and xz compressed as well as uncompressed tar files
+   
+      Note
+   
+      detects type of archive automatically
+   
+      Note
+   
+      uses tar’s --diff arg to calculate if changed or not. If this arg is not supported, it will always unpack the archive
+   
+      Note
+   
+      does not detect if a .zip file is different from destination - always unzips
+   
+      Note
+   
+      existing files/directories in the destination which are not in the archive are not touched. This is the same behavior as a normal archive extraction
+   
+      Note
+   
+      existing files/directories in the destination which are not in the archive are ignored for purposes of deciding if the archive should be unpacked or not
+   
+MORE INFO                          *unarchive-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/unarchive_module.html

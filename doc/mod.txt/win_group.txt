@@ -1,0 +1,23 @@
+SYNOPSIS                           *win_group*
+
+New in version 1.7.
+
+Add and remove local groups
+
+EXAMPLES                           *win_group-examples*
+>
+    # Create a new group
+    win_group:
+      name: deploy
+      description: Deploy Group
+      state: present
+   
+    # Remove a group
+    win_group:
+      name: deploy
+      state: absent
+   
+MORE INFO                          *win_group-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/win_group_module.html

@@ -1,0 +1,33 @@
+SYNOPSIS                           *win_chocolatey*
+
+New in version 1.9.
+
+Installs packages using Chocolatey (http://chocolatey.org/). If Chocolatey is missing from the system, the module will install it. List of packages can be found at http://chocolatey.org/packages
+
+EXAMPLES                           *win_chocolatey-examples*
+>
+    # Install git
+    win_chocolatey:
+      name: git
+   
+    # Install notepadplusplus version 6.6
+    win_chocolatey:
+      name: notepadplusplus.install
+      version: 6.6
+   
+    # Uninstall git
+    win_chocolatey:
+      name: git
+      state: absent
+   
+    # Install Application Request Routing v3 from webpi
+    # Logically, this requires that you install IIS first (see win_feature)
+    # To find a list of packages available via webpi source, `choco list -source webpi`
+    win_chocolatey:
+      name: ARRv3
+      source: webpi
+   
+MORE INFO                          *win_chocolatey-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/win_chocolatey_module.html

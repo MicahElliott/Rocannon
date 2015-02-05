@@ -1,0 +1,71 @@
+SYNOPSIS                           *rax_keypair*
+
+New in version 1.5.
+
+Create a keypair for use with Rackspace Cloud Servers
+
+EXAMPLES                           *rax_keypair-examples*
+>
+    - name: Create a keypair
+      hosts: localhost
+      gather_facts: False
+      tasks:
+        - name: keypair request
+          local_action:
+            module: rax_keypair
+            credentials: ~/.raxpub
+            name: my_keypair
+            region: DFW
+          register: keypair
+        - name: Create local public key
+          local_action:
+            module: copy
+            content: "{{ keypair.keypair.public_key }}"
+            dest: "{{ inventory_dir }}/{{ keypair.keypair.name }}.pub"
+        - name: Create local private key
+          local_action:
+            module: copy
+            content: "{{ keypair.keypair.private_key }}"
+            dest: "{{ inventory_dir }}/{{ keypair.keypair.name }}"
+   
+    - name: Create a keypair
+      hosts: localhost
+      gather_facts: False
+      tasks:
+        - name: keypair request
+          local_action:
+            module: rax_keypair
+            credentials: ~/.raxpub
+            name: my_keypair
+            public_key: "{{ lookup('file', 'authorized_keys/id_rsa.pub') }}"
+            region: DFW
+          register: keypair
+   
+      Note
+   
+      Keypairs cannot be manipulated, only created and deleted. To “update” a keypair you must first delete and then recreate.
+   
+      Note
+   
+      The ability to specify a file path for the public key was added in 1.7
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax_keypair-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_keypair_module.html

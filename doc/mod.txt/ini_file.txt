@@ -1,0 +1,29 @@
+SYNOPSIS                           *ini_file*
+
+Manage (add, remove, change) individual settings in an INI-style file without having to manage the file as a whole with, say, template or assemble. Adds missing sections if they don’t exist.
+Comments are discarded when the source file is read, and therefore will not show up in the destination file.
+
+EXAMPLES                           *ini_file-examples*
+>
+    # Ensure "fav=lemonade is in section "[drinks]" in specified file
+    - ini_file: dest=/etc/conf section=drinks option=fav value=lemonade mode=0600 backup=yes
+   
+    - ini_file: dest=/etc/anotherconf
+                section=drinks
+                option=temperature
+                value=cold
+                backup=yes
+   
+      Note
+   
+      While it is possible to add an option without specifying a value, this makes no sense.
+   
+      Note
+   
+      A section named default cannot be added by the module, but if it exists, individual options within the section can be updated. (This is a limitation of Python’s ConfigParser.) Either use
+      template to create a base INI file with a [default] section, or use lineinfile to add the missing line.
+   
+MORE INFO                          *ini_file-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ini_file_module.html

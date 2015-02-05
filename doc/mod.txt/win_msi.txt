@@ -1,0 +1,18 @@
+SYNOPSIS                           *win_msi*
+
+New in version 1.7.
+
+Installs or uninstalls a Windows MSI file that is already located on the target server
+
+EXAMPLES                           *win_msi-examples*
+>
+    # Install an MSI file
+    - win_msi: path=C:\\7z920-x64.msi
+   
+    # Uninstall an MSI file
+    - win_msi: path=C:\\7z920-x64.msi state=absent
+   
+MORE INFO                          *win_msi-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/win_msi_module.html

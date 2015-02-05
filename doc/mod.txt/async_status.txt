@@ -1,0 +1,10 @@
+SYNOPSIS                           *async_status*
+
+This module gets the status of an asynchronous task.
+
+EXAMPLES                           *async_status-examples*
+>
+MORE INFO                          *async_status-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/async_status_module.html

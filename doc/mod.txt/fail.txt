@@ -1,0 +1,14 @@
+SYNOPSIS                           *fail*
+
+This module fails the progress with a custom message. It can be useful for bailing out when a certain condition is met using when.
+
+EXAMPLES                           *fail-examples*
+>
+    # Example playbook using fail and when together
+    - fail: msg="The system may not be provisioned according to the CMDB status."
+      when: cmdb_status != "to-be-staged"
+   
+MORE INFO                          *fail-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/fail_module.html

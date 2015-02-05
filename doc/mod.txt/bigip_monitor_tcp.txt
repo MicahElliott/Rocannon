@@ -1,0 +1,64 @@
+SYNOPSIS                           *bigip_monitor_tcp*
+
+New in version 1.4.
+
+Manages F5 BIG-IP LTM tcp monitors via iControl SOAP API
+
+EXAMPLES                           *bigip_monitor_tcp-examples*
+>
+    - name: BIGIP F5 | Create TCP Monitor
+      local_action:
+        module:             bigip_monitor_tcp
+        state:              present
+        server:             "{{ f5server }}"
+        user:               "{{ f5user }}"
+        password:           "{{ f5password }}"
+        name:               "{{ item.monitorname }}"
+        type:               tcp
+        send:               "{{ item.send }}"
+        receive:            "{{ item.receive }}"
+      with_items: f5monitors-tcp
+    - name: BIGIP F5 | Create TCP half open Monitor
+      local_action:
+        module:             bigip_monitor_tcp
+        state:              present
+        server:             "{{ f5server }}"
+        user:               "{{ f5user }}"
+        password:           "{{ f5password }}"
+        name:               "{{ item.monitorname }}"
+        type:               tcp
+        send:               "{{ item.send }}"
+        receive:            "{{ item.receive }}"
+      with_items: f5monitors-halftcp
+    - name: BIGIP F5 | Remove TCP Monitor
+      local_action:
+        module:             bigip_monitor_tcp
+        state:              absent
+        server:             "{{ f5server }}"
+        user:               "{{ f5user }}"
+        password:           "{{ f5password }}"
+        name:               "{{ monitorname }}"
+      with_flattened:
+      - f5monitors-tcp
+      - f5monitors-halftcp
+   
+      Note
+   
+      Requires BIG-IP software version >= 11
+   
+      Note
+   
+      F5 developed module ‘bigsuds’ required (see http://devcentral.f5.com)
+   
+      Note
+   
+      Best run as a local_action in your playbook
+   
+      Note
+   
+      Monitor API documentation: https://devcentral.f5.com/wiki/iControl.LocalLB__Monitor.ashx
+   
+MORE INFO                          *bigip_monitor_tcp-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/bigip_monitor_tcp_module.html

@@ -1,0 +1,16 @@
+SYNOPSIS                           *homebrew_tap*
+
+New in version 1.6.
+
+Tap external Homebrew repositories.
+
+EXAMPLES                           *homebrew_tap-examples*
+>
+    homebrew_tap: tap=homebrew/dupes state=present
+    homebrew_tap: tap=homebrew/dupes state=absent
+    homebrew_tap: tap=homebrew/dupes,homebrew/science state=present
+   
+MORE INFO                          *homebrew_tap-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/homebrew_tap_module.html

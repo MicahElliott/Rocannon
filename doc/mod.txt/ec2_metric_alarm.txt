@@ -1,0 +1,42 @@
+SYNOPSIS                           *ec2_metric_alarm*
+
+New in version 1.6.
+
+Can create or delete AWS metric alarms Metrics you wish to alarm on must already exist
+
+EXAMPLES                           *ec2_metric_alarm-examples*
+>
+    - name: create alarm
+      ec2_metric_alarm:
+        state: present
+        region: ap-southeast-2
+        name: "cpu-low"
+        metric: "CPUUtilization"
+        namespace: "AWS/EC2"
+        statistic: Average
+        comparison: "<="
+        threshold: 5.0
+        period: 300
+        evaluation_periods: 3
+        unit: "Percent"
+        description: "This will alarm when a bamboo slave's cpu usage average is lower than 5% for 15 minutes "
+        dimensions: {'InstanceId':'i-XXX'}
+        alarm_actions: ["action1","action2"]
+   
+      Note
+   
+      The following environment variables can be used AWS_ACCESS_KEY or EC2_ACCESS_KEY or AWS_ACCESS_KEY_ID, AWS_SECRET_KEY or EC2_SECRET_KEY or AWS_SECRET_ACCESS_KEY, AWS_REGION or EC2_REGION,
+      AWS_SECURITY_TOKEN
+   
+      Note
+   
+      Ansible uses the boto configuration file (typically ~/.boto) if no credentials are provided. See http://boto.readthedocs.org/en/latest/boto_config_tut.html
+   
+      Note
+   
+      AWS_REGION or EC2_REGION can be typically be used to specify the AWS region, when required, but this can also be configured in the boto config file
+   
+MORE INFO                          *ec2_metric_alarm-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_metric_alarm_module.html

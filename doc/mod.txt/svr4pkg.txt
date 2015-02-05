@@ -1,0 +1,26 @@
+SYNOPSIS                           *svr4pkg*
+
+Manages SVR4 packages on Solaris 10 and 11. These were the native packages on Solaris <= 10 and are available as a legacy feature in Solaris 11. Note that this is a very basic packaging system.
+It will not enforce dependencies on install or remove.
+
+EXAMPLES                           *svr4pkg-examples*
+>
+    # Install a package from an already copied file
+    - svr4pkg: name=CSWcommon src=/tmp/cswpkgs.pkg state=present
+   
+    # Install a package directly from an http site
+    - svr4pkg: name=CSWpkgutil src=http://get.opencsw.org/now state=present zone=current
+   
+    # Install a package with a response file
+    - svr4pkg: name=CSWggrep src=/tmp/third-party.pkg response_file=/tmp/ggrep.response state=present
+   
+    # Ensure that a package is not installed.
+    - svr4pkg: name=SUNWgnome-sound-recorder state=absent
+   
+    # Ensure that a category is not installed.
+    - svr4pkg: name=FIREFOX state=absent category=true
+   
+MORE INFO                          *svr4pkg-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/svr4pkg_module.html

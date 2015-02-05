@@ -1,0 +1,46 @@
+SYNOPSIS                           *ec2_elb*
+
+New in version 1.2.
+
+This module de-registers or registers an AWS EC2 instance from the ELBs that it belongs to. Returns fact “ec2_elbs” which is a list of elbs attached to the instance if state=absent is passed as
+an argument. Will be marked changed when called only if there are ELBs found to operate on.
+
+EXAMPLES                           *ec2_elb-examples*
+>
+    # basic pre_task and post_task example
+    pre_tasks:
+      - name: Gathering ec2 facts
+        action: ec2_facts
+      - name: Instance De-register
+        local_action:
+          module: ec2_elb
+          instance_id: "{{ ansible_ec2_instance_id }}"
+          state: 'absent'
+    roles:
+      - myrole
+    post_tasks:
+      - name: Instance Register
+        local_action:
+          module: ec2_elb
+          instance_id: "{{ ansible_ec2_instance_id }}"
+          ec2_elbs: "{{ item }}"
+          state: 'present'
+        with_items: ec2_elbs
+   
+      Note
+   
+      The following environment variables can be used AWS_ACCESS_KEY or EC2_ACCESS_KEY or AWS_ACCESS_KEY_ID, AWS_SECRET_KEY or EC2_SECRET_KEY or AWS_SECRET_ACCESS_KEY, AWS_REGION or EC2_REGION,
+      AWS_SECURITY_TOKEN
+   
+      Note
+   
+      Ansible uses the boto configuration file (typically ~/.boto) if no credentials are provided. See http://boto.readthedocs.org/en/latest/boto_config_tut.html
+   
+      Note
+   
+      AWS_REGION or EC2_REGION can be typically be used to specify the AWS region, when required, but this can also be configured in the boto config file
+   
+MORE INFO                          *ec2_elb-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_elb_module.html

@@ -1,0 +1,29 @@
+SYNOPSIS                           *a10_server*
+
+New in version 1.8.
+
+Manage slb server objects on A10 Networks devices via aXAPI
+
+EXAMPLES                           *a10_server-examples*
+>
+    # Create a new server
+    - a10_server:
+        host: a10.mydomain.com
+        username: myadmin
+        password: mypassword
+        server: test
+        server_ip: 1.1.1.100
+        server_ports:
+          - port_num: 8080
+            protocol: tcp
+          - port_num: 8443
+            protocol: TCP
+   
+      Note
+   
+      Requires A10 Networks aXAPI 2.1
+   
+MORE INFO                          *a10_server-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/a10_server_module.html

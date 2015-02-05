@@ -1,0 +1,13 @@
+SYNOPSIS                           *group*
+
+Manage presence of groups on a host.
+
+EXAMPLES                           *group-examples*
+>
+    # Example group command from Ansible Playbooks
+    - group: name=somegroup state=present
+   
+MORE INFO                          *group-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/group_module.html

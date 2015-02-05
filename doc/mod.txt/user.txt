@@ -1,0 +1,22 @@
+SYNOPSIS                           *user*
+
+Manage user accounts and user attributes.
+
+EXAMPLES                           *user-examples*
+>
+    # Add the user 'johnd' with a specific uid and a primary group of 'admin'
+    - user: name=johnd comment="John Doe" uid=1040 group=admin
+   
+    # Add the user 'james' with a bash shell, appending the group 'admins' and 'developers' to the user's groups
+    - user: name=james shell=/bin/bash groups=admins,developers append=yes
+   
+    # Remove the user 'johnd'
+    - user: name=johnd state=absent remove=yes
+   
+    # Create a 2048-bit SSH key for user jsmith in ~jsmith/.ssh/id_rsa
+    - user: name=jsmith generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa
+   
+MORE INFO                          *user-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/user_module.html

@@ -1,0 +1,27 @@
+SYNOPSIS                           *layman*
+
+New in version 1.6.
+
+Uses Layman to manage an additional repositories for the Portage package manager on Gentoo Linux. Please note that Layman must be installed on a managed node prior using this module.
+
+EXAMPLES                           *layman-examples*
+>
+    # Install the overlay 'mozilla' which is on the central overlays list.
+    - layman: name=mozilla
+   
+    # Install the overlay 'cvut' from the specified alternative list.
+    - layman: name=cvut list_url=http://raw.github.com/cvut/gentoo-overlay/master/overlay.xml
+   
+    # Update (sync) the overlay 'cvut', or install if not installed yet.
+    - layman: name=cvut list_url=http://raw.github.com/cvut/gentoo-overlay/master/overlay.xml state=updated
+   
+    # Update (sync) all of the installed overlays.
+    - layman: name=ALL state=updated
+   
+    # Uninstall the overlay 'cvut'.
+    - layman: name=cvut state=absent
+   
+MORE INFO                          *layman-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/layman_module.html

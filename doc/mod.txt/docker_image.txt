@@ -1,0 +1,45 @@
+SYNOPSIS                           *docker_image*
+
+New in version 1.5.
+
+Create, check and remove docker images
+
+EXAMPLES                           *docker_image-examples*
+>
+    Build docker image if required. Path should contains Dockerfile to build image:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: check or build image
+        docker_image: path="/path/to/build/dir" name="my/app" state=present
+   
+    Build new version of image:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: check or build image
+        docker_image: path="/path/to/build/dir" name="my/app" state=build
+   
+    Remove image from local docker storage:
+   
+    - hosts: web
+      sudo: yes
+      tasks:
+      - name: remove image
+        docker_image: name="my/app" state=absent
+   
+      For help in developing on modules, should you be so inclined, please read Community Information & Contributing, Helping Testing PRs and Developing Modules.
+   
+      Next Previous
+   
+      ══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
+   
+      © Copyright 2014 Ansible, Inc.. Last updated on Jan 07, 2015.
+   
+      Ansible docs are generated from GitHub sources using Sphinx using a theme provided by Read the Docs. . Module documentation is not edited directly, but is generated from the source code for the
+MORE INFO                          *docker_image-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/docker_image_module.html

@@ -1,0 +1,77 @@
+SYNOPSIS                           *synchronize*
+
+New in version 1.4.
+
+This is a wrapper around rsync. Of course you could just use the command action to call rsync yourself, but you also have to add a fair number of boilerplate options and host facts. You still
+may need to call rsync directly via command or shell depending on your use case. The synchronize action is meant to do common things with rsync easily. It does not provide access to the full
+power of rsync, but does make most invocations easier to follow.
+
+EXAMPLES                           *synchronize-examples*
+>
+    # Synchronization of src on the control machine to dest on the remote hosts
+    synchronize: src=some/relative/path dest=/some/absolute/path
+   
+    # Synchronization without any --archive options enabled
+    synchronize: src=some/relative/path dest=/some/absolute/path archive=no
+   
+    # Synchronization with --archive options enabled except for --recursive
+    synchronize: src=some/relative/path dest=/some/absolute/path recursive=no
+   
+    # Synchronization with --archive options enabled except for --times, with --checksum option enabled
+    synchronize: src=some/relative/path dest=/some/absolute/path checksum=yes times=no
+   
+    # Synchronization without --archive options enabled except use --links
+    synchronize: src=some/relative/path dest=/some/absolute/path archive=no links=yes
+   
+    # Synchronization of two paths both on the control machine
+    local_action: synchronize src=some/relative/path dest=/some/absolute/path
+   
+    # Synchronization of src on the inventory host to the dest on the localhost in
+    pull mode
+    synchronize: mode=pull src=some/relative/path dest=/some/absolute/path
+   
+    # Synchronization of src on delegate host to dest on the current inventory host.
+    # If delegate_to is set to the current inventory host, this can be used to syncronize
+    # two directories on that host.
+    synchronize: >
+        src=some/relative/path dest=/some/absolute/path
+        delegate_to: delegate.host
+   
+    # Synchronize and delete files in dest on the remote host that are not found in src of localhost.
+    synchronize: src=some/relative/path dest=/some/absolute/path delete=yes
+   
+    # Synchronize using an alternate rsync command
+    synchronize: src=some/relative/path dest=/some/absolute/path rsync_path="sudo rsync"
+   
+    # Example .rsync-filter file in the source directory
+    - var       # exclude any path whose last part is 'var'
+    - /var      # exclude any path starting with 'var' starting at the source directory
+    + /var/conf # include /var/conf even though it was previously excluded
+   
+    # Synchronize passing in extra rsync options
+    synchronize: src=/tmp/helloworld dest=/var/www/helloword rsync_opts=--no-motd,--exclude=.git
+   
+      Note
+   
+      rsync must be installed on both the local and remote machine.
+   
+      Note
+   
+      Inspect the verbose output to validate the destination user/host/path are what was expected.
+   
+      Note
+   
+      The remote user for the dest path will always be the remote_user, not the sudo_user.
+   
+      Note
+   
+      Expect that dest=~/x will be ~<remote_user>/x even if using sudo.
+   
+      Note
+   
+      To exclude files and directories from being synchronized, you may add .rsync-filter files to the source directory.
+   
+MORE INFO                          *synchronize-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/synchronize_module.html

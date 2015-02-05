@@ -1,0 +1,28 @@
+SYNOPSIS                           *snmp_facts*
+
+New in version 1.9.
+
+Retrieve facts for a device using SNMP, the facts will be inserted to the ansible_facts key.
+
+EXAMPLES                           *snmp_facts-examples*
+>
+    # Gather facts with SNMP version 2
+    - snmp_facts: host={{ inventory_hostname }} version=2c community=public
+      connection: local
+   
+    # Gather facts using SNMP version 3
+    - snmp_facts:
+        host={{ inventory_hostname }}
+        version=v3
+        level=authPriv
+        integrity=sha
+        privacy=aes
+        username=snmp-user
+        authkey=abc12345
+        privkey=def6789
+      delegate_to: localhost
+   
+MORE INFO                          *snmp_facts-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/snmp_facts_module.html

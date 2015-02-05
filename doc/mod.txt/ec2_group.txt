@@ -1,0 +1,67 @@
+SYNOPSIS                           *ec2_group*
+
+New in version 1.3.
+
+maintains ec2 security groups. This module has a dependency on python-boto >= 2.5
+
+EXAMPLES                           *ec2_group-examples*
+>
+    - name: example ec2 group
+      ec2_group:
+        name: example
+        description: an example EC2 group
+        vpc_id: 12345
+        region: eu-west-1a
+        aws_secret_key: SECRET
+        aws_access_key: ACCESS
+        rules:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+          - proto: tcp
+            from_port: 22
+            to_port: 22
+            cidr_ip: 10.0.0.0/8
+          - proto: udp
+            from_port: 10050
+            to_port: 10050
+            cidr_ip: 10.0.0.0/8
+          - proto: udp
+            from_port: 10051
+            to_port: 10051
+            group_id: sg-12345678
+          - proto: all
+            # the containing group name may be specified here
+            group_name: example
+        rules_egress:
+          - proto: tcp
+            from_port: 80
+            to_port: 80
+            cidr_ip: 0.0.0.0/0
+            group_name: example-other
+            # description to use if example-other needs to be created
+            group_desc: other example EC2 group
+   
+      Note
+   
+      If a rule declares a group_name and that group doesn’t exist, it will be automatically created. In that case, group_desc should be provided as well. The module will refuse to create a
+      depended-on group without a description.
+   
+      Note
+   
+      The following environment variables can be used AWS_ACCESS_KEY or EC2_ACCESS_KEY or AWS_ACCESS_KEY_ID, AWS_SECRET_KEY or EC2_SECRET_KEY or AWS_SECRET_ACCESS_KEY, AWS_REGION or EC2_REGION,
+      AWS_SECURITY_TOKEN
+   
+      Note
+   
+      Ansible uses the boto configuration file (typically ~/.boto) if no credentials are provided. See http://boto.readthedocs.org/en/latest/boto_config_tut.html
+   
+      Note
+   
+      AWS_REGION or EC2_REGION can be typically be used to specify the AWS region, when required, but this can also be configured in the boto config file
+   
+MORE INFO                          *ec2_group-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_group_module.html

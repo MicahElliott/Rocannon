@@ -1,0 +1,38 @@
+SYNOPSIS                           *setup*
+
+This module is automatically called by playbooks to gather useful variables about remote hosts that can be used in playbooks. It can also be executed directly by /usr/bin/ansible to check what
+variables are available to a host. Ansible provides many facts about the system, automatically.
+
+EXAMPLES                           *setup-examples*
+>
+    # Display facts from all hosts and store them indexed by I(hostname) at C(/tmp/facts).
+    ansible all -m setup --tree /tmp/facts
+   
+    # Display only facts regarding memory found by ansible on all hosts and output them.
+    ansible all -m setup -a 'filter=ansible_*_mb'
+   
+    # Display only facts returned by facter.
+    ansible all -m setup -a 'filter=facter_*'
+   
+    # Display only facts about certain interfaces.
+    ansible all -m setup -a 'filter=ansible_eth[0-2]'
+   
+      Note
+   
+      More ansible facts will be added with successive releases. If facter or ohai are installed, variables from these programs will also be snapshotted into the JSON file for usage in templating.
+      These variables are prefixed with facter_ and ohai_ so it’s easy to tell their source. All variables are bubbled up to the caller. Using the ansible facts and choosing to not install facter and
+      ohai means you can avoid Ruby-dependencies on your remote systems. (See also facter and ohai.)
+   
+      Note
+   
+      The filter option filters only the first level subkey below ansible_facts.
+   
+      Note
+   
+      If the target host is Windows, you will not currently have the ability to use fact_path or filter as this is provided by a simpler implementation of the module. Different facts are returned for
+      Windows hosts.
+   
+MORE INFO                          *setup-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/setup_module.html

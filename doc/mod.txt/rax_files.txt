@@ -1,0 +1,85 @@
+SYNOPSIS                           *rax_files*
+
+New in version 1.5.
+
+Manipulate Rackspace Cloud Files Containers
+
+EXAMPLES                           *rax_files-examples*
+>
+    - name: "Test Cloud Files Containers"
+      hosts: local
+      gather_facts: no
+      tasks:
+        - name: "List all containers"
+          rax_files: state=list
+   
+        - name: "Create container called 'mycontainer'"
+          rax_files: container=mycontainer
+   
+        - name: "Create container 'mycontainer2' with metadata"
+          rax_files:
+            container: mycontainer2
+            meta:
+              key: value
+              file_for: [email protected]
+   
+        - name: "Set a container's web index page"
+          rax_files: container=mycontainer web_index=index.html
+   
+        - name: "Set a container's web error page"
+          rax_files: container=mycontainer web_error=error.html
+   
+        - name: "Make container public"
+          rax_files: container=mycontainer public=yes
+   
+        - name: "Make container public with a 24 hour TTL"
+          rax_files: container=mycontainer public=yes ttl=86400
+   
+        - name: "Make container private"
+          rax_files: container=mycontainer private=yes
+   
+    - name: "Test Cloud Files Containers Metadata Storage"
+      hosts: local
+      gather_facts: no
+      tasks:
+        - name: "Get mycontainer2 metadata"
+          rax_files:
+            container: mycontainer2
+            type: meta
+   
+        - name: "Set mycontainer2 metadata"
+          rax_files:
+            container: mycontainer2
+            type: meta
+            meta:
+              uploaded_by: [email protected]
+   
+        - name: "Remove mycontainer2 metadata"
+          rax_files:
+            container: "mycontainer2"
+            type: meta
+            state: absent
+            meta:
+              key: ""
+              file_for: ""
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax_files-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_files_module.html

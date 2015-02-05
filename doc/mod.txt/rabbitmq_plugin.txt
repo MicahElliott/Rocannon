@@ -1,0 +1,15 @@
+SYNOPSIS                           *rabbitmq_plugin*
+
+New in version 1.1.
+
+Enables or disables RabbitMQ plugins
+
+EXAMPLES                           *rabbitmq_plugin-examples*
+>
+    # Enables the rabbitmq_management plugin
+    - rabbitmq_plugin: names=rabbitmq_management state=enabled
+   
+MORE INFO                          *rabbitmq_plugin-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rabbitmq_plugin_module.html

@@ -1,0 +1,35 @@
+SYNOPSIS                           *ec2_scaling_policy*
+
+New in version 1.6.
+
+Can create or delete scaling policies for autoscaling groups Referenced autoscaling groups must already exist
+
+EXAMPLES                           *ec2_scaling_policy-examples*
+>
+    - ec2_scaling_policy:
+        state: present
+        region: US-XXX
+        name: "scaledown-policy"
+        adjustment_type: "ChangeInCapacity"
+        asg_name: "slave-pool"
+        scaling_adjustment: -1
+        min_adjustment_step: 1
+        cooldown: 300
+   
+      Note
+   
+      The following environment variables can be used AWS_ACCESS_KEY or EC2_ACCESS_KEY or AWS_ACCESS_KEY_ID, AWS_SECRET_KEY or EC2_SECRET_KEY or AWS_SECRET_ACCESS_KEY, AWS_REGION or EC2_REGION,
+      AWS_SECURITY_TOKEN
+   
+      Note
+   
+      Ansible uses the boto configuration file (typically ~/.boto) if no credentials are provided. See http://boto.readthedocs.org/en/latest/boto_config_tut.html
+   
+      Note
+   
+      AWS_REGION or EC2_REGION can be typically be used to specify the AWS region, when required, but this can also be configured in the boto config file
+   
+MORE INFO                          *ec2_scaling_policy-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/ec2_scaling_policy_module.html

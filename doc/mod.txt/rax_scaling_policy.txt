@@ -1,0 +1,67 @@
+SYNOPSIS                           *rax_scaling_policy*
+
+New in version 1.7.
+
+Manipulate Rackspace Cloud Autoscale Scaling Policy
+
+EXAMPLES                           *rax_scaling_policy-examples*
+>
+    ---
+    - hosts: localhost
+      gather_facts: false
+      connection: local
+      tasks:
+        - rax_scaling_policy:
+            credentials: ~/.raxpub
+            region: ORD
+            at: '2013-05-19T08:07:08Z'
+            change: 25
+            cooldown: 300
+            is_percent: true
+            name: ASG Test Policy - at
+            policy_type: schedule
+            scaling_group: ASG Test
+          register: asps_at
+   
+        - rax_scaling_policy:
+            credentials: ~/.raxpub
+            region: ORD
+            cron: '1 0 * * *'
+            change: 25
+            cooldown: 300
+            is_percent: true
+            name: ASG Test Policy - cron
+            policy_type: schedule
+            scaling_group: ASG Test
+          register: asp_cron
+   
+        - rax_scaling_policy:
+            credentials: ~/.raxpub
+            region: ORD
+            cooldown: 300
+            desired_capacity: 5
+            name: ASG Test Policy - webhook
+            policy_type: webhook
+            scaling_group: ASG Test
+          register: asp_webhook
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax_scaling_policy-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_scaling_policy_module.html

@@ -1,0 +1,34 @@
+SYNOPSIS                           *a10_virtual_server*
+
+New in version 1.8.
+
+Manage slb virtual server objects on A10 Networks devices via aXAPI
+
+EXAMPLES                           *a10_virtual_server-examples*
+>
+    # Create a new virtual server
+    - a10_virtual_server:
+        host: a10.mydomain.com
+        username: myadmin
+        password: mypassword
+        virtual_server: vserver1
+        virtual_server_ip: 1.1.1.1
+        virtual_server_ports:
+          - port: 80
+            protocol: TCP
+            service_group: sg-80-tcp
+          - port: 443
+            protocol: HTTPS
+            service_group: sg-443-https
+          - port: 8080
+            protocol: http
+            status: disabled
+   
+      Note
+   
+      Requires A10 Networks aXAPI 2.1
+   
+MORE INFO                          *a10_virtual_server-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/a10_virtual_server_module.html

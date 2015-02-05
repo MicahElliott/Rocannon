@@ -1,0 +1,21 @@
+SYNOPSIS                           *netscaler*
+
+New in version 1.1.
+
+Manages Citrix NetScaler server and service entities.
+
+EXAMPLES                           *netscaler-examples*
+>
+    # Disable the server
+    ansible host -m netscaler -a "nsc_host=nsc.example.com user=apiuser password=apipass"
+   
+    # Enable the server
+    ansible host -m netscaler -a "nsc_host=nsc.example.com user=apiuser password=apipass action=enable"
+   
+    # Disable the service local:8080
+    ansible host -m netscaler -a "nsc_host=nsc.example.com user=apiuser password=apipass name=local:8080 type=service action=disable"
+   
+MORE INFO                          *netscaler-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/netscaler_module.html

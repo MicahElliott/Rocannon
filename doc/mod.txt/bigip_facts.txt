@@ -1,0 +1,43 @@
+SYNOPSIS                           *bigip_facts*
+
+New in version 1.6.
+
+Collect facts from F5 BIG-IP devices via iControl SOAP API
+
+EXAMPLES                           *bigip_facts-examples*
+>
+    ## playbook task examples:
+   
+    ---
+    # file bigip-test.yml
+    # ...
+    - hosts: bigip-test
+      tasks:
+      - name: Collect BIG-IP facts
+        local_action: >
+          bigip_facts
+          server=lb.mydomain.com
+          user=admin
+          password=mysecret
+          include=interface,vlan
+   
+      Note
+   
+      Requires BIG-IP software version >= 11.4
+   
+      Note
+   
+      F5 developed module ‘bigsuds’ required (see http://devcentral.f5.com)
+   
+      Note
+   
+      Best run as a local_action in your playbook
+   
+      Note
+   
+      Tested with manager and above account privilege level
+   
+MORE INFO                          *bigip_facts-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/bigip_facts_module.html

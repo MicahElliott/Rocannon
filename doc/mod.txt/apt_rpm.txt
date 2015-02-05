@@ -1,0 +1,21 @@
+SYNOPSIS                           *apt_rpm*
+
+New in version 1.5.
+
+Manages packages with apt-rpm. Both low-level (rpm) and high-level (apt-get) package manager binaries required.
+
+EXAMPLES                           *apt_rpm-examples*
+>
+    # install package foo
+    - apt_rpm: pkg=foo state=present
+    # remove package foo
+    - apt_rpm: pkg=foo state=absent
+    # description: remove packages foo and bar
+    - apt_rpm: pkg=foo,bar state=absent
+    # description: update the package database and install bar (bar will be the updated if a newer version exists)
+    - apt_rpm: name=bar state=present update_cache=yes
+   
+MORE INFO                          *apt_rpm-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/apt_rpm_module.html

@@ -1,0 +1,25 @@
+SYNOPSIS                           *pkgng*
+
+New in version 1.2.
+
+Manage binary packages for FreeBSD using ‘pkgng’ which is available in versions after 9.0.
+
+EXAMPLES                           *pkgng-examples*
+>
+    # Install package foo
+    - pkgng: name=foo state=present
+   
+    # Annotate package foo and bar
+    - pkgng: name=foo,bar annotation=+test1=baz,-test2,:test3=foobar
+   
+    # Remove packages foo and bar
+    - pkgng: name=foo,bar state=absent
+   
+      Note
+   
+      When using pkgsite, be careful that already in cache packages won’t be downloaded again.
+   
+MORE INFO                          *pkgng-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/pkgng_module.html

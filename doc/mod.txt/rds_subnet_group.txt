@@ -1,0 +1,26 @@
+SYNOPSIS                           *rds_subnet_group*
+
+New in version 1.5.
+
+Creates, modifies, and deletes RDS database subnet groups. This module has a dependency on python-boto >= 2.5.
+
+EXAMPLES                           *rds_subnet_group-examples*
+>
+    # Add or change a subnet group
+    - rds_subnet_group
+        state: present
+        name: norwegian-blue
+        description: My Fancy Ex Parrot Subnet Group
+        subnets:
+          - subnet-aaaaaaaa
+          - subnet-bbbbbbbb
+   
+    # Remove a parameter group
+    - rds_param_group:
+        state: absent
+        name: norwegian-blue
+   
+MORE INFO                          *rds_subnet_group-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rds_subnet_group_module.html

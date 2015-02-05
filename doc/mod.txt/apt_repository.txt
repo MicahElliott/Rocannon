@@ -1,0 +1,35 @@
+SYNOPSIS                           *apt_repository*
+
+Add or remove an APT repositories in Ubuntu and Debian.
+
+EXAMPLES                           *apt_repository-examples*
+>
+    # Add specified repository into sources list.
+    apt_repository: repo='deb http://archive.canonical.com/ubuntu hardy partner' state=present
+   
+    # Add source repository into sources list.
+    apt_repository: repo='deb-src http://archive.canonical.com/ubuntu hardy partner' state=present
+   
+    # Remove specified repository from sources list.
+    apt_repository: repo='deb http://archive.canonical.com/ubuntu hardy partner' state=absent
+   
+    # On Ubuntu target: add nginx stable repository from PPA and install its signing key.
+    # On Debian target: adding PPA is not available, so it will fail immediately.
+    apt_repository: repo='ppa:nginx/stable'
+   
+      Note
+   
+      This module works on Debian and Ubuntu and requires python-apt.
+   
+      Note
+   
+      This module supports Debian Squeeze (version 6) as well as its successors.
+   
+      Note
+   
+      This module treats Debian and Ubuntu distributions separately. So PPA could be installed only on Ubuntu machines.
+   
+MORE INFO                          *apt_repository-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/apt_repository_module.html

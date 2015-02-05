@@ -1,0 +1,38 @@
+SYNOPSIS                           *dnsmadeeasy*
+
+New in version 1.3.
+
+Manages DNS records via the v2 REST API of the DNS Made Easy service. It handles records only; there is no manipulation of domains or monitor/account support yet. See:
+http://www.dnsmadeeasy.com/services/rest-api/
+
+EXAMPLES                           *dnsmadeeasy-examples*
+>
+    # fetch my.com domain records
+    - dnsmadeeasy: account_key=key account_secret=secret domain=my.com state=present
+      register: response
+   
+    # create / ensure the presence of a record
+    - dnsmadeeasy: account_key=key account_secret=secret domain=my.com state=present record_name="test" record_type="A" record_value="127.0.0.1"
+   
+    # update the previously created record
+    - dnsmadeeasy: account_key=key account_secret=secret domain=my.com state=present record_name="test" record_value="192.168.0.1"
+   
+    # fetch a specific record
+    - dnsmadeeasy: account_key=key account_secret=secret domain=my.com state=present record_name="test"
+      register: response
+   
+    # delete a record / ensure it is absent
+    - dnsmadeeasy: account_key=key account_secret=secret domain=my.com state=absent record_name="test"
+   
+      Note
+   
+      The DNS Made Easy service requires that machines interacting with the API have the proper time and timezone set. Be sure you are within a few seconds of actual time by using NTP.
+   
+      Note
+   
+      This module returns record(s) in the “result” element when ‘state’ is set to ‘present’. This value can be be registered and used in your playbooks.
+   
+MORE INFO                          *dnsmadeeasy-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/dnsmadeeasy_module.html

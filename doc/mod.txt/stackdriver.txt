@@ -1,0 +1,16 @@
+SYNOPSIS                           *stackdriver*
+
+New in version 1.6.
+
+Send code deploy and annotation events to Stackdriver
+
+EXAMPLES                           *stackdriver-examples*
+>
+    - stackdriver: key=AAAAAA event=deploy deployed_to=production deployed_by=leeroyjenkins repository=MyWebApp revision_id=abcd123
+   
+    - stackdriver: key=AAAAAA event=annotation msg="Greetings from Ansible" annotated_by=leeroyjenkins level=WARN instance_id=i-abcd1234
+   
+MORE INFO                          *stackdriver-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/stackdriver_module.html

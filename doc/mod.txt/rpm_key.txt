@@ -1,0 +1,21 @@
+SYNOPSIS                           *rpm_key*
+
+New in version 1.3.
+
+Adds or removes (rpm –import) a gpg key to your rpm database.
+
+EXAMPLES                           *rpm_key-examples*
+>
+    # Example action to import a key from a url
+    - rpm_key: state=present key=http://apt.sw.be/RPM-GPG-KEY.dag.txt
+   
+    # Example action to import a key from a file
+    - rpm_key: state=present key=/path/to/key.gpg
+   
+    # Example action to ensure a key is not present in the db
+    - rpm_key: state=absent key=DEADB33F
+   
+MORE INFO                          *rpm_key-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rpm_key_module.html

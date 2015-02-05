@@ -1,0 +1,67 @@
+SYNOPSIS                           *rax_dns_record*
+
+New in version 1.5.
+
+Manage DNS records on Rackspace Cloud DNS
+
+EXAMPLES                           *rax_dns_record-examples*
+>
+    - name: Create DNS Records
+      hosts: all
+      gather_facts: False
+      tasks:
+        - name: Create A record
+          local_action:
+            module: rax_dns_record
+            credentials: ~/.raxpub
+            domain: example.org
+            name: www.example.org
+            data: "{{ rax_accessipv4 }}"
+            type: A
+          register: a_record
+   
+        - name: Create PTR record
+          local_action:
+            module: rax_dns_record
+            credentials: ~/.raxpub
+            server: "{{ rax_id }}"
+            name: "{{ inventory_hostname }}"
+            region: DFW
+          register: ptr_record
+   
+      Note
+   
+      It is recommended that plays utilizing this module be run with serial: 1 to avoid exceeding the API request limit imposed by the Rackspace CloudDNS API
+   
+      Note
+   
+      To manipulate a PTR record either loadbalancer or server must be supplied
+   
+      Note
+   
+      As of version 1.7, the type field is required and no longer defaults to an A record.
+   
+      Note
+   
+      PTR record support was added in version 1.7
+   
+      Note
+   
+      The following environment variables can be used, RAX_USERNAME, RAX_API_KEY, RAX_CREDS_FILE, RAX_CREDENTIALS, RAX_REGION.
+   
+      Note
+   
+      RAX_CREDENTIALS and RAX_CREDS_FILE points to a credentials file appropriate for pyrax. See https://github.com/rackspace/pyrax/blob/master/docs/getting_started.md#authenticating
+   
+      Note
+   
+      RAX_USERNAME and RAX_API_KEY obviate the use of a credentials file
+   
+      Note
+   
+      RAX_REGION defines a Rackspace Public Cloud region (DFW, ORD, LON, ...)
+   
+MORE INFO                          *rax_dns_record-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/rax_dns_record_module.html

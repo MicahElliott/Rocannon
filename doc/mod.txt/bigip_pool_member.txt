@@ -1,0 +1,77 @@
+SYNOPSIS                           *bigip_pool_member*
+
+New in version 1.4.
+
+Manages F5 BIG-IP LTM pool members via iControl SOAP API
+
+EXAMPLES                           *bigip_pool_member-examples*
+>
+    ## playbook task examples:
+   
+    ---
+    # file bigip-test.yml
+    # ...
+    - hosts: bigip-test
+      tasks:
+      - name: Add pool member
+        local_action: >
+          bigip_pool_member
+          server=lb.mydomain.com
+          user=admin
+          password=mysecret
+          state=present
+          pool=matthite-pool
+          partition=matthite
+          host="{{ ansible_default_ipv4["address"] }}"
+          port=80
+          description="web server"
+          connection_limit=100
+          rate_limit=50
+          ratio=2
+   
+      - name: Modify pool member ratio and description
+        local_action: >
+          bigip_pool_member
+          server=lb.mydomain.com
+          user=admin
+          password=mysecret
+          state=present
+          pool=matthite-pool
+          partition=matthite
+          host="{{ ansible_default_ipv4["address"] }}"
+          port=80
+          ratio=1
+          description="nginx server"
+   
+      - name: Remove pool member from pool
+        local_action: >
+          bigip_pool_member
+          server=lb.mydomain.com
+          user=admin
+          password=mysecret
+          state=absent
+          pool=matthite-pool
+          partition=matthite
+          host="{{ ansible_default_ipv4["address"] }}"
+          port=80
+   
+      Note
+   
+      Requires BIG-IP software version >= 11
+   
+      Note
+   
+      F5 developed module ‘bigsuds’ required (see http://devcentral.f5.com)
+   
+      Note
+   
+      Best run as a local_action in your playbook
+   
+      Note
+   
+      Supersedes bigip_pool for managing pool members
+   
+MORE INFO                          *bigip_pool_member-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/bigip_pool_member_module.html

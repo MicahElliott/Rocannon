@@ -1,0 +1,20 @@
+SYNOPSIS                           *crypttab*
+
+New in version 1.8.
+
+Control Linux encrypted block devices that are set up during system boot in /etc/crypttab.
+
+EXAMPLES                           *crypttab-examples*
+>
+    - name: Set the options explicitly a deivce which must already exist
+      crypttab: name=luks-home state=present opts=discard,cipher=aes-cbc-essiv:sha256
+   
+    - name: Add the 'discard' option to any existing options for all devices
+      crypttab: name={{ item.device }} state=opts_present opts=discard
+      with_items: ansible_mounts
+      when: '/dev/mapper/luks-' in {{ item.device }}
+   
+MORE INFO                          *crypttab-moreinfo*
+>
+All arguments are omni-completed, but if you really want to see the online docs:
+http://docs.ansible.com/crypttab_module.html
