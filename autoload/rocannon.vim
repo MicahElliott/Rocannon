@@ -1,5 +1,5 @@
-echo 'Loading ansiblecomplete'
-"sleep 2
+echo 'Loading ansiblecomplete and sleeping'
+sleep 1
 
 " Can generate all actions and their params with:
 "
@@ -66,9 +66,36 @@ endfun
 "set omnifunc=CompleteAnsible
 
 
+" Bounce between different role files.
+" If editing
+"   roles/dbsvrs/tasks/main.yml
+" should be able to bounce over to
+"   roles/dbsvrs/vars/main.yml
+" with :Rvars
+"
+" So mapping is
+"   :Rvars      -> roles/dbsvrs/vars/main.yml
+"   :Rtemplates -> roles/dbsvrs/templates/main.yml
+"   :Rhandlers  -> roles/dbsvrs/handlers/main.yml
+"   :Rtasks     -> roles/dbsvrs/tasks/main.yml
+"   :Rfiles     -> roles/dbsvrs/files/main.yml
+
+fun! rocannon#Bounce()
+endfun
 
 
-
+" TODO
+fun! rocannon#WhichFile(path, parent)
+  let fname = expand('%:t')
+  "let parent = expand('%:h')
+  if !exists(a:parent)
+    echomsg 'parent dir does not exist'
+    return
+  end
+  if fname !~ 'main\.(yml|ans)'
+    return %:p:h/../vars/main.yml
+  end
+endfun
 
 
 " All ansible vars (from `-m setup`)

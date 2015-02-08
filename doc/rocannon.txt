@@ -1,37 +1,60 @@
 *rocannon.txt* Ansible completion, abbrs, syntax, colorscheme, folding, docs
 
+         888b.                                          ~
+         8  .8 .d8b. .d8b .d88 8d8b. 8d8b. .d8b. 8d8b.  ~
+         8wwK' 8' .8 8    8  8 8P Y8 8P Y8 8' .8 8P Y8  ~
+         8  Yb `Y8P' `Y8P `Y88 8   8 8   8 `Y8P' 8   8  ~
+
 Author:  Micah Elliott
-Repo:    https://github.com/MicahElliott/rocannon
+Repo:    https://github.com/MicahElliott/Rocannon
 License: Same terms as Vim itself (see |license|)
 
-INTRODUCTION                                     *rocannon*
+==============================================================================
+INTRODUCTION                                                      *rocannon*
 
 Rocannon is the operator of the Ansible.
 
-Ansible is basically just a bunch of commands (actions like stat, yum, git),
-expressed in YAML. In fact, it looks like plain old YAML data that benefits
-very little from default highlighting. It’s not terribly obvious that a
-multiline play always has just a single action, and several supporting
-constructs that look a lot like actions (while, register, when). Rocannon makes
-these things obvious. It also really speeds up specifying a playbook by
-completing most of what you’d type.
+Ansible playbooks are basically just a bunch of commands (actions like stat,
+yum, git, copy), expressed in YAML — a raw key-value data format. And it looks
+like data: uuugly. It’s not terribly obvious that a multiline play always has
+just a single action, and often several supporting constructs that confusingly
+look a lot like actions (while, with, when, register, name, etc), but are not.
+Rocannon makes things obvious. One bold, bright green action per play.
+Meaningful highlights of looping, conditionals, variables, sections. It also
+really speeds up specifying a playbook by completing most of what you’d type.
 
-HELP                                            *rocannon-help*
+==============================================================================
+FEATURES                                                 *rocannon-features*
+
+* Completion system that’s aware of all ansible modules/actions and their
+  args, and even the unique `state=` values
+* Syntax for semantics of Ansible, way beyond vanilla YAML
+* A 256-color scheme to make use of the extended syntax
+* Local, comprehensive documentation system that mirrors online docs (use |K|)
+* Folding regions to collapse task blocks into simple, readable lists
+* Simple template for new `.ans` files
+* “Bouncing” between related roles files #[SOON]#
+* Execution of individual plays (via implicit tags) #[SOON]#
+
+==============================================================================
+DOCUMENTATION FOR ANSIBLE ACTIONS                            *rocannon-help*
 
 All of the online Ansible module site docs have been parsed into vim
 |online-help| files. This makes it really quick to look up any module's docs
 with |K|. Remember |K| as a "K"iller feature.
 
-This works because Rocannon sets |keywordprg|.
+This works via Rocannon setting |keywordprg|.
 
-COMPLETION                                      *rocannon-completion*
+==============================================================================
+COMPLETION                                             *rocannon-completion*
 
-Actions are omni-completed. Typing <C-x><C-o> to start an indented line will
+Actions are omni-completed. Typing <C-x><C-o> to start a blank line will
 show all available Ansible actions.
 
 Completion of required args is simply done through abbreviations (snippets felt
 like overkill since few commands have multiple required args). To perform an
-insert-mode abbr expansion, you can simply use <Space>, but <C-]> is better.
+insert-mode abbr expansion, you can simply use <Space>, but <C-]> is Vim’s
+natural expander.
 
     Before            After ~
     yum:<C-]>         yum: name=_
@@ -53,29 +76,75 @@ prior completion.
     yum: name=zsh state=<C-Space>  " choose present
     yum: name=zsh state=present
 
+Bonus: Easier Omni-completion ~
+
 You can set up <C-Space> for omni-completion with the following in `$VIM`:
 >
-    inoremap <Nul> <C-x><C-o>
+    :inoremap <Nul> <C-x><C-o>
 
 (This may be OS/term-dependent; works well in urxvt.)
 
-COLORS                                          *rocannon-colors*
+==============================================================================
+COLORS                                                     *rocannon-colors*
 
-Colors can be disabled, but it’s not recommended.
+Colors can be disabled (but it’s not recommended).
 >
-    let g:rocannon_bypass_colorscheme = 1
+    :let g:rocannon_bypass_colorscheme = 1
 
-FOLDING                                         *rocannon-folding*
+Dark and light backgrounds are supported, but dark is better tested, and is
+recommended. You probably already set this in your `$VIM`:
+>
+    :set background=dark
+
+You can toggle back-and-forth with that and:
+>
+    :set background=light
+
+Note that this colorscheme is tuned for 256-color consoles, and unicode
+characters (like `·`) are used for folds and elsewhere.
+
+==============================================================================
+ABBREVIATIONS                                       *rocannon-abbreviations*
+
+There are just a few simple ones for now.
+
+In Ansible you are frequently typing: `- name: ...` Also slighly common is `register:`.
+
+    iab     expansion ~
+    n:      - name:
+    r:      register:
+    w:      with_items:
+    e:      environment:
+    t:      tags: [
+    #v      # vim: set ft=ansible:
+
+You can view available abbeviations with:
+>
+    :Rabbrev
+
+==============================================================================
+FOLDING                                                   *rocannon-folding*
 
 Folding is done via syntax. To enable it:
 >
-    set foldmethod=syntax
-    set foldmethod=expr
-    set foldlevel=0
+    :set foldenable
+    :set foldlevel=0
 
-This will collapse all plays into a single "name" line.
+Rocannon already set this for you:
+>
+    :set foldmethod=syntax
 
-SYNTAX                                          *rocannon-syntax*
+This will collapse each play into a single "name" line. The fold is prettied
+to hide the non-essentials.
+
+Note that is it’s best to separate your plays with a blank line.
+
+Bonus: Easy fold toggling ~
+>
+    :nnoremap <Space> za
+
+==============================================================================
+SYNTAX                                                     *rocannon-syntax*
 
 Ansible is much like a little programming language, though its semantics are
 simply conventional. They represent conditionals (when), loops (item,
@@ -83,9 +152,72 @@ with_items), statements (actions), functions (notify blocks). These should be
 highlighted as such.
 
 There are several elements defined according to Ansibles semantics. Each is
-prefixed with `ans`.
+prefixed with `ans`. Just type `:hi` to see them.
 
-CONTRIBUTING                                    *rocannon-contributing*
+==============================================================================
+BOUNCING AROUND (NAVIGATION)                             *rocannon-bouncing*
+
+Ideas here are borrowed from `vim-rails` navigation. More borrowing (like
+|gf| and |CTRL-w_f|) would be even better.
+
+Several commands are available for bouncing:
+
+    Cmd    File ~
+    :RV -> roles/dbsvrs/*v*ars/main.yml
+    :RT -> roles/dbsvrs/*t*emplates/main.yml
+    :RH -> roles/dbsvrs/*h*andlers/main.yml
+    :RK -> roles/dbsvrs/tas*k*s/main.yml
+    :RF -> roles/dbsvrs/*f*iles/main.yml
+
+Note that `:RK` is a little funky to remember, but gmail has trained us to use
+`gk` to get to its "tasks" so probably easy to remember.
+
+Related maps are available if you enable them with:
+>
+    :let g:rocannon_enable_maps = 1
+
+The commands all open new windows by default. If you would instead like them
+to just open the file in the active buffer, or a in new tab, use respectively:
+>
+    :let g:rocannon_bounce_inplace = 1
+    :let g:rocannon_bounce_newtab = 1
+
+    :let g:rocannon_bounce_style = 'win'  " alternatives: tab, buffer
+
+Sitting in a file down in `roles/appsvrs/` on the following cursor spots
+indicated by `*`:
+>
+    stat: path={{myde*st}}
+<    roles/appsvrs/vars/main.yml ~
+
+Remember that |CTRL-^| gets you back to the previous file you jumped from.
+
+==============================================================================
+CONVENTIONS                                           *rocannon-conventions*
+
+* Folding depends on having a `name:` line for a play. And better to have a
+  blank line between plays
+
+* Register vars are highlighted when they are like `myvar_r` (suffixed with `_r`)
+
+* Environment variables tend to be all upper-case; highlighting uses this fact
+
+==============================================================================
+IMPROVEMENTS                                         *rocannon-improvements*
+
+* Should be able to complete non-actions (when, register, etc) if we’re in a
+  play that already has an action above.
+
+* Didn’t want the baggage of full `yaml.vim` syntax, but some of its precision
+  (regions, containment) could be worked in.
+
+* Indents are not perfect. I find that <C-t>/<C-d> suffice while typing, but
+  real indent smarts could be beneficial.
+
+* Vim-Fireplace has a fantastic feature that lets you execute any block of text.
+
+==============================================================================
+CONTRIBUTING                                         *rocannon-contributing*
 
 See |CONTRIBUTING.md| for development details.
 

@@ -58,6 +58,8 @@ syn match   ansKeyword "ansible_\w\+"
 hi def link ansKeyword Identifier
 syn keyword ansSpecialVars inventory_host
 hi def link ansSpecialVars Identifier
+syn match   ansEnvVar "[A-Z][A-Z_]\+"
+hi def link ansSpecialVars Identifier
 
 "sy keyword ansBoolean True true yes on False false no off
 syn keyword ansBoolean         true True TRUE false False FALSE yes Yes YES no No NO on On ON off Off OFF
@@ -74,4 +76,7 @@ hi link helpStar ansAction
 
 
 " Folding based on `name` line
-syn region ansFold start="- name:" end="\n\n" transparent fold
+syn region ansFold start="#\?- name:" end="\n\n" transparent fold
+"syn region ansFoldCommented start="#\s*?- name:" end="\n\n" transparent fold
+
+syn region  ansDirective  display oneline start='^---' end='$'
