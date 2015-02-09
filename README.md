@@ -22,6 +22,8 @@ stick to Ansible best practices
 - Notice the completion of action and arg (other args also completable)
 - Pull up documentation for `stat` with `K`
 
+![Rocannon Demo!](https://raw.githubusercontent.com/MicahElliott/Rocannon/master/examples/demo2.gif)
+
 ## Installation
 However you want. Here I’m using Vundle:
 
