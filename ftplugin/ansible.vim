@@ -10,6 +10,12 @@ let b:did_ftplugin = 1
 " Enable completions
 setlocal omnifunc=rocannon#CompleteAnsible
 
+" Bulk commenting is usually without spaces; doc comments are intentional and
+" don't need commentary.
+" https://github.com/tpope/vim-commentary/issues/33
+set commentstring=#%s
+let b:commentary_format = '#%s'
+
 " Gets typed so often
 iab n: - name:
 iab r: register:

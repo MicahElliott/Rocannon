@@ -22,8 +22,6 @@ airbrake_deployment-moreinfo	mod.txt/airbrake_deployment.txt	/*airbrake_deployme
 alternatives	mod.txt/alternatives.txt	/*alternatives*
 alternatives-examples	mod.txt/alternatives.txt	/*alternatives-examples*
 alternatives-moreinfo	mod.txt/alternatives.txt	/*alternatives-moreinfo*
-ans_a10_server	a10_server.txt	/*ans_a10_server*
-ans_a10_server-examples	a10_server.txt	/*ans_a10_server-examples*
 apache2_module	mod.txt/apache2_module.txt	/*apache2_module*
 apache2_module-examples	mod.txt/apache2_module.txt	/*apache2_module-examples*
 apache2_module-moreinfo	mod.txt/apache2_module.txt	/*apache2_module-moreinfo*
@@ -602,11 +600,16 @@ riak	mod.txt/riak.txt	/*riak*
 riak-examples	mod.txt/riak.txt	/*riak-examples*
 riak-moreinfo	mod.txt/riak.txt	/*riak-moreinfo*
 rocannon	rocannon.txt	/*rocannon*
+rocannon-abbreviations	rocannon.txt	/*rocannon-abbreviations*
+rocannon-bouncing	rocannon.txt	/*rocannon-bouncing*
 rocannon-colors	rocannon.txt	/*rocannon-colors*
 rocannon-completion	rocannon.txt	/*rocannon-completion*
 rocannon-contributing	rocannon.txt	/*rocannon-contributing*
+rocannon-conventions	rocannon.txt	/*rocannon-conventions*
+rocannon-features	rocannon.txt	/*rocannon-features*
 rocannon-folding	rocannon.txt	/*rocannon-folding*
 rocannon-help	rocannon.txt	/*rocannon-help*
+rocannon-improvements	rocannon.txt	/*rocannon-improvements*
 rocannon-syntax	rocannon.txt	/*rocannon-syntax*
 rocannon.txt	rocannon.txt	/*rocannon.txt*
 rollbar_deployment	mod.txt/rollbar_deployment.txt	/*rollbar_deployment*

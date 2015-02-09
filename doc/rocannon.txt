@@ -33,7 +33,7 @@ FEATURES                                                 *rocannon-features*
 * Local, comprehensive documentation system that mirrors online docs (use |K|)
 * Folding regions to collapse task blocks into simple, readable lists
 * Simple template for new `.ans` files
-* “Bouncing” between related roles files #[SOON]#
+* “Bouncing” between related roles files
 * Execution of individual plays (via implicit tags) #[SOON]#
 
 ==============================================================================
@@ -78,7 +78,7 @@ prior completion.
 
 Bonus: Easier Omni-completion ~
 
-You can set up <C-Space> for omni-completion with the following in `$VIM`:
+You can set up <C-Space> for omni-completion with the following in `$MYVIMRC`:
 >
     :inoremap <Nul> <C-x><C-o>
 
@@ -92,7 +92,7 @@ Colors can be disabled (but it’s not recommended).
     :let g:rocannon_bypass_colorscheme = 1
 
 Dark and light backgrounds are supported, but dark is better tested, and is
-recommended. You probably already set this in your `$VIM`:
+recommended. You probably already set this in your `$MYVIMRC`:
 >
     :set background=dark
 
@@ -154,6 +154,9 @@ highlighted as such.
 There are several elements defined according to Ansibles semantics. Each is
 prefixed with `ans`. Just type `:hi` to see them.
 
+Note that Rocannon bypasses the traditional `yaml.vim` plugin, which I find to
+be overkill/meddlesome for Ansible files.
+
 ==============================================================================
 BOUNCING AROUND (NAVIGATION)                             *rocannon-bouncing*
 
@@ -163,11 +166,11 @@ Ideas here are borrowed from `vim-rails` navigation. More borrowing (like
 Several commands are available for bouncing:
 
     Cmd    File ~
-    :RV -> roles/dbsvrs/*v*ars/main.yml
-    :RT -> roles/dbsvrs/*t*emplates/main.yml
-    :RH -> roles/dbsvrs/*h*andlers/main.yml
-    :RK -> roles/dbsvrs/tas*k*s/main.yml
-    :RF -> roles/dbsvrs/*f*iles/main.yml
+    :RV --> roles/dbsvrs/*v*ars/main.yml
+    :RT --> roles/dbsvrs/*t*emplates/main.yml
+    :RH --> roles/dbsvrs/*h*andlers/main.yml
+    :RK --> roles/dbsvrs/tas*k*s/main.yml
+    :RF --> roles/dbsvrs/*f*iles/main.yml
 
 Note that `:RK` is a little funky to remember, but gmail has trained us to use
 `gk` to get to its "tasks" so probably easy to remember.
