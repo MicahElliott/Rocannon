@@ -53,8 +53,9 @@ Or name them like `foo.ans` or `foo.yaml` instead of `foo.yml`.
 _(It would be really nice if Ansible supported a `*.ans` file extension.)_
 
 ## Comprehensive Help
-This README is just to get you started. Use the extensive vim help to learn
-the important details:
+This README is just to get you started. Use the extensive [vim
+help](https://github.com/MicahElliott/Rocannon/blob/master/doc/rocannon.txt)
+to learn the important details:
 
     :help rocannon
 

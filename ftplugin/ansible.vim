@@ -56,6 +56,7 @@ endif
 "command! AnsVars split %:p:h/../vars/main.yml
 command! AnsVars split group_vars/all.yaml
 
+" Inside role
 command! RHandler  call rocannon#OpenAlternate(act, 'handlers')
 command! RVars     call rocannon#OpenAlternate(act, 'vars')
 command! RPlates   call rocannon#OpenAlternate(act, 'templates')
@@ -63,6 +64,18 @@ command! RTasks    call rocannon#OpenAlternate(act, 'tasks')
 command! RFiles    call rocannon#OpenAlternate(act, 'files')
 command! RDefaults call rocannon#OpenAlternate(act, 'defaults')
 command! RMeta     call rocannon#OpenAlternate(act, 'meta')
+
+" Any complexity means main is just a bunch of includes.
+" RM would be nice for "M"ain but "M"eta might be more important
+command! RIncludes exe act . expand('%:p:h') . '/main.yaml'
+
+" Top level
+command! Rglobals    split group_vars/all.yaml
+command! Rsite       split site.yaml
+command! Rinventory  split hosts
+command! Rhosts      split hosts
+command! Rrhosts     split ~/.ssh/config
+command! Rconfig     split ~/.ansible.cfg
 
 if exists('g:rocannon_bounce_mappings') && g:rocannon_bounce_mappings == 1
   " ec 'enabling rocannon_bounce_mappings'

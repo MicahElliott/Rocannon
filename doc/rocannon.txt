@@ -190,9 +190,9 @@ my associated templates with `:RP` (temPlates). Leader mappings are also
 available (e.g., `,t` to bounce to tasks à la `:RT`).
 
 (Ideas here are borrowed from `vim-rails` navigation. More borrowing (like
-|gf| and |CTRL-w_f|) would be even better.)
+|gf| and |CTRL-W_f|) would be even better.)
 
-Several commands are available for bouncing:
+Several commands are available for local-role bouncing:
 
     Cmd              File ~
     :RV[ars]     --> roles/dbsvrs/*v*ars/main.yaml
@@ -200,6 +200,16 @@ Several commands are available for bouncing:
     :RH[andlers] --> roles/dbsvrs/*h*andlers/main.yaml
     :RP[lates]   --> roles/dbsvrs/tem*p*lates/main.yaml
     :RF[iles]    --> roles/dbsvrs/*f*iles/
+
+You can bounce to key top-level files:
+
+    Cmd                File ~
+    :Rg[lobals]    --> group_vars/all.yaml
+    :Rs[ite]       --> site.yaml
+    :Ri[nventory]  --> hosts
+    :Rh[osts]      --> hosts
+    :Rr[hosts]     --> ~/.ssh/config
+    :Rc[onfig]     --> ~/.ansible.cfg
 
 Related maps are available if you enable them with:
 >
@@ -210,8 +220,13 @@ them to just open the file in the active buffer, or a in new tab, use: >
 
     :let g:rocannon_open_action = 'split'  " alternatives: tabnew, edit
 
-Sitting in a file down in `roles/appsvrs/` on the following cursor spots
-indicated by `*`:
+Note that the standard bouncing actions will also work. With your cursor on
+the `o` you can do |gf| (go to file) or |CTRL-W_F| (go to in split).
+
+    - include: fo*o*.yaml
+
+[[NYI]] Sitting in a file down in `roles/appsvrs/` on the following cursor
+spots indicated by `*` will bounce you to the appropriate `vars` file:
 >
     stat: path={{myde*st}}
 <    roles/appsvrs/vars/main.yaml ~
