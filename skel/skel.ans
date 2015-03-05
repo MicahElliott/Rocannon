@@ -1,0 +1,7 @@
+---
+### TASKS: What does this playbook do??
+
+- name: first task
+  debug: msg='some message'
+
+# vim:ft=ansible:

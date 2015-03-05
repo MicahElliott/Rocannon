@@ -1,4 +1,5 @@
-*rocannon.txt* Ansible completion, abbrs, syntax, colorscheme, folding, docs
+*rocannon.txt* Ansible completion, abbrs, syntax, colorscheme, folding,
+             docs, skeleton
 
          888b.                                          ~
          8  .8 .d8b. .d8b .d88 8d8b. 8d8b. .d8b. 8d8b.  ~
@@ -32,9 +33,24 @@ FEATURES                                                 *rocannon-features*
 * A 256-color scheme to make use of the extended syntax
 * Local, comprehensive documentation system that mirrors online docs (use |K|)
 * Folding regions to collapse task blocks into simple, readable lists
-* Simple template for new `.ans` files
+* Simple skeleton for new `.ans`/`.yaml` files
 * “Bouncing” between related roles files
-* Execution of individual plays (via implicit tags) #[SOON]#
+* Execution of individual plays (via implicit tags and `:make`)
+
+==============================================================================
+FILETYPE DETECTION                                       *rocannon-ftdetect*
+
+You’ll probably want to suffix your ansible files with `.yaml`. YAML files are
+usually suffixed `.yml`, but for suffix `.yaml` (which Ansible treats just
+like a `.yml` file) Rocannon will treat the file automatically as filetype
+"ansible".
+
+You could also just leave off the suffix (`main` instead of `main.yaml`) and
+let Rocannon find the the first line containing `---`. But suffixes can be
+useful, so I recommend the `.yaml` suffix hack. Think of adding an "a" to
+".yml" for Ansible filetypes.
+
+In a perfect world, Ansible will support the `.ans` suffix.
 
 ==============================================================================
 DOCUMENTATION FOR ANSIBLE ACTIONS                            *rocannon-help*
@@ -66,7 +82,7 @@ Further optional args can be expanded through omni-completion: <C-x><C-o> (but
 <C-Space> is easier; see below).
 
 You can even complete `state=` args. These are by far the most common among
-modules, and vary quite a bit, so they've been generated as another
+modules, and vary quite a bit, so they’ve been generated as another
 omni-completion. This one is presently a kluge, so press <C-]> to end the
 prior completion.
 
@@ -75,6 +91,11 @@ prior completion.
     yum: name=zsh state=<C-]>      " finish, staying in insert mode
     yum: name=zsh state=<C-Space>  " choose present
     yum: name=zsh state=present
+
+Keywords like `ansible_foo_bar` are completed via a dictionary. Use
+<C-n>/<C-p> to cycle through these. This makes it pretty easy to quickly see
+what `ansible_*` vars are available -- there are 50+ of them. A few nest a
+level, but no smarts here to dive through them.
 
 Bonus: Easier Omni-completion ~
 
@@ -160,40 +181,57 @@ be overkill/meddlesome for Ansible files.
 ==============================================================================
 BOUNCING AROUND (NAVIGATION)                             *rocannon-bouncing*
 
-Ideas here are borrowed from `vim-rails` navigation. More borrowing (like
-|gf| and |CTRL-w_f|) would be even better.
+You often need to bounce between a few common files within a role, say tasks,
+handlers, and templates. Rocannon provides a few commands to make the bouncing
+easy. For example, if I’m editing `roles/appsvrs/tasks/foo.yaml` and I want to
+quickly bounce into `roles/appsvrs/handlers/foo.yaml`, I can just type `:RH`.
+The `R` is for Rocannon. Then I can bounce into the directory containing all
+my associated templates with `:RP` (temPlates). Leader mappings are also
+available (e.g., `,t` to bounce to tasks à la `:RT`).
+
+(Ideas here are borrowed from `vim-rails` navigation. More borrowing (like
+|gf| and |CTRL-w_f|) would be even better.)
 
 Several commands are available for bouncing:
 
-    Cmd    File ~
-    :RV --> roles/dbsvrs/*v*ars/main.yml
-    :RT --> roles/dbsvrs/*t*emplates/main.yml
-    :RH --> roles/dbsvrs/*h*andlers/main.yml
-    :RK --> roles/dbsvrs/tas*k*s/main.yml
-    :RF --> roles/dbsvrs/*f*iles/main.yml
-
-Note that `:RK` is a little funky to remember, but gmail has trained us to use
-`gk` to get to its "tasks" so probably easy to remember.
+    Cmd              File ~
+    :RV[ars]     --> roles/dbsvrs/*v*ars/main.yaml
+    :RT[asks]    --> roles/dbsvrs/*t*asks/main.yaml
+    :RH[andlers] --> roles/dbsvrs/*h*andlers/main.yaml
+    :RP[lates]   --> roles/dbsvrs/tem*p*lates/main.yaml
+    :RF[iles]    --> roles/dbsvrs/*f*iles/
 
 Related maps are available if you enable them with:
 >
     :let g:rocannon_enable_maps = 1
 
-The commands all open new windows by default. If you would instead like them
-to just open the file in the active buffer, or a in new tab, use respectively:
->
-    :let g:rocannon_bounce_inplace = 1
-    :let g:rocannon_bounce_newtab = 1
+The commands all open new window splits by default. If you would instead like
+them to just open the file in the active buffer, or a in new tab, use: >
 
-    :let g:rocannon_bounce_style = 'win'  " alternatives: tab, buffer
+    :let g:rocannon_open_action = 'split'  " alternatives: tabnew, edit
 
 Sitting in a file down in `roles/appsvrs/` on the following cursor spots
 indicated by `*`:
 >
     stat: path={{myde*st}}
-<    roles/appsvrs/vars/main.yml ~
+<    roles/appsvrs/vars/main.yaml ~
 
 Remember that |CTRL-^| gets you back to the previous file you jumped from.
+
+==============================================================================
+MAKE AND QUICKFIX                                        *rocannon-quickfix*
+
+Ansible does not show useful error messages for many of its errors. This
+improves over time, though (in Ansible V2:
+https://github.com/ansible/ansible/issues/5797). The good error messages it
+does show are parsed for line numbers to be used in the |quickfix| window.
+This is handled for you via 'errorformat'. You can set 'makeprg' to use your
+`ansible-playbook` settings. >
+
+    :let g:rocannon_ansible_command = 'ansible-playbook site.yaml'
+
+Then repeatedly type `:mak[e]` to run it and jump to errors (when they show line
+numbers).
 
 ==============================================================================
 CONVENTIONS                                           *rocannon-conventions*
@@ -204,6 +242,9 @@ CONVENTIONS                                           *rocannon-conventions*
 * Register vars are highlighted when they are like `myvar_r` (suffixed with `_r`)
 
 * Environment variables tend to be all upper-case; highlighting uses this fact
+
+* Notify blocks can usually fit on a single line; makes it possible to
+  recognized and jump to each in its handlers file
 
 ==============================================================================
 IMPROVEMENTS                                         *rocannon-improvements*

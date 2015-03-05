@@ -608,8 +608,10 @@ rocannon-contributing	rocannon.txt	/*rocannon-contributing*
 rocannon-conventions	rocannon.txt	/*rocannon-conventions*
 rocannon-features	rocannon.txt	/*rocannon-features*
 rocannon-folding	rocannon.txt	/*rocannon-folding*
+rocannon-ftdetect	rocannon.txt	/*rocannon-ftdetect*
 rocannon-help	rocannon.txt	/*rocannon-help*
 rocannon-improvements	rocannon.txt	/*rocannon-improvements*
+rocannon-quickfix	rocannon.txt	/*rocannon-quickfix*
 rocannon-syntax	rocannon.txt	/*rocannon-syntax*
 rocannon.txt	rocannon.txt	/*rocannon.txt*
 rollbar_deployment	mod.txt/rollbar_deployment.txt	/*rollbar_deployment*

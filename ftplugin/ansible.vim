@@ -7,13 +7,26 @@ if exists("b:did_ftplugin")
 endif
 let b:did_ftplugin = 1
 
+set shiftwidth=2
+set tabstop=2
+set expandtab
+
+" Okay for ansible to break 80-char/line rule; too annoying when auto-wraps
+set textwidth=0
+
 " Enable completions
-setlocal omnifunc=rocannon#CompleteAnsible
+setl omnifunc=rocannon#CompleteAnsible
+
+" Dictionary-style completion of ansible keywords
+setl complete+=k
+" Not sure where to safely put this dict file, so hackishly abs-pathing it
+"setl dict=anskeywords.txt
+setl dict=~/.vim/bundle/Rocannon/dict/anskeywords.txt
 
 " Bulk commenting is usually without spaces; doc comments are intentional and
 " don't need commentary.
 " https://github.com/tpope/vim-commentary/issues/33
-set commentstring=#%s
+setl commentstring=#%s
 let b:commentary_format = '#%s'
 
 " Gets typed so often
@@ -22,7 +35,7 @@ iab r: register:
 iab w: with_items:
 iab e: environment:
 iab t: tags: [
-iab #v # vim:set ft=ansible:<C-r>=rocannon#Eatchar('\s')<CR>
+iab #v # vim:ft=ansible:<C-r>=rocannon#Eatchar('\s')<CR>
 
 
 " Color Scheme
@@ -34,34 +47,54 @@ if g:rocannon_bypass_colorscheme != 1
   colorscheme rocannon
 endif
 
-" Bouncing around (navigation)
-command RV split %:p:h/../vars/main.yml
-command RT split %:p:h/../templates/main.yml
-command RH split %:p:h/../handlers/main.yml
-command RK split %:p:h/../tasks/main.yml
-command RF split %:p:h/../files/main.yml
+""" Bouncing around (navigation)
+if !exists('g:rocannon_open_action')
+  let g:rocannon_open_action = 'split'
+  let act = g:rocannon_open_action  " shorter for convenience herein
+endif
 
-" For new tabs
-command RVT tabnew %:p:h/../vars/main.yml
-command RTT tabnew %:p:h/../templates/main.yml
-command RHT tabnew %:p:h/../handlers/main.yml
-command RKT tabnew %:p:h/../tasks/main.yml
-command RFT tabnew %:p:h/../files/main.yml
+"command! AnsVars split %:p:h/../vars/main.yml
+command! AnsVars split group_vars/all.yaml
 
-" For in-buffer
-command RVB edit %:p:h/../vars/main.yml
-command RTB edit %:p:h/../templates/main.yml
-command RHB edit %:p:h/../handlers/main.yml
-command RKB edit %:p:h/../tasks/main.yml
-command RFB edit %:p:h/../files/main.yml
+command! RHandler  call rocannon#OpenAlternate(act, 'handlers')
+command! RVars     call rocannon#OpenAlternate(act, 'vars')
+command! RPlates   call rocannon#OpenAlternate(act, 'templates')
+command! RTasks    call rocannon#OpenAlternate(act, 'tasks')
+command! RFiles    call rocannon#OpenAlternate(act, 'files')
+command! RDefaults call rocannon#OpenAlternate(act, 'defaults')
+command! RMeta     call rocannon#OpenAlternate(act, 'meta')
 
-ec 'checking for rocannon_bounce_mappings'
 if exists('g:rocannon_bounce_mappings') && g:rocannon_bounce_mappings == 1
-  ec 'mapping for rocannon_bounce_mappings'
+  " ec 'enabling rocannon_bounce_mappings'
+  nnoremap <Leader>h :RH<CR>
   nnoremap <Leader>v :RV<CR>
+  nnoremap <Leader>p :RP<CR>
+  nnoremap <Leader>t :RT<CR>
+  nnoremap <Leader>f :RF<CR>
+  nnoremap <Leader>d :RD<CR>
+  nnoremap <Leader>m :RM<CR>
 endif
 
 " Built-in help
 set keywordprg=:help
 
 set foldmethod=syntax
+
+" Parse ansible-playbook output for use in quickfix list
+" http://vim.wikia.com/wiki/Errorformats
+" Really lame that ansible's error output is usually not parsable.
+" https://github.com/ansible/ansible/issues/5797
+" Some errors are useful, though:
+"    ERROR: Syntax Error while loading YAML script, /home/mde/proj/Membean/provn/ansible/roles/appsvr/tasks/rubygems.yaml
+"    Note: The error may actually appear before this position: line 18, column 3
+"
+"      foooooooo
+"      when: not rg_r.stat.exists
+set errorformat=%EERROR:\ %m\\,\ %f,%C%m:\ line\ %l\\,\ column\ %c
+
+" Run ansible-playbook (with :mak)
+set makeprg=ansible-playbook\ -u\ root\ -l\ orcs:172.17.0.2\ -k\ site.yaml\ -v\ -t\ vimcur
+" Could have function to run ansible without tag (-t)
+
+" Add a vimcur tag to enable single task run
+nnoremap <Leader>r }kotags: [vimcur]<Esc>{jv}

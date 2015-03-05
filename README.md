@@ -1,5 +1,4 @@
 # Rocannon: Operator of the Ansible
-  _Vim omni-completion, abbreviations, syntax, and colorscheme for Ansible playbooks_
 
 Command the Ansible, Relish the Rainbow. Never visit the Ansible docs again.
 
@@ -9,9 +8,20 @@ Ansible is a unique DSL with semantics way beyond an editor’s simple
 built-in YAML treatment. Thus, Ansible files need a totally different type of
 syntax highlighting — and of course completion of actions and their args.
 
-This is a somewhat simplistic Vim implementation, but mostly works if you
+## Features
+* Completion system that’s aware of all ansible modules/actions and their
+  args, and even the unique `state=` values
+* Syntax for semantics of Ansible, way beyond vanilla YAML
+* A 256-color scheme to make use of the extended syntax
+* Local, comprehensive documentation system that mirrors online docs (use `K`)
+* Folding regions to collapse task blocks into simple, readable lists
+* Simple skeleton for new `.ans`/`.yaml` files
+* “Bouncing” between related roles files
+* Execution of individual plays (via implicit tags and `:make`)
+
+(This is a somewhat simplistic Vim implementation, but mostly works if you
 stick to Ansible best practices
-[http://docs.ansible.com/playbooks_best_practices.html]().
+[http://docs.ansible.com/playbooks_best_practices.html]().)
 
 ## Demo
 - Vanilla YAML file with default highlighting
@@ -34,11 +44,12 @@ You could even use Ansible!
 
     % ansible localhost -m git -a 'repo=https://github.com/MicahElliott/Rocannon dest=~/.vim/bundle/Rocannon'
 
-Add to the top of each Ansible YAML file:
+Add to the top (or bottom) of each Ansible YAML file:
 
-    ---# vim:set ft=ansible
+    ---
+    # vim:ft=ansible:
 
-Or name them like `foo.ans` instead of `foo.yml`.
+Or name them like `foo.ans` or `foo.yaml` instead of `foo.yml`.
 _(It would be really nice if Ansible supported a `*.ans` file extension.)_
 
 ## Comprehensive Help

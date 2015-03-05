@@ -1,6 +1,6 @@
 #! /usr/bin/env zsh
 
-# actions2vim — pull actions from ansible and convert to vim dict
+# ans2vim — pull actions, abbrs, args from ansible and convert to vim dicts
 
 ### Generate doc dumps
 print 'Generating text dump of actions...'

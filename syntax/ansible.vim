@@ -39,9 +39,6 @@ hi def link ansReg Define
 syn match   ansRegVar "\w\+_r\>"
 hi def link ansReg Define
 
-syn match   ansComment "#.*"
-hi def link ansComment Comment
-
 syn match   ansIgnore "ignore_errors:"
 hi def link ansIgnore Exception
 
@@ -58,7 +55,9 @@ syn match   ansKeyword "ansible_\w\+"
 hi def link ansKeyword Identifier
 syn keyword ansSpecialVars inventory_host
 hi def link ansSpecialVars Identifier
-syn match   ansEnvVar "[A-Z][A-Z_]\+"
+syn match   ansEnvVar   "[A-Z][A-Z_]\+"
+syn match   ansEnvBlock "environment:"
+
 hi def link ansSpecialVars Identifier
 
 "sy keyword ansBoolean True true yes on False false no off
@@ -66,8 +65,8 @@ syn keyword ansBoolean         true True TRUE false False FALSE yes Yes YES no N
 syn match   ansBoolean         ":.*\zs\W[+-]\(\W\|$\)" contained
 hi def link ansBoolean Boolean
 
-" Need to generate these from ansible-doc
-"syn match   ansAction "^\s\+(file\|copy\|yum\|template\|stat\|service\|ping\|pause\|monit\|hostname\|user\|get_url\|debug\|cron\|command\|git\|assert\|assemble\|apt):"
+" Generated `ansAction` from ansible-doc (eg: yum, template, stat, copy)
+
 hi def link ansAction Operator
 
 "sy match ansNumber "\<\d\>"
@@ -79,4 +78,17 @@ hi link helpStar ansAction
 syn region ansFold start="#\?- name:" end="\n\n" transparent fold
 "syn region ansFoldCommented start="#\s*?- name:" end="\n\n" transparent fold
 
+
+syn match ansComment         "#\s.*"
+syn match ansCommentHeader   "###\s.*"
+syn match ansCommentDisabled "#[-a-zA-Z]\+.*"
+syn match ansCommentDebug    "##[a-zA-Z]\+.*"
+syn match ansComment         "#$"
+hi def link ansComment Comment
+hi def link ansCommentHeader Comment
+hi def link ansCommentDisabled Comment
+hi def link ansCommentDebug Comment
+
 syn region  ansDirective  display oneline start='^---' end='$'
+
+syn match ExtraWhitespace /\s\+$/

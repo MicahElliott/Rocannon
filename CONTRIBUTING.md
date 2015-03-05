@@ -48,13 +48,13 @@ I normally would have turned to `sed` for this, but Vim was great!
 
 ## More Thoughts
 
-Should try to get ansible to accepts files with .ans suffix, since its yaml is
-significantly extended from regular yaml. Would make identify filetype
-easier..
+Should try to get Ansible to accept files with .ans suffix, since its yaml is
+significantly extended from regular yaml. Would make identifying filetype
+easier.
 
 Try experimenting with clean new filetype by playing with a test.ans file.
 
-Would be amazing to simply highlight a task and press something to run ansible
+Would be amazing to simply highlight a task and press something to run Ansible
 on it. Could be done by silently/temporarily adding some unique tag.
 
 ## Ansible vars
