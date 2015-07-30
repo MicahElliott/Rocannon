@@ -36,6 +36,7 @@ hi Comment    ctermfg=59
 hi HelpHeadline ctermfg=blue cterm=bold
 " Not working. Want it to look like ansAction
 hi HelpStar ctermfg=120 ctermbg=22 cterm=bold
+hi HelpExample ctermfg=246
 " }}}
 
 """ Colors sensitive to background {{{
@@ -77,6 +78,7 @@ hi ansWhen       ctermfg=130 cterm=none
 hi ansReg        ctermfg=130 cterm=none
 hi ansRegVar     ctermfg=130 cterm=bold
 hi ansIgnore     ctermfg=124 cterm=none
+hi ansInclude    ctermfg=80  cterm=bold
 
 hi ansParallel  ctermfg=87  cterm=none
 hi ansTargets   ctermfg=22  cterm=bold

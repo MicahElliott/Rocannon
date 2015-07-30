@@ -2,6 +2,9 @@
 
 runtime syntax/actions.vim
 
+"syn match   ansEnvVar   "[A-Z][A-Z_]\+"
+syn match   ansEnvBlock "environment:"
+
 "sy match ansNameKey "- name: .*"
 syn match ansNameLine "- name: .*" contains=ansNameText
 hi def link ansNameLine Label
@@ -42,6 +45,9 @@ hi def link ansReg Define
 syn match   ansIgnore "ignore_errors:"
 hi def link ansIgnore Exception
 
+syn match   ansInclude "include:"
+hi def link ansInclude Include
+
 syn keyword ansSpecials tasks pre_tasks post_tasks handlers roles
 hi def link ansSpecials Macro
 
@@ -55,8 +61,6 @@ syn match   ansKeyword "ansible_\w\+"
 hi def link ansKeyword Identifier
 syn keyword ansSpecialVars inventory_host
 hi def link ansSpecialVars Identifier
-syn match   ansEnvVar   "[A-Z][A-Z_]\+"
-syn match   ansEnvBlock "environment:"
 
 hi def link ansSpecialVars Identifier
 
@@ -64,6 +68,10 @@ hi def link ansSpecialVars Identifier
 syn keyword ansBoolean         true True TRUE false False FALSE yes Yes YES no No NO on On ON off Off OFF
 syn match   ansBoolean         ":.*\zs\W[+-]\(\W\|$\)" contained
 hi def link ansBoolean Boolean
+
+" See autoload/states.vim, just the common ones
+syn keyword ansState enabled disabled present absent latest running stopped killed deleted linked unlinked touch link directory
+hi def link ansState Boolean
 
 " Generated `ansAction` from ansible-doc (eg: yum, template, stat, copy)
 
