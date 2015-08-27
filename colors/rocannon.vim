@@ -41,7 +41,7 @@ hi HelpExample ctermfg=246
 
 """ Colors sensitive to background {{{
 if &background == 'light'
-  echom 'hmm, background set to light'
+  echom 'WARNING: background set to light'
   " hi Normal      ctermfg=232
   hi ansNameKey  ctermfg=232 cterm=bold,underline
   hi ansNameLine ctermfg=232 cterm=bold,underline

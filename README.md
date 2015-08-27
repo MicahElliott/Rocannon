@@ -35,21 +35,33 @@ stick to Ansible best practices
 ![Rocannon Demo!](https://raw.githubusercontent.com/MicahElliott/Rocannon/master/examples/demo4.gif)
 
 ## Installation
-However you want. Here I’m using Vundle:
+Here I’m using [Vundle](https://github.com/VundleVim/Vundle.vim) (but
+[Pathogen](https://github.com/tpope/vim-pathogen) should also work):
 
-    % vim ~/.vimrc " add line: Bundle "MicahElliott/Rocannon"
-    % vim +BundleInstall +qa
+    % vim ~/.vimrc " add line inside vundle block
+    Plugin 'MicahElliott/Rocannon'
 
-You could even use Ansible!
+Then install it with Vundle.
+
+    % vim +PluginInstall +qa
+
+I recommend the above, but — just for fun — you could even use Ansible to get
+it! (This also assumes Vundle is managing your `~/.vim/bundle` area, and that
+you’ve added the _Plugin_ line above to your `~/.vimrc`.)
 
     % ansible localhost -m git -a 'repo=https://github.com/MicahElliott/Rocannon dest=~/.vim/bundle/Rocannon'
 
-Add to the top (or bottom) of each Ansible YAML file:
+Rocannon should automatically detect a file with extension `.yaml` (but not
+`.yml`) as an Ansible file type. If you want to be explicit, though, you could
+add to the top (or bottom) of each Ansible YAML file:
 
-    ---
     # vim:ft=ansible:
 
-Or name them like `foo.ans` or `foo.yaml` instead of `foo.yml`.
+Now open an Ansible file and your should notice that the filetype is
+“ansible”, and you’ll see some fancy colors, completions, etc:
+
+    % vim foo.yaml
+
 _(It would be really nice if Ansible supported a `*.ans` file extension.)_
 
 ## Comprehensive Help
