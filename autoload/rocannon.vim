@@ -81,6 +81,10 @@ fun! rocannon#OpenAlternate(action, category)
   "          and fall back to main.yaml
   "        - open dir (browser) for files and templates
   " NOTE: connecting vars with / to avoid "not a file" message
+  if index(['split', 'vsplit', 'edit', 'tabnet'], a:action) == -1
+      echom "Can't open " . a:category . " with g:rocannon_open_action=" . a:action
+      return
+  endif
   let fname = expand('%:p:t')
   let role = expand('%:p:h:h:t') . '/'
   "echom 'will look for: roles/' . role . a:category . '/' . fname
