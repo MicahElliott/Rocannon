@@ -76,7 +76,7 @@ endfun
 " with :RVars
 
 fun! rocannon#OpenAlternate(action, category)
-  " Action should be one of: split, edit, tabnew
+  " Action should be one of: split, vsplit, edit, tabnew
   " TODO:  - should have some smarts about whether matching files names exists,
   "          and fall back to main.yaml
   "        - open dir (browser) for files and templates

@@ -218,7 +218,7 @@ Related maps are available if you enable them with:
 The commands all open new window splits by default. If you would instead like
 them to just open the file in the active buffer, or a in new tab, use: >
 
-    :let g:rocannon_open_action = 'split'  " alternatives: tabnew, edit
+    :let g:rocannon_open_action = 'split'  " alternatives: vsplit, tabnew, edit
 
 Note that the standard bouncing actions will also work. With your cursor on
 the `o` you can do |gf| (go to file) or |CTRL-W_F| (go to in split).
