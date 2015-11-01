@@ -50,8 +50,8 @@ endif
 """ Bouncing around (navigation)
 if !exists('g:rocannon_open_action')
   let g:rocannon_open_action = 'split'
-  let act = g:rocannon_open_action  " shorter for convenience herein
 endif
+let act = g:rocannon_open_action  " shorter for convenience herein
 
 "command! AnsVars split %:p:h/../vars/main.yml
 command! AnsVars split group_vars/all.yaml
