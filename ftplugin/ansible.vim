@@ -51,23 +51,23 @@ endif
 if !exists('g:rocannon_open_action')
   let g:rocannon_open_action = 'split'
 endif
-let act = g:rocannon_open_action  " shorter for convenience herein
+let open_action = g:rocannon_open_action  " shorter for convenience herein
 
 "command! AnsVars split %:p:h/../vars/main.yml
 command! AnsVars split group_vars/all.yaml
 
 " Inside role
-command! RHandler  call rocannon#OpenAlternate(act, 'handlers')
-command! RVars     call rocannon#OpenAlternate(act, 'vars')
-command! RPlates   call rocannon#OpenAlternate(act, 'templates')
-command! RTasks    call rocannon#OpenAlternate(act, 'tasks')
-command! RFiles    call rocannon#OpenAlternate(act, 'files')
-command! RDefaults call rocannon#OpenAlternate(act, 'defaults')
-command! RMeta     call rocannon#OpenAlternate(act, 'meta')
+command! RHandler  call rocannon#OpenAlternate(open_action, 'handlers')
+command! RVars     call rocannon#OpenAlternate(open_action, 'vars')
+command! RPlates   call rocannon#OpenAlternate(open_action, 'templates')
+command! RTasks    call rocannon#OpenAlternate(open_action, 'tasks')
+command! RFiles    call rocannon#OpenAlternate(open_action, 'files')
+command! RDefaults call rocannon#OpenAlternate(open_action, 'defaults')
+command! RMeta     call rocannon#OpenAlternate(open_action, 'meta')
 
 " Any complexity means main is just a bunch of includes.
 " RM would be nice for "M"ain but "M"eta might be more important
-command! RIncludes exe act . expand('%:p:h') . '/main.yaml'
+command! RIncludes exe open_action . expand('%:p:h') . '/main.yaml'
 
 " Top level
 command! Rglobals    split group_vars/all.yaml
