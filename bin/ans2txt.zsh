@@ -9,7 +9,11 @@ ansible-doc -l |sed '/^$/,$ d' >|actions.txt
 brokens=(ec2_metric_alarm ec2_scaling_policy rax_dns stackdriver)
 print 'Generating text dump of all args...'
 # Could ignore broken modules, but not worth it for now
-while read -r cmd txt; do ansible-doc -s $cmd 2>/dev/null; done <actions.txt >|args.txt
+#while read -r cmd txt; do ansible-doc -s $cmd 2>/dev/null; done <actions.txt >|args.txt
+for i in $(cat actions.txt | cut -d" " -f1); do ansible-doc -s $i; done >|args.txt
+
+# Remove traceback lines for failures in ansible-doc
+sed -i '/traceback/d' args.txt
 
 ### Actions
 print 'Wrote actions to ../autoload/actions.vim'
